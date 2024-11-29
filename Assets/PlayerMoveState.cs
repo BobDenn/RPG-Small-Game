@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMoveState : PlayerGroundedState
@@ -26,10 +27,8 @@ public class PlayerMoveState : PlayerGroundedState
         
         player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
 
-        if (xInput == 0)
-        {
+        if (xInput == 0 || player.IsWallDetected())
             stateMachine.ChangeState(player.idleState);
-        }
         
     }
 }

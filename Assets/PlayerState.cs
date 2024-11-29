@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerState 
@@ -10,9 +11,11 @@ public class PlayerState
     protected Rigidbody2D rb;
 
     protected float xInput;
+    protected float yInput;
     private string animBoolName;
 
     protected float stateTimer;
+    protected bool triggerCalled;
 
     public PlayerState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName)
     {
@@ -25,6 +28,7 @@ public class PlayerState
     {
         player.anim.SetBool(animBoolName, true);
         rb = player.rb;
+        triggerCalled = false;
     }
     
     
@@ -33,6 +37,7 @@ public class PlayerState
         stateTimer -= Time.deltaTime;
         
         xInput = Input.GetAxisRaw("Horizontal");
+        yInput = Input.GetAxisRaw("Vertical");
         
         player.anim.SetFloat("yVelocity", rb.velocity.y);
     }
@@ -41,5 +46,11 @@ public class PlayerState
     {
         player.anim.SetBool(animBoolName, false);
     }
+
+    public virtual void AnimationFinishTrigger()
+    {
+        triggerCalled = true;
+    }
+    
     
 }
