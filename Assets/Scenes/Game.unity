@@ -525,6 +525,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efaf40f115adbc54996d4a3c7da53fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackMovement:
+  - {x: 3, y: 5}
+  - {x: 2, y: 3}
+  - {x: 4, y: 3}
   moveSpeed: 8
   jumpForce: 15
   dashCoolDown: 5
@@ -546,7 +550,7 @@ Transform:
   m_GameObject: {fileID: 1376143273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.471, y: -2.444, z: 0}
+  m_LocalPosition: {x: 0.824, y: -2.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -772,7 +776,7 @@ Transform:
   m_GameObject: {fileID: 1993852028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.328, y: 0.02, z: 0.009065365}
+  m_LocalPosition: {x: 0.342, y: 0.015, z: 0.009065365}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
