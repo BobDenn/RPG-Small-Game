@@ -8,11 +8,12 @@ public class Enemy : Entity
     // the variable to recognise player
     public LayerMask whatIsPlayer;
     
-    [Header("Move info")] 
+    [Header("Move info")]
     public float moveSpeed;
     public float idleTime;
 
-    [Header("Attack info")] 
+    [Header("Attack info")]
+    public float battleTime;
     public float attackDistance;
     public float attackCooldown;
     [HideInInspector] public float lastTimeAttacked;

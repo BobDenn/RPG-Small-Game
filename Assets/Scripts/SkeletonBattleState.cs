@@ -26,12 +26,22 @@ public class SkeletonBattleState : EnemyState
         // Attack logic
         if (enemy.IsPlayerDetected())
         {
+            // The enemy's battle time
+            stateTimer = enemy.battleTime;
+
             if (enemy.IsPlayerDetected().distance < enemy.attackDistance)
             {
-                // enemy attack
+                // time of enemy attack
                 if(CanAttack())
                     stateMachine.ChangeState(enemy.attackState);
             }
+        }
+        else
+        {
+            // change to Idle
+            if (stateTimer < 0 || Vector2.Distance(player.transform.position, enemy.transform.position) > 7)  
+                stateMachine.ChangeState(enemy.idleState);
+            
         }
         
         
