@@ -26,10 +26,11 @@ public class PlayerPrimaryAttackState : PlayerState
 
         // Choose attack direction with local variable
         float attackDir = player.facingDir;
-
+        // change face direction when attacking 
         if (xInput != 0)
             attackDir = xInput;
         
+        // little step when attacking
         player.SetVelocity(player.attackMovement[comboCounter].x * attackDir, player.attackMovement[comboCounter].y);
 
         stateTimer = .1f;
@@ -40,7 +41,7 @@ public class PlayerPrimaryAttackState : PlayerState
         base.Update();
 
         if (stateTimer < 0)
-            player.ZeroVelocity();
+            player.SetZeroVelocity();
         
         if(triggerCalled)
             stateMachine.ChangeState(player.idleState);

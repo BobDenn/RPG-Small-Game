@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : Entity // player's movement
+public class Player : Entity 
+    // player's movement
 {
     [Header("Attack details")] 
     public Vector2[] attackMovement;
@@ -22,7 +23,7 @@ public class Player : Entity // player's movement
     public float dashDuration;
     public float dashDir { get; private set; }
     
-// all player's states
+    // all player's states
     #region States  
     public PlayerStateMachine stateMachine {  get; private set; }
     public PlayerIdleState idleState { get; private set; }
@@ -79,13 +80,13 @@ public class Player : Entity // player's movement
     // to control sequence of attack 
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
     
-
+    // Dash ability
     public void CheckForDashInput()
     {
-
+        // other condition
         if (IsWallDetected())
             return;
-        
+        // timestamp
         _dashUsageTimer -= Time.deltaTime;
         
         if (Input.GetKeyDown(KeyCode.LeftShift) && _dashUsageTimer < 0)

@@ -14,13 +14,13 @@ public class Entity : MonoBehaviour
     [Header("Collision info")] 
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected float groundCheckDistance;
+    [SerializeField] protected LayerMask whatIsGround;
     [Space]
     [SerializeField] protected Transform wallCheck;
     [SerializeField] protected float wallCheckDistance;
-    [SerializeField] protected LayerMask whatIsGround;
     
     public int facingDir { get; private set; } = 1;
-    protected bool facingRight = true;
+    private bool facingRight = true;
     
     protected virtual void Awake()
     {
@@ -41,7 +41,9 @@ public class Entity : MonoBehaviour
         
     }
     #region Velocity
-    public void ZeroVelocity() => rb.velocity = new Vector2(0, 0);
+    
+    // I can move & flip
+    public void SetZeroVelocity() => rb.velocity = new Vector2(0, 0);
 
     public void SetVelocity(float _xVelocity, float _yVelocity)
     {

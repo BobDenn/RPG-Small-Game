@@ -9,11 +9,13 @@ public class EnemyState
     private string animBoolName;
     protected EnemySkeleton enemy;
 
+    protected Rigidbody2D rb;
     
     protected float stateTimer;
+    // symbol that change to another state
     protected bool triggerCalled;
 
-
+    // Statement of three variables
     public EnemyState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName)
     {
         this.enemyBase = _enemyBase;
@@ -24,7 +26,9 @@ public class EnemyState
     public virtual void Enter()
     {
         triggerCalled = false;
+        rb = enemyBase.rb;
         enemyBase.anim.SetBool(animBoolName, true);
+        
     }
 
     public virtual void Update()
@@ -36,6 +40,11 @@ public class EnemyState
     {
         enemyBase.anim.SetBool(animBoolName, false);
         
+    }
+
+    public virtual void AnimationFinishTrigger()
+    {
+        triggerCalled = true;
     }
 
 }
