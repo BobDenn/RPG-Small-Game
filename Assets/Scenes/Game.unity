@@ -1320,6 +1320,7 @@ GameObject:
   - component: {fileID: 1347720320}
   - component: {fileID: 1347720322}
   - component: {fileID: 1347720321}
+  - component: {fileID: 1347720323}
   m_Layer: 7
   m_Name: Enemy_Skeleton
   m_TagString: Untagged
@@ -1358,6 +1359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9c84c1f7168054e81a83b2336aae18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockBackDirection: {x: 7, y: 12}
+  knockBackDuration: 0.07
   attackCheck: {fileID: 998179891}
   attackCheckRadius: 0.8
   groundCheck: {fileID: 305083346}
@@ -1436,7 +1439,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 12
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1448,6 +1451,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &1347720323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347720318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e42b23c3f5d41848bc73a0dcb7e7314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.2
+  hitMat: {fileID: 2100000, guid: 6e76868a7cfa650459f59a0e15652be5, type: 2}
 --- !u!1 &1376143273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1460,6 +1477,7 @@ GameObject:
   - component: {fileID: 1376143274}
   - component: {fileID: 1376143277}
   - component: {fileID: 1376143276}
+  - component: {fileID: 1376143278}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -1479,6 +1497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efaf40f115adbc54996d4a3c7da53fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockBackDirection: {x: 0, y: 0}
+  knockBackDuration: 0
   attackCheck: {fileID: 365283701}
   attackCheckRadius: 0.8
   groundCheck: {fileID: 1273558151}
@@ -1578,6 +1598,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.13203853, y: -0.28136778}
   m_Size: {x: 1.0025138, y: 2.1118736}
   m_Direction: 0
+--- !u!114 &1376143278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376143273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e42b23c3f5d41848bc73a0dcb7e7314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashDuration: 0.1
+  hitMat: {fileID: 2100000, guid: 6e76868a7cfa650459f59a0e15652be5, type: 2}
 --- !u!1 &1420772645
 GameObject:
   m_ObjectHideFlags: 0

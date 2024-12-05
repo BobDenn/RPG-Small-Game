@@ -19,6 +19,8 @@ public class PlayerPrimaryAttackState : PlayerState
     {
         base.Enter();
 
+        xInput = 0; // we need this to fix bug on attack direction
+
         if (comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
             comboCounter = 0;
         
@@ -26,6 +28,7 @@ public class PlayerPrimaryAttackState : PlayerState
 
         // Choose attack direction with local variable
         float attackDir = player.facingDir;
+        
         // change face direction when attacking 
         if (xInput != 0)
             attackDir = xInput;

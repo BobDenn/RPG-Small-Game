@@ -31,7 +31,7 @@ public class SkeletonBattleState : EnemyState
 
             if (enemy.IsPlayerDetected().distance < enemy.attackDistance)
             {
-                // time of enemy attack
+                // change to attackState
                 if(CanAttack())
                     stateMachine.ChangeState(enemy.attackState);
             }

@@ -8,8 +8,14 @@ public class Entity : MonoBehaviour
     #region Components
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
+    public EntityFX fx { get; private set; }
     
     #endregion
+
+    [Header("Knock Back info")] 
+    [SerializeField] protected Vector2 knockBackDirection;
+    [SerializeField] protected float knockBackDuration;
+    protected bool IsKnocked;
     
     [Header("Collision info")]
     [SerializeField] public Transform attackCheck;
@@ -33,8 +39,9 @@ public class Entity : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        anim = GetComponentInChildren<Animator>();
+        fx = GetComponent<EntityFX>();
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>();
 
     }
 
@@ -43,24 +50,47 @@ public class Entity : MonoBehaviour
     {
         
     }
-    #region Damge
-    public void Damge()
+    
+    public void Damage()
     {
-        Debug.Log(gameObject.name + " was Damged");
+        fx.StartCoroutine("FlashFX");
+        StartCoroutine("HitKnockBack");
+        
+        Debug.Log(gameObject.name + " was Damaged");
     }
 
-    #endregion
+    protected virtual IEnumerator HitKnockBack()
+    {
+        IsKnocked = true;
+        
+        rb.velocity = new Vector2(knockBackDirection.x * -facingDir, knockBackDirection.y);
+
+        yield return new WaitForSeconds(knockBackDuration);
+        IsKnocked = false;
+
+    }
+    
+    
 
 
     #region Velocity
 
     // I can move & flip
-    public void SetZeroVelocity() => rb.velocity = new Vector2(0, 0);
-
-    public void SetVelocity(float _xVelocity, float _yVelocity)
+    public void SetZeroVelocity()
     {
-        rb.velocity = new Vector2(_xVelocity, _yVelocity);
-        FlipController(_xVelocity);
+        if(IsKnocked)
+            return;
+        
+        rb.velocity = new Vector2(0, 0);
+    } 
+
+    public void SetVelocity(float xVelocity, float yVelocity)
+    {
+        if(IsKnocked)
+            return;
+        
+        rb.velocity = new Vector2(xVelocity, yVelocity);
+        FlipController(xVelocity);
     }
 
     #endregion
