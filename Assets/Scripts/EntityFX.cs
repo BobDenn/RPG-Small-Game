@@ -19,6 +19,7 @@ public class EntityFX : MonoBehaviour
 
     }
 
+    // hit flash
     private IEnumerator FlashFX()
     {
         _sr.material = hitMat;
@@ -27,5 +28,21 @@ public class EntityFX : MonoBehaviour
 
         _sr.material = _originalMat;
     }
+
+    // to change _sr's color
+    private void RedColorBlink()
+    {
+        if(_sr.color != Color.white)
+            _sr.color = Color.white;
+        else
+            _sr.color = Color.red;
+    }
     
+    // cancel repeating
+    private void CancelRebBlink()
+    {
+        // stop repeating
+        CancelInvoke();
+        _sr.color = Color.white;
+    }
 }

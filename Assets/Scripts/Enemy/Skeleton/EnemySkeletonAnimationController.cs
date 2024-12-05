@@ -21,5 +21,8 @@ public class SkeletonAttackAnimationController : MonoBehaviour
                 hit.GetComponent<Player>().Damage();
         }
     }
+    // open and close red thing event
+    private void OpenCounterWindow() => enemy.OpenCounterAttackWindow();
+    private void CloseCounterWindow() => enemy.CloseCounterAttackWindow();
 
 }

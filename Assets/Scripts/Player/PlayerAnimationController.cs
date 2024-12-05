@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimationControllers : MonoBehaviour
+public class PlayerAnimationController : MonoBehaviour
 {
     // Start to attack
     private Player player => GetComponentInParent<Player>();
@@ -14,6 +14,7 @@ public class PlayerAnimationControllers : MonoBehaviour
 
     private void AttackTrigger()
     {
+        // detect enemies whom in circle and attack them
         Collider2D[] colliders = Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackCheckRadius);
 
         foreach (var hit in colliders)

@@ -7,6 +7,14 @@ public class Enemy : Entity
 {
     // the variable to recognise player
     public LayerMask whatIsPlayer;
+
+
+    [Header("Stunned info")]
+    public Vector2 stunDirection;
+    public float stunDuration;
+    protected bool canBeStunned;
+    [SerializeField] protected GameObject counterImage;
+
     
     [Header("Move info")]
     public float moveSpeed;
@@ -35,6 +43,34 @@ public class Enemy : Entity
         
     }
 
+    #region CounterImg
+    public virtual void OpenCounterAttackWindow()
+    {
+        canBeStunned = true;
+        counterImage.SetActive(true);
+    }
+
+    public virtual void CloseCounterAttackWindow()
+    {
+        canBeStunned = false;
+        counterImage.SetActive(false);
+    }
+
+    #endregion
+    // protected -> public : make sure the player can use this function
+    public virtual bool CanBeStunned()
+    {
+        if (canBeStunned)
+        {
+            CloseCounterAttackWindow();
+            return true;
+        }
+
+        return false;
+    }
+
+
+    // finish attacking 
     public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
     
     // To find Player and enter battle state

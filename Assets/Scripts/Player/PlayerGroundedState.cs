@@ -17,6 +17,10 @@ public class PlayerGroundedState : PlayerState
     public override void Update()
     {
         base.Update();
+
+        // test counter attack
+        if (Input.GetKeyDown(KeyCode.Q))
+            stateMachine.ChangeState(player.counterAttackState);
         
         if(Input.GetKey(KeyCode.Mouse0))
             stateMachine.ChangeState(player.PrimaryAttackState);

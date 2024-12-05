@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SkeletonMoveState : SkeletonGroundState
 {
-    public SkeletonMoveState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName, EnemySkeleton enemy) : base(_enemyBase, _stateMachine, _animBoolName, enemy)
+    public SkeletonMoveState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName, EnemySkeleton _enemy) : base(_enemyBase, _stateMachine, _animBoolName, _enemy)
     {
-        
+
     }
 
     public override void Enter()

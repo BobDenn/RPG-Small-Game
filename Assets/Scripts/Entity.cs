@@ -11,11 +11,6 @@ public class Entity : MonoBehaviour
     public EntityFX fx { get; private set; }
     
     #endregion
-
-    [Header("Knock Back info")] 
-    [SerializeField] protected Vector2 knockBackDirection;
-    [SerializeField] protected float knockBackDuration;
-    protected bool IsKnocked;
     
     [Header("Collision info")]
     [SerializeField] public Transform attackCheck;
@@ -28,6 +23,13 @@ public class Entity : MonoBehaviour
     [SerializeField] protected Transform wallCheck;
     [SerializeField] protected float wallCheckDistance;
     
+
+    [Header("Knock Back info")] 
+    [SerializeField] protected Vector2 knockBackDirection;
+    [SerializeField] protected float knockBackDuration;
+    protected bool IsKnocked;
+
+
     public int facingDir { get; private set; } = 1;
     private bool facingRight = true;
     
