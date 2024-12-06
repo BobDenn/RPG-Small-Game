@@ -16,6 +16,8 @@ public class EntityFX : MonoBehaviour
     {
         _sr = GetComponentInChildren<SpriteRenderer>();
         _originalMat = _sr.material;
+        
+        
 
     }
 

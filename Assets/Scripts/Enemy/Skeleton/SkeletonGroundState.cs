@@ -16,7 +16,7 @@ public class SkeletonGroundState : EnemyState
     {
         base.Enter();
         // cause system overload and will delete it
-        player = GameObject.Find("Player").transform;
+        player = PlayerManager.instance.player.transform;
     }
 
     public override void Update()
