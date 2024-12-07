@@ -40,7 +40,7 @@ public class PlayerCounterAttackState : PlayerState
             { 
                 if (hit.GetComponent<Enemy>().CanBeStunned()) 
                 {
-                    stateTimer = 1; // any value bigger than enemy's stunDuration
+                    stateTimer = 0.6f; // any value bigger than enemy's stunDuration
 
                     player.anim.SetBool("SuccessfulCounterAttack", true);
                 }
