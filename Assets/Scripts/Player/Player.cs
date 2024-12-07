@@ -35,8 +35,12 @@ public class Player : Entity
     public PlayerDashState dashState { get; private set; }
     public PlayerWallSlideState wallSlide { get; private set; }
     public PlayerWallJumpState wallJump { get; private set; }
-    public PlayerPrimaryAttackState PrimaryAttackState { get; private set; }
+
+    public PlayerPrimaryAttackState primaryAttackState { get; private set; }
     public PlayerCounterAttackState counterAttackState { get; private set; }
+
+    public PlayerAimSwordState aimSword { get; private set; }
+    public PlayerCatchSwordState catchSword {  get; private set; }
 
     #endregion
 
@@ -51,9 +55,13 @@ public class Player : Entity
         airState  = new PlayerAirState(this, stateMachine,  "Jump");
         dashState = new PlayerDashState(this, stateMachine, "Dash");
         wallSlide = new PlayerWallSlideState(this, stateMachine, "WallSlide");
-        wallJump = new PlayerWallJumpState(this, stateMachine, "Jump");
-        PrimaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
+        wallJump  = new PlayerWallJumpState(this, stateMachine, "Jump");
+
+        primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
         counterAttackState = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
+
+        aimSword   = new PlayerAimSwordState(this, stateMachine, "AimSword");
+        catchSword = new PlayerCatchSwordState(this, stateMachine, "CatchSword");
 
     }
 

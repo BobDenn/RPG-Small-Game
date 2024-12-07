@@ -18,12 +18,15 @@ public class PlayerGroundedState : PlayerState
     {
         base.Update();
 
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+            stateMachine.ChangeState(player.aimSword);
+
         // test counter attack
         if (Input.GetKeyDown(KeyCode.Q))
             stateMachine.ChangeState(player.counterAttackState);
         
         if(Input.GetKey(KeyCode.Mouse0))
-            stateMachine.ChangeState(player.PrimaryAttackState);
+            stateMachine.ChangeState(player.primaryAttackState);
         
         if(!player.IsGroundDetected())
             stateMachine.ChangeState(player.airState);
