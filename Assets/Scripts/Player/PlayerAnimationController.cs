@@ -12,6 +12,7 @@ public class PlayerAnimationController : MonoBehaviour
         player.AnimationTrigger();
     }
 
+
     private void AttackTrigger()
     {
         // detect enemies whom in circle and attack them
@@ -22,6 +23,12 @@ public class PlayerAnimationController : MonoBehaviour
             if (hit.GetComponent<Enemy>() != null)
                 hit.GetComponent<Enemy>().Damage();
         }
+    }
+
+    private void ThrowSword()
+    {
+        // call Sword_Skill so that we do make sense
+        SkillManager.instance.sword.CreateSword();
     }
 
 }

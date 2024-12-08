@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 105818317}
   - component: {fileID: 105818318}
   - component: {fileID: 105818319}
+  - component: {fileID: 105818320}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -197,6 +198,26 @@ MonoBehaviour:
   clonePrefab: {fileID: 2142452396873493595, guid: 8777c522d91ea1043ad9a9ab4a66364e, type: 3}
   _cloneDuration: 2
   canAttack: 1
+--- !u!114 &105818320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105818312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5164cd9e4cb1e409e170b16728a554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  swordPrefab: {fileID: 1076412969739255174, guid: d0eac174bf7ebe8488d60d22ab845f31, type: 3}
+  launchForce: {x: 35, y: 25}
+  swordGravity: 4.5
+  numberOfDots: 20
+  spaceBetweenDots: 0.07
+  dotPrefab: {fileID: 3940401974903571729, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+  dotsParent: {fileID: 1733946862}
 --- !u!1 &121449743
 GameObject:
   m_ObjectHideFlags: 3
@@ -1725,6 +1746,7 @@ MonoBehaviour:
   jumpForce: 15
   dashSpeed: 25
   dashDuration: 0.2
+  sword: {fileID: 0}
 --- !u!4 &1376143275
 Transform:
   m_ObjectHideFlags: 0
@@ -1742,6 +1764,7 @@ Transform:
   - {fileID: 1273558151}
   - {fileID: 1993852029}
   - {fileID: 365283701}
+  - {fileID: 1733946862}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1376143276
@@ -5600,6 +5623,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1733946861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1733946862}
+  m_Layer: 6
+  m_Name: DotsParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1733946862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733946861}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1376143275}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1893931994
 GameObject:
   m_ObjectHideFlags: 0

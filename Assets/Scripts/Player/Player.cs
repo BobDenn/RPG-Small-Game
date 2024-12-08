@@ -24,6 +24,7 @@ public class Player : Entity
 
 
     public SkillManager skill { get; private set; }
+    public GameObject sword; //{ get; private set; }
 
     // all player's states
     #region States  
@@ -82,6 +83,19 @@ public class Player : Entity
         
         CheckForDashInput();
     }
+
+    // Sword Skill Related, assign & destroy
+    // only one sword can use
+    public void AssignNewSword(GameObject _newSword)
+    {
+        sword = _newSword;
+    }
+
+    public void ClearTheSword()
+    {
+        Destroy(sword);
+    }
+
 
     public IEnumerator BusyFor(float _seconds)
     {

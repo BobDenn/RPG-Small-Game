@@ -13,12 +13,16 @@ public class PlayerGroundedState : PlayerState
     {
         base.Enter();
     }
+    public override void Exit()
+    {
+        base.Exit();
+    }
 
     public override void Update()
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())
             stateMachine.ChangeState(player.aimSword);
 
         // test counter attack
@@ -34,9 +38,12 @@ public class PlayerGroundedState : PlayerState
         if(Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected() )
             stateMachine.ChangeState(player.jumpState);
     }
-
-    public override void Exit()
+    private bool HasNoSword()
     {
-        base.Exit();
+        if (!player.sword) 
+            return true;
+
+        player.sword.GetComponent<Sword_Skill_Controller>().ReturnSword();
+        return false;
     }
 }
