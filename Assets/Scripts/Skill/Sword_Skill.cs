@@ -82,12 +82,12 @@ public class Sword_Skill : Skill
         }
     }
 
-    private Vector2 DotsPosition(float z)
+    private Vector2 DotsPosition(float a)
     {
         Vector2 position = (Vector2)player.transform.position + new Vector2(
             AimDirection().normalized.x * launchForce.x,
-            AimDirection().normalized.y * launchForce.y) * z + 
-            .5f * (Physics2D.gravity * swordGravity) * (z * z);
+            AimDirection().normalized.y * launchForce.y) * a + 
+            .5f * (Physics2D.gravity * swordGravity) * (a * a);
         
         return position;
     }

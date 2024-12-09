@@ -16,7 +16,7 @@ public class Sword_Skill_Controller : MonoBehaviour
     // need to know what's difference between Awake and Start 
     private void Awake()
     {
-        _anim = GetComponent<Animator>();
+        _anim = GetComponentInChildren<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _cd = GetComponent<CircleCollider2D>();
     }
