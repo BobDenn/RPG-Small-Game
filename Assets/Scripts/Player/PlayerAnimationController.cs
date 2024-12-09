@@ -24,4 +24,9 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
+    private void ThrowSword()
+    {
+        SkillManager.instance.sword.CreateSword();
+    }
+
 }
