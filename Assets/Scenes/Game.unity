@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36542b05a0483245bd5be3558065669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 2
+  cooldown: 1
 --- !u!114 &105818319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 2
   clonePrefab: {fileID: 2142452396873493595, guid: 8777c522d91ea1043ad9a9ab4a66364e, type: 3}
-  _cloneDuration: 2
+  cloneDuration: 2
   canAttack: 1
 --- !u!114 &105818320
 MonoBehaviour:
@@ -212,8 +212,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   swordPrefab: {fileID: 7615105612757292131, guid: d0eac174bf7ebe8488d60d22ab845f31, type: 3}
-  launchDir: {x: 25, y: 15}
+  launchForce: {x: 25, y: 15}
   swordGravity: 4
+  numberOfDots: 20
+  spaceBetweenDots: 0.07
+  dotPrefab: {fileID: 7498656892666710955, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+  dotsParent: {fileID: 1413032154}
 --- !u!1 &121449743
 GameObject:
   m_ObjectHideFlags: 3
@@ -1759,6 +1763,7 @@ Transform:
   - {fileID: 1273558151}
   - {fileID: 1993852029}
   - {fileID: 365283701}
+  - {fileID: 1413032154}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1376143276
@@ -1837,6 +1842,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashDuration: 0.1
   hitMat: {fileID: 2100000, guid: 6e76868a7cfa650459f59a0e15652be5, type: 2}
+--- !u!1 &1413032153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1413032154}
+  m_Layer: 6
+  m_Name: AimDotParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1413032154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413032153}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1376143275}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1420772645
 GameObject:
   m_ObjectHideFlags: 0
@@ -5819,6 +5855,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1975487911514657008, guid: d0eac174bf7ebe8488d60d22ab845f31, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6250640906255544425, guid: d0eac174bf7ebe8488d60d22ab845f31, type: 3}
       propertyPath: m_LocalPosition.x
       value: 35.09492
@@ -5863,11 +5903,76 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword
       objectReference: {fileID: 0}
+    - target: {fileID: 7615105612757292131, guid: d0eac174bf7ebe8488d60d22ab845f31, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0eac174bf7ebe8488d60d22ab845f31, type: 3}
+--- !u!1001 &1048638159008933108
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4113687812035596439, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 29.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113687812035596439, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113687812035596439, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113687812035596439, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113687812035596439, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113687812035596439, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113687812035596439, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113687812035596439, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113687812035596439, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113687812035596439, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498656892666710955, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+      propertyPath: m_Name
+      value: AimDot
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498656892666710955, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5880,3 +5985,4 @@ SceneRoots:
   - {fileID: 740785284}
   - {fileID: 105818315}
   - {fileID: 194637716783670809}
+  - {fileID: 1048638159008933108}
