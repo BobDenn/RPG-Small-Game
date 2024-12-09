@@ -18,7 +18,7 @@ public class Clone_Skill_Controller : MonoBehaviour
 
     private void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
+        sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponent<Animator>();
     }
 
@@ -46,7 +46,7 @@ public class Clone_Skill_Controller : MonoBehaviour
 
         cloneTimer = _cloneDuration;
 
-        FaceCloestTarget();
+        FaceClosestTarget();
     }
 
     private void AnimationTrigger()
@@ -66,9 +66,9 @@ public class Clone_Skill_Controller : MonoBehaviour
         }
     }
 
-    private void FaceCloestTarget()
+    private void FaceClosestTarget()
     {
-        // detect enemy whitin r=25's Circle 
+        // detect enemy within r=25's Circle 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 25);
 
         float closestDistance = Mathf.Infinity;
@@ -81,7 +81,7 @@ public class Clone_Skill_Controller : MonoBehaviour
                 float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
                 if (distanceToEnemy < closestDistance)
                 {
-                    // update closestDistance when dectect enemy successfully
+                    // update closestDistance when detect enemy successfully
                     closestDistance = distanceToEnemy;
                     // got closestEnemy
                     closestEnemy = hit.transform;
