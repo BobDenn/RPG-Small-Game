@@ -48,7 +48,9 @@ public class Sword_Skill : Skill
         GameObject newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
         Sword_Skill_Controller newSwordScript = newSword.GetComponent<Sword_Skill_Controller>();
         // assign the value
-        newSwordScript.SetupSword(_finalDir, swordGravity);
+        newSwordScript.SetupSword(_finalDir, swordGravity, player);
+        player.AssignNewSword(newSword);
+        
         // close dots
         DotsActive(false);
     }
@@ -81,7 +83,7 @@ public class Sword_Skill : Skill
 
     private Vector2 DotsPosition(float a)
     {
-        Vector2 position = (Vector2) player.transform.position * new Vector2(
+        Vector2 position = (Vector2) player.transform.position + new Vector2(
             AimDirection().normalized.x * launchForce.x, 
             AimDirection().normalized.y * launchForce.y) * a + 
                            .5f * (Physics2D.gravity * swordGravity) * (a * a);

@@ -24,6 +24,7 @@ public class Player : Entity
 
 
     public SkillManager skill { get; private set; }
+    public GameObject sword;//{ get; private set; }
 
     // all player's states
     #region States  
@@ -91,6 +92,17 @@ public class Player : Entity
         
         isBusy = false;
     }
+    // only one sword
+    public void AssignNewSword(GameObject newSword)
+    {
+        sword = newSword;
+    }
+
+    public void ClearTheSword()
+    {
+        Destroy(sword);
+    }
+    
     
     // to control sequence of attack 
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
