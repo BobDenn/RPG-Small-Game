@@ -1,10 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine;
+
+public enum SwordType
+{
+    Regular,
+    Bounce,
+    Pierce,
+    Spin
+}
 
 public class Sword_Skill : Skill
 {
+    public SwordType swordType = SwordType.Regular;
+    
+    [Header("Bounce info")] 
+    [SerializeField] private int amountOfBounce;
+    [SerializeField] private float bounceGravity;
+
+    [Header("Pierce info")] 
+    [SerializeField] private int amountOfPierce;
+    [SerializeField] private float pierceGravity;
+    
     [Header("Sword info")]
     [SerializeField] private GameObject swordPrefab;
     [SerializeField] private Vector2 launchForce;
@@ -12,7 +30,9 @@ public class Sword_Skill : Skill
 
     // where sword go, destination
     private Vector2 _finalDir;
-    [Space] [SerializeField] private int numberOfDots;
+    
+    [Header("Aim info")]
+    [SerializeField] private int numberOfDots;
     [SerializeField] private float spaceBetweenDots;
     [SerializeField] private GameObject dotPrefab;
     [SerializeField] private Transform dotsParent;
@@ -24,6 +44,16 @@ public class Sword_Skill : Skill
         base.Start();
         
         GenerateDots();
+
+        SetupGravity();
+    }
+
+    private void SetupGravity()
+    {
+        if (swordType == SwordType.Bounce)
+            swordGravity = bounceGravity;
+        else if (swordType == SwordType.Pierce)
+            swordGravity = pierceGravity;
     }
 
     //direction and multiply our launchDir setting for distance
@@ -47,6 +77,14 @@ public class Sword_Skill : Skill
     {
         GameObject newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
         Sword_Skill_Controller newSwordScript = newSword.GetComponent<Sword_Skill_Controller>();
+        // this is one of Swords which can bounce, there is four kinds of sword
+        if (swordType == SwordType.Bounce) 
+            // add pierce situation
+            newSwordScript.SetupBounce(true, amountOfBounce);
+        else if(swordType == SwordType.Pierce)
+            newSwordScript.SetupPierce(amountOfPierce);
+        
+        
         // assign the value
         newSwordScript.SetupSword(_finalDir, swordGravity, player);
         player.AssignNewSword(newSword);
@@ -54,6 +92,8 @@ public class Sword_Skill : Skill
         // close dots
         DotsActive(false);
     }
+    
+    #region Aim region
     private Vector2 AimDirection()
     {
         Vector2 playerPosition = player.transform.position;
@@ -90,5 +130,5 @@ public class Sword_Skill : Skill
         
         return position;
     }
-    
+    #endregion
 }
