@@ -22,8 +22,14 @@ public class Sword_Skill : Skill
     [Header("Pierce info")] 
     [SerializeField] private int amountOfPierce;
     [SerializeField] private float pierceGravity;
+
+    [Header("Spin info")] 
+    [SerializeField] private float hitCooldown = .33f;
+    [SerializeField] private float maxTravelDistance = 7;
+    [SerializeField] private float spinDuration = 2;
+    [SerializeField] private float spingravity = 1;
     
-    [Header("Sword info")]
+    [Header("Sword Skill info")]
     [SerializeField] private GameObject swordPrefab;
     [SerializeField] private Vector2 launchForce;
     [SerializeField] private float swordGravity;
@@ -54,6 +60,8 @@ public class Sword_Skill : Skill
             swordGravity = bounceGravity;
         else if (swordType == SwordType.Pierce)
             swordGravity = pierceGravity;
+        else if (swordType == SwordType.Spin)
+            swordGravity = spingravity;
     }
 
     //direction and multiply our launchDir setting for distance
@@ -77,12 +85,15 @@ public class Sword_Skill : Skill
     {
         GameObject newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
         Sword_Skill_Controller newSwordScript = newSword.GetComponent<Sword_Skill_Controller>();
+        
         // this is one of Swords which can bounce, there is four kinds of sword
         if (swordType == SwordType.Bounce) 
             // add pierce situation
             newSwordScript.SetupBounce(true, amountOfBounce);
         else if(swordType == SwordType.Pierce)
             newSwordScript.SetupPierce(amountOfPierce);
+        else if(swordType == SwordType.Spin)
+            newSwordScript.SetupSpin(true, maxTravelDistance, spinDuration,hitCooldown);
         
         
         // assign the value
