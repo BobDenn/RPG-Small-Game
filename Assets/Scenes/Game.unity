@@ -211,17 +211,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  swordType: 3
+  swordType: 0
   amountOfBounce: 4
   bounceGravity: 0.5
+  bounceSpeed: 20
   amountOfPierce: 2
   pierceGravity: 1
+  hitCooldown: 0.33
   maxTravelDistance: 7
   spinDuration: 2
-  spingravity: 1
+  spinGravity: 1
   swordPrefab: {fileID: 7615105612757292131, guid: d0eac174bf7ebe8488d60d22ab845f31, type: 3}
   launchForce: {x: 35, y: 25}
   swordGravity: 3
+  freezeTimeDuration: 1
+  returnSpeed: 15
   numberOfDots: 20
   spaceBetweenDots: 0.07
   dotPrefab: {fileID: 7498656892666710955, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}
@@ -1268,7 +1272,7 @@ MonoBehaviour:
   attackCheck: {fileID: 117471023}
   attackCheckRadius: 0.8
   groundCheck: {fileID: 896668541}
-  groundCheckDistance: 0.4
+  groundCheckDistance: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
@@ -2568,7 +2572,7 @@ MonoBehaviour:
   attackCheck: {fileID: 185575269}
   attackCheckRadius: 0.8
   groundCheck: {fileID: 551027454}
-  groundCheckDistance: 0.4
+  groundCheckDistance: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
@@ -2898,7 +2902,7 @@ Transform:
   m_GameObject: {fileID: 1347720318}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.63, y: -3.4, z: 0}
+  m_LocalPosition: {x: 39.62, y: -3.516, z: 0}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2924,7 +2928,7 @@ MonoBehaviour:
   attackCheck: {fileID: 998179891}
   attackCheckRadius: 0.8
   groundCheck: {fileID: 305083346}
-  groundCheckDistance: 0.4
+  groundCheckDistance: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
@@ -8637,7 +8641,7 @@ MonoBehaviour:
   attackCheck: {fileID: 1802398721}
   attackCheckRadius: 0.8
   groundCheck: {fileID: 704388560}
-  groundCheckDistance: 0.4
+  groundCheckDistance: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
@@ -8946,7 +8950,7 @@ MonoBehaviour:
   attackCheck: {fileID: 1519965698}
   attackCheckRadius: 0.8
   groundCheck: {fileID: 1831188915}
-  groundCheckDistance: 0.4
+  groundCheckDistance: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8

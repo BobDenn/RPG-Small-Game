@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Sword_Skill_Controller : MonoBehaviour
 {
-    [SerializeField] private float returningSpeed = 16;
     private Animator _anim;
     private Rigidbody2D _rb;
     private CircleCollider2D _cd;
@@ -14,8 +13,11 @@ public class Sword_Skill_Controller : MonoBehaviour
     private bool _canRotate = true;
     private bool _isReturning;
 
+    private float _freezeTimeDuration;
+    private float _returnSpeed = 16;
+    
     /*     bounce info    */
-    [SerializeField] private float bounceSpeed;
+    private float _bounceSpeed;
     private bool _isBouncing;
     private int _amountOfBounce;
     private List<Transform> _enemyTarget; // need Initialize the list if in private state
@@ -44,25 +46,35 @@ public class Sword_Skill_Controller : MonoBehaviour
         
     }
 
+    private void DestroyMe()
+    {
+        Destroy(gameObject);
+    }
+    
     #region Setup Stuff
     
-    public void SetupSword(Vector2 dir, float gravityScale,Player player)
+    public void SetupSword(Vector2 dir, float gravityScale,Player player, float freezeTimeDuration, float returnSpeed)
     {
         _player = player;
         _rb.velocity = dir;
         _rb.gravityScale = gravityScale;
+        _freezeTimeDuration = freezeTimeDuration;
+        _returnSpeed = returnSpeed;
         
         if(_pierceAmount <= 0)
             _anim.SetBool("Rotate", true);
         // ???
         _spinDir = Mathf.Clamp(_rb.velocity.x, -1, 1);
+        
+        Invoke("DestroyMe", 7);
     }
 
     // bounce
-    public void SetupBounce(bool isBouncing, int amountOfBounce)
+    public void SetupBounce(bool isBouncing, int amountOfBounce, float bounceSpeed)
     {
-        this._isBouncing = isBouncing;
-        this._amountOfBounce = amountOfBounce;
+        _isBouncing = isBouncing;
+        _amountOfBounce = amountOfBounce;
+        _bounceSpeed = bounceSpeed;
         
         //Initialize list
         _enemyTarget = new List<Transform>();
@@ -100,7 +112,7 @@ public class Sword_Skill_Controller : MonoBehaviour
         if (_isReturning)
         {
             // return to player
-            transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, returningSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, _returnSpeed * Time.deltaTime);
 
             if (Vector2.Distance(transform.position, _player.transform.position) < 1)
                 // catch the sword
@@ -163,11 +175,12 @@ public class Sword_Skill_Controller : MonoBehaviour
         if (_isBouncing && _enemyTarget.Count > 0)
         {
             transform.position = Vector2.MoveTowards(transform.position, _enemyTarget[_targetIndex].position,
-                bounceSpeed * Time.deltaTime);
+                _bounceSpeed * Time.deltaTime);
 
             if (Vector2.Distance(transform.position, _enemyTarget[_targetIndex].position) < .1f)
             {
                 _enemyTarget[_targetIndex].GetComponent<Enemy>().WasDamaged();
+                _enemyTarget[_targetIndex].GetComponent<Enemy>().StartCoroutine("FreezeTimeFor", _freezeTimeDuration);
                 
                 _targetIndex++;
                 _amountOfBounce--;
@@ -190,9 +203,17 @@ public class Sword_Skill_Controller : MonoBehaviour
     {
         if (_isReturning)
             return;
-        
+
+
+        if (collision.GetComponent<Enemy>() != null)
+        {
+            Enemy enemy = collision.GetComponent<Enemy>();
+            
+            enemy.WasDamaged();
+            enemy.StartCoroutine("FreezeTimeFor", _freezeTimeDuration);
+        }
         // difficult
-        collision.GetComponent<Enemy>()?.WasDamaged();
+        // collision.GetComponent<Enemy>()?.WasDamaged();
         
         
         // Add enemy to our target list

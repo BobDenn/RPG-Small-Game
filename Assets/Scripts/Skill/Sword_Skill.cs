@@ -18,6 +18,7 @@ public class Sword_Skill : Skill
     [Header("Bounce info")] 
     [SerializeField] private int amountOfBounce;
     [SerializeField] private float bounceGravity;
+    [SerializeField] private float bounceSpeed;
 
     [Header("Pierce info")] 
     [SerializeField] private int amountOfPierce;
@@ -27,12 +28,14 @@ public class Sword_Skill : Skill
     [SerializeField] private float hitCooldown = .33f;
     [SerializeField] private float maxTravelDistance = 7;
     [SerializeField] private float spinDuration = 2;
-    [SerializeField] private float spingravity = 1;
+    [SerializeField] private float spinGravity = 1;
     
     [Header("Sword Skill info")]
     [SerializeField] private GameObject swordPrefab;
     [SerializeField] private Vector2 launchForce;
     [SerializeField] private float swordGravity;
+    [SerializeField] private float freezeTimeDuration;
+    [SerializeField] private float returnSpeed;
 
     // where sword go, destination
     private Vector2 _finalDir;
@@ -61,7 +64,7 @@ public class Sword_Skill : Skill
         else if (swordType == SwordType.Pierce)
             swordGravity = pierceGravity;
         else if (swordType == SwordType.Spin)
-            swordGravity = spingravity;
+            swordGravity = spinGravity;
     }
 
     //direction and multiply our launchDir setting for distance
@@ -89,7 +92,7 @@ public class Sword_Skill : Skill
         // this is one of Swords which can bounce, there is four kinds of sword
         if (swordType == SwordType.Bounce) 
             // add pierce situation
-            newSwordScript.SetupBounce(true, amountOfBounce);
+            newSwordScript.SetupBounce(true, amountOfBounce, bounceSpeed);
         else if(swordType == SwordType.Pierce)
             newSwordScript.SetupPierce(amountOfPierce);
         else if(swordType == SwordType.Spin)
@@ -97,7 +100,7 @@ public class Sword_Skill : Skill
         
         
         // assign the value
-        newSwordScript.SetupSword(_finalDir, swordGravity, player);
+        newSwordScript.SetupSword(_finalDir, swordGravity, player, freezeTimeDuration, returnSpeed);
         player.AssignNewSword(newSword);
         
         // close dots
