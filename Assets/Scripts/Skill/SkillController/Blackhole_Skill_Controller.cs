@@ -11,22 +11,32 @@ public class Blackhole_Skill_Controller : MonoBehaviour
     [SerializeField] private List<KeyCode> keyCodeList;
     
     [Header("black hole info")]
-    public float maxSize;
-    public float groupSpeed;
-    public bool canGrow;
-    public bool canShrink;
-    public float shrinkSpeed;
+    private float _maxSize;
+    private float _growSpeed;
+    private float _shrinkSpeed;
+    private bool _canGrow = true;
+    private bool _canShrink;
 
     [Header("clone attack info")]
-    public int amountOfAttack = 4;
-    public float cloneAttackCooldown = .3f;
+    private int _amountOfAttack = 4;
+
+    private float _cloneAttackCooldown = .3f;
     private float _cloneAttackTimer;
     private bool _cloneCanAttack;
     private bool _canCreateHotKeys = true;
     
     private List<Transform> _targets = new List<Transform>();
     private List<GameObject> _createHotKey = new List<GameObject>();
-
+    // pass value
+    public void SetupBlackHole(float maxSize, float growSpeed,float shrinkSpeed, int amountOfAttack, float cloneAttackCooldown)
+    {
+        _maxSize = maxSize;
+        _growSpeed = growSpeed;
+        _shrinkSpeed = shrinkSpeed;
+        _amountOfAttack = amountOfAttack;
+        _cloneAttackCooldown = cloneAttackCooldown;
+    }
+    
     private void Update()
     {
         _cloneAttackTimer -= Time.deltaTime;
@@ -38,9 +48,31 @@ public class Blackhole_Skill_Controller : MonoBehaviour
             _canCreateHotKeys = false;
         }
         
+        CloneAttack();
+        
+        
+        if (_canGrow && !_canShrink)
+        {
+            // expand black hole
+            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(_maxSize, _maxSize),
+                _growSpeed * Time.deltaTime);
+        }
+
+        if (_canShrink)
+        {
+            transform.localScale =
+                Vector2.Lerp(transform.localScale, new Vector2(-1, -1), _shrinkSpeed * Time.deltaTime);
+            // if black hole is too small then destroy
+            if(transform.localScale.x < 0)
+                Destroy(gameObject);
+        }
+    }
+
+    private void CloneAttack()
+    {
         if (_cloneAttackTimer < 0 && _cloneCanAttack)
         {
-            _cloneAttackTimer = cloneAttackCooldown;
+            _cloneAttackTimer = _cloneAttackCooldown;
             int randomIndex = Random.Range(0, _targets.Count);
             
             // use offset
@@ -52,32 +84,13 @@ public class Blackhole_Skill_Controller : MonoBehaviour
                 
             SkillManager.instance.clone.CreateClone(_targets[randomIndex], new Vector3(xOffset, 0));
             
-            amountOfAttack--;
-            if (amountOfAttack < 0)
+            _amountOfAttack--;
+            if (_amountOfAttack < 0)
             {
-                canShrink = true;
+                _canShrink = true;
                 _cloneCanAttack = false;
             }
-
         }
-        
-        
-        if (canGrow && !canShrink)
-        {
-            // expand black hole
-            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(maxSize, maxSize),
-                groupSpeed * Time.deltaTime);
-        }
-
-        if (canShrink)
-        {
-            transform.localScale =
-                Vector2.Lerp(transform.localScale, new Vector2(-1, -1), shrinkSpeed * Time.deltaTime);
-            // if black hole is too small then destroy
-            if(transform.localScale.x < 0)
-                Destroy(gameObject);
-        }
-
     }
 
     // destroy hot keys
@@ -102,6 +115,15 @@ public class Blackhole_Skill_Controller : MonoBehaviour
             CreateHotKey(collision);
         }
     }
+    // exit detecting
+    /*private void OnTriggerExit(Collider collision)
+    {
+        if(collision.GetComponent<Enemy>() != null)
+            collision.GetComponent<Enemy>().FreezeTime(false);
+    }*/
+    // another way to write this function 
+    // ? means if it isn't null then do behind function, otherwise do nothing. super easy super cool
+    private void OnTriggerExit2D(Collider2D collision) => collision.GetComponent<Enemy>()?.FreezeTime(false);
 
     private void CreateHotKey(Collider2D collision)
     {
