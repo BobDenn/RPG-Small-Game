@@ -12,7 +12,7 @@ public class Blackhole_Hotkey_Controller : MonoBehaviour
     private Transform _myEnemies;
     private Blackhole_Skill_Controller _blackHole;
 
-    public void SetupHotKey(KeyCode myNewHotKey, Transform myEnemy, Blackhole_Skill_Controller blackhole)
+    public void SetupHotKey(KeyCode myNewHotKey, Transform myEnemy, Blackhole_Skill_Controller blackHole)
     {
         _sr = GetComponent<SpriteRenderer>();
         
@@ -20,7 +20,7 @@ public class Blackhole_Hotkey_Controller : MonoBehaviour
         _myText = GetComponentInChildren<TextMeshProUGUI>();
 
         _myEnemies = myEnemy;
-        _blackHole = blackhole;
+        _blackHole = blackHole;
         
         _myHotKey = myNewHotKey;
         _myText.text = myNewHotKey.ToString();
@@ -37,5 +37,4 @@ public class Blackhole_Hotkey_Controller : MonoBehaviour
             _sr.color = Color.clear;
         }
     }
-    
 }

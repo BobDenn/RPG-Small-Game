@@ -85,7 +85,7 @@ public class Player : Entity
         
         CheckForDashInput();
     }
-
+    
     public IEnumerator BusyFor(float _seconds)
     {
         isBusy = true;
@@ -105,7 +105,6 @@ public class Player : Entity
         stateMachine.ChangeState(catchSword);
         Destroy(sword);
     }
-    
     
     // to control sequence of attack 
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();

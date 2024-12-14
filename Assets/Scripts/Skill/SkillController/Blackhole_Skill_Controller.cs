@@ -10,42 +10,55 @@ public class Blackhole_Skill_Controller : MonoBehaviour
     [SerializeField] private GameObject hotKeyPrefab;
     [SerializeField] private List<KeyCode> keyCodeList;
     
-    [Header("black hole info")]
     private float _maxSize;
     private float _growSpeed;
     private float _shrinkSpeed;
+    private float _blackHoleTimer;
     private bool _canGrow = true;
     private bool _canShrink;
-
-    [Header("clone attack info")]
-    private int _amountOfAttack = 4;
-
+    
+    private int _amountOfAttacks;
     private float _cloneAttackCooldown = .3f;
     private float _cloneAttackTimer;
-    private bool _cloneCanAttack;
+    private bool _cloneAttackReleased;
     private bool _canCreateHotKeys = true;
+    private bool _playerCanDisappear = true;
     
     private List<Transform> _targets = new List<Transform>();
     private List<GameObject> _createHotKey = new List<GameObject>();
-    // pass value
-    public void SetupBlackHole(float maxSize, float growSpeed,float shrinkSpeed, int amountOfAttack, float cloneAttackCooldown)
+    
+    public bool playerCanExitState { get; private set; }
+    
+    // pass black hole parameters
+    public void SetupBlackHole(float maxSize, float growSpeed,float shrinkSpeed, int amountOfAttacks, float cloneAttackCooldown, float blackHoleDuration)
     {
         _maxSize = maxSize;
         _growSpeed = growSpeed;
         _shrinkSpeed = shrinkSpeed;
-        _amountOfAttack = amountOfAttack;
+        _amountOfAttacks = amountOfAttacks;
+        _blackHoleTimer = blackHoleDuration;
         _cloneAttackCooldown = cloneAttackCooldown;
     }
     
     private void Update()
     {
-        _cloneAttackTimer -= Time.deltaTime;
-        // press R use ultimate ability -0-
+        _cloneAttackTimer -= Time.deltaTime; // always negative
+        _blackHoleTimer -= Time.deltaTime;
+
+        if (_blackHoleTimer < 0)
+        {
+            _blackHoleTimer = Mathf.Infinity;
+            
+            if(_targets.Count > 0)
+                ReleaseCloneAttack();
+            else
+                FinishBlackHole();
+        }
+        
+        // press R use clone attack -0-
         if (Input.GetKeyDown(KeyCode.R))
         {
-            DestroyHotKeys();
-            _cloneCanAttack = true;
-            _canCreateHotKeys = false;
+            ReleaseCloneAttack();
         }
         
         CloneAttack();
@@ -53,7 +66,7 @@ public class Blackhole_Skill_Controller : MonoBehaviour
         
         if (_canGrow && !_canShrink)
         {
-            // expand black hole
+            // expand black hole slowly
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(_maxSize, _maxSize),
                 _growSpeed * Time.deltaTime);
         }
@@ -68,35 +81,63 @@ public class Blackhole_Skill_Controller : MonoBehaviour
         }
     }
 
+    private void ReleaseCloneAttack()
+    {
+        if(_targets.Count <= 0)
+            return;
+        
+        DestroyHotKeys();
+        _cloneAttackReleased = true;
+        _canCreateHotKeys = false;
+        if (_playerCanDisappear)
+        {
+            _playerCanDisappear = false;
+            
+            PlayerManager.instance.player.MakeTransparent(true);
+        }    
+    }
+
     private void CloneAttack()
     {
-        if (_cloneAttackTimer < 0 && _cloneCanAttack)
+        if (_cloneAttackTimer < 0 && _cloneAttackReleased && _amountOfAttacks > 0)
         {
             _cloneAttackTimer = _cloneAttackCooldown;
+            
             int randomIndex = Random.Range(0, _targets.Count);
             
-            // use offset
+            // clone's offset position
             float xOffset;
-            if (Random.Range(0, 100) > 40)
-                xOffset = 2;
+            if (Random.Range(0, 100) > 50)
+                xOffset = 1;
             else
-                xOffset = -2;
+                xOffset = -1;
                 
             SkillManager.instance.clone.CreateClone(_targets[randomIndex], new Vector3(xOffset, 0));
             
-            _amountOfAttack--;
-            if (_amountOfAttack < 0)
+            _amountOfAttacks--;
+            
+            // black hole shrinks when attack finished 
+            if (_amountOfAttacks <= 0)
             {
-                _canShrink = true;
-                _cloneCanAttack = false;
+                // try out what does invoke mean 
+                Invoke("FinishBlackHole", 1f);
+                
             }
         }
+    }
+
+    private void FinishBlackHole()
+    {
+        DestroyHotKeys();
+        playerCanExitState = true;
+        _canShrink = true;
+        _cloneAttackReleased = false;
     }
 
     // destroy hot keys
     private void DestroyHotKeys()
     {
-        if(_createHotKey.Count<0)
+        if(_createHotKey.Count <= 0)
             return;
         for (int i = 0; i < _createHotKey.Count; i++)
         {
