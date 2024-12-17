@@ -1,103 +1,148 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+using UnityEngine.Serialization;
 using UnityEngine;
-using UnityEngine.UIElements;
+
+public enum SwordType
+{
+    Regular,
+    Bounce,
+    Pierce,
+    Spin
+}
 
 public class Sword_Skill : Skill
 {
-    [Header("Sword info")]
+    public SwordType swordType = SwordType.Regular;
+    
+    [Header("Bounce info")] 
+    [SerializeField] private int amountOfBounce;
+    [SerializeField] private float bounceGravity;
+    [SerializeField] private float bounceSpeed;
+
+    [Header("Pierce info")] 
+    [SerializeField] private int amountOfPierce;
+    [SerializeField] private float pierceGravity;
+
+    [Header("Spin info")] 
+    [SerializeField] private float hitCooldown = .33f;
+    [SerializeField] private float maxTravelDistance = 7;
+    [SerializeField] private float spinDuration = 2;
+    [SerializeField] private float spinGravity = 1;
+    
+    [Header("Sword Skill info")]
     [SerializeField] private GameObject swordPrefab;
     [SerializeField] private Vector2 launchForce;
     [SerializeField] private float swordGravity;
+    [SerializeField] private float freezeTimeDuration;
+    [SerializeField] private float returnSpeed;
 
-    [Header("Aim dots")]
+    // where sword go, destination
+    private Vector2 _finalDir;
+    
+    [Header("Aim info")]
     [SerializeField] private int numberOfDots;
     [SerializeField] private float spaceBetweenDots;
     [SerializeField] private GameObject dotPrefab;
     [SerializeField] private Transform dotsParent;
 
-    private GameObject[] dots;
-
-    // destination
-    private Vector2 finalDir;
+    private GameObject[] _dots;
 
     protected override void Start()
     {
         base.Start();
-
+        
         GenerateDots();
-    }
-    
 
+        SetupGravity();
+    }
+
+    private void SetupGravity()
+    {
+        if (swordType == SwordType.Bounce)
+            swordGravity = bounceGravity;
+        else if (swordType == SwordType.Pierce)
+            swordGravity = pierceGravity;
+        else if (swordType == SwordType.Spin)
+            swordGravity = spinGravity;
+    }
+
+    //direction and multiply our launchDir setting for distance
     protected override void Update()
     {
-        base.Update();
-        if(Input.GetKeyUp(KeyCode.Mouse1))
-            finalDir = new Vector2(AimDirection().normalized.x * launchForce.x, AimDirection().normalized.y * launchForce.y);
+        
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+            _finalDir = new Vector2(AimDirection().normalized.x * launchForce.x, AimDirection().normalized.y * launchForce.y);
 
         if (Input.GetKey(KeyCode.Mouse1))
         {
-            for (int i = 0; i < dots.Length; i++)
+            for (int i = 0; i < _dots.Length; i++)
             {
-                dots[i].transform.position = DotsPosition(i * spaceBetweenDots);
-                
+                _dots[i].transform.position = DotsPosition(i * spaceBetweenDots);
             }
         }
-
     }
-
+    
+    // generate sword
     public void CreateSword()
     {
-        // get sword prefab, so we can use skill to create sword
         GameObject newSword = Instantiate(swordPrefab, player.transform.position, transform.rotation);
-
         Sword_Skill_Controller newSwordScript = newSword.GetComponent<Sword_Skill_Controller>();
-
-        newSwordScript.SetupSword(finalDir, swordGravity, player);
         
+        // this is one of Swords which can bounce, there is four kinds of sword
+        if (swordType == SwordType.Bounce) 
+            // add pierce situation
+            newSwordScript.SetupBounce(true, amountOfBounce, bounceSpeed);
+        else if(swordType == SwordType.Pierce)
+            newSwordScript.SetupPierce(amountOfPierce);
+        else if(swordType == SwordType.Spin)
+            newSwordScript.SetupSpin(true, maxTravelDistance, spinDuration,hitCooldown);
+        
+        
+        // assign the value
+        newSwordScript.SetupSword(_finalDir, swordGravity, player, freezeTimeDuration, returnSpeed);
         player.AssignNewSword(newSword);
-
+        
+        // close dots
         DotsActive(false);
-
     }
-
-    public Vector2 AimDirection()
+    
+    #region Aim region
+    private Vector2 AimDirection()
     {
         Vector2 playerPosition = player.transform.position;
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // can't understand
+        Vector2 mousePosition  = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePosition - playerPosition;
 
         return direction;
     }
 
+    public void DotsActive(bool isActive)
+    {
+        for (int i = 0; i < _dots.Length; i++)
+        {
+            _dots[i].SetActive(isActive);
+        }
+    }
+
     private void GenerateDots()
     {
-        dots = new GameObject[numberOfDots];
+        _dots = new GameObject[numberOfDots];
         for (int i = 0; i < numberOfDots; i++)
         {
-            dots[i] = Instantiate(dotPrefab, player.transform.position, Quaternion.identity, dotsParent);
-            dots[i].SetActive(false);
+            _dots[i] = Instantiate(dotPrefab, player.transform.position, Quaternion.identity, dotsParent);
+            _dots[i].SetActive(false);
         }
     }
 
     private Vector2 DotsPosition(float a)
     {
-        Vector2 position = (Vector2)player.transform.position + new Vector2(
-            AimDirection().normalized.x * launchForce.x,
+        Vector2 position = (Vector2) player.transform.position + new Vector2(
+            AimDirection().normalized.x * launchForce.x, 
             AimDirection().normalized.y * launchForce.y) * a + 
-            .5f * (Physics2D.gravity * swordGravity) * (a * a);
+                           .5f * (Physics2D.gravity * swordGravity) * (a * a);
         
         return position;
     }
-
-    public void DotsActive(bool _isActive)
-    {
-        for (int i = 0; i < dots.Length; i++)
-        {
-            dots[i].SetActive(_isActive);
-        }
-    }
-
+    #endregion
 }

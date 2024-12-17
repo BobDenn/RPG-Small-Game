@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
     public EntityFX fx { get; private set; }
+    public SpriteRenderer sr { get; private set; }
     
     #endregion
     
@@ -41,10 +42,10 @@ public class Entity : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        fx = GetComponent<EntityFX>();
-        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
-
+        rb = GetComponent<Rigidbody2D>();
+        fx = GetComponent<EntityFX>();
     }
 
     // Update is called once per frame
@@ -53,7 +54,7 @@ public class Entity : MonoBehaviour
         
     }
     
-    public void Damage()
+    public void WasDamaged()
     {
         fx.StartCoroutine("FlashFX");
         StartCoroutine("HitKnockBack");
@@ -122,13 +123,25 @@ public class Entity : MonoBehaviour
         transform.Rotate(0,180,0);
     }
 
-    public virtual void FlipController(float _x)
+    public virtual void FlipController(float x)
     {
-        if (_x > 0 && !facingRight)
+        if (x > 0 && !facingRight)
             Flip();
-        else if (_x < 0 && facingRight)
+        else if (x < 0 && facingRight)
             Flip();
     }
     
     #endregion
+    
+    // disappear
+    public void MakeTransparent(bool transparent)
+    {
+        if (transparent)
+            sr.color = Color.clear;
+        else
+            sr.color = Color.white;
+        
+    }
+    
+    
 }

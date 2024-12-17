@@ -37,12 +37,12 @@ public class Clone_Skill_Controller : MonoBehaviour
     }
 
     // create a clone of player such as this function's name
-    public void SetupClone(Transform _newTransform, float _cloneDuration, bool _canAttack)
+    public void SetupClone(Transform _newTransform, float _cloneDuration, bool _canAttack,Vector3 _offset)
     {
         if (_canAttack)
             anim.SetInteger("AttackNum", Random.Range(1, 4)); // range( [x,y) )
 
-        transform.position = _newTransform.position;
+        transform.position = _newTransform.position + _offset;
 
         cloneTimer = _cloneDuration;
 
@@ -62,7 +62,7 @@ public class Clone_Skill_Controller : MonoBehaviour
         foreach (var hit in colliders)
         {
             if (hit.GetComponent<Enemy>() != null)
-                hit.GetComponent<Enemy>().Damage();
+                hit.GetComponent<Enemy>().WasDamaged();
         }
     }
 
