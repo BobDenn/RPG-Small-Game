@@ -82,8 +82,13 @@ public class Player : Entity
         base.Update();
         
         stateMachine.currentState.Update();
-        
+        // use dash
         CheckForDashInput();
+
+        // crystal skill
+        if (Input.GetKeyDown(KeyCode.F))
+            skill.crystal.CanUseSkill();
+
     }
     
     public IEnumerator BusyFor(float _seconds)
