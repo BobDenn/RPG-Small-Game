@@ -14,6 +14,7 @@ public class Clone_Skill : Skill
     // you can create clone when you start to use dash or dash state is finished
     [SerializeField] private bool createCloneOnDashStart;
     [SerializeField] private bool createCloneOnDashOver;
+    [SerializeField] private bool canCreateCloneOnCounterAttack;
     
 
     public void CreateClone(Transform _clonePosition, Vector3 offset)
@@ -37,4 +38,16 @@ public class Clone_Skill : Skill
             CreateClone(player.transform, Vector3.zero);
     }
 
+    public void CreateCloneOnCounterAttack(Transform enemyTransform)
+    {
+        if (canCreateCloneOnCounterAttack)
+            StartCoroutine(CreateCloneDelay(enemyTransform, new Vector3(1 * player.facingDir, 0f, 0f)));
+
+    }
+
+    private IEnumerator CreateCloneDelay(Transform transform, Vector3 offset)
+    {
+        yield return new WaitForSeconds(.5f);
+            CreateClone(transform, offset);
+    }
 }

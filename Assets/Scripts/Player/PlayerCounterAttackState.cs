@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerCounterAttackState : PlayerState
 {
+    private bool _canCreateClone; // make sure only one clone
     public PlayerCounterAttackState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
 
@@ -13,7 +14,7 @@ public class PlayerCounterAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
+        _canCreateClone = true;
         stateTimer = player.counterAttackDuration;
 
         // make sure the animator is reset
@@ -31,7 +32,7 @@ public class PlayerCounterAttackState : PlayerState
 
         player.SetZeroVelocity();
 
-        // counter attack
+        // counter_attack
         Collider2D[] colliders = Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackCheckRadius);
 
         foreach (var hit in colliders)
@@ -40,14 +41,18 @@ public class PlayerCounterAttackState : PlayerState
             { 
                 if (hit.GetComponent<Enemy>().CanBeStunned()) 
                 {
-                    stateTimer = 0.6f; // any value bigger than enemy's stunDuration
-
+                    stateTimer = 0.6f; // any value bigger than enemy's stun Duration
                     player.anim.SetBool("SuccessfulCounterAttack", true);
+                    if (_canCreateClone)
+                    {
+                        _canCreateClone = false;
+                        player.skill.clone.CreateCloneOnCounterAttack(hit.transform);
+                    }
                 }
             }
         }
 
-        // if counter attack failed, we do this
+        // if counter-attack failed, we do this
         if (stateTimer < 0 || triggerCalled)
             stateMachine.ChangeState(player.idleState);
     }
