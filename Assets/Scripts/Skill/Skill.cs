@@ -40,4 +40,32 @@ public class Skill : MonoBehaviour
         // do some skill specific things
     }
     
+    // find the closest enemy
+    protected virtual Transform FindClosestEnemy(Transform _checkTransform)
+    {
+        // detect enemy within r=25's Circle 
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(_checkTransform.position, 25);
+
+        float closestDistance = Mathf.Infinity;
+        Transform closestEnemy = null;
+
+        // to find the closest enemy
+        foreach (var hit in colliders)
+        {
+            if ((hit.GetComponent<Enemy>() != null))
+            {
+                float distanceToEnemy = Vector2.Distance(_checkTransform.position, hit.transform.position);
+                if (distanceToEnemy < closestDistance)
+                {
+                    // update closestDistance when detect enemy successfully
+                    closestDistance = distanceToEnemy;
+                    // got closestEnemy
+                    closestEnemy = hit.transform;
+                }
+            }
+        }
+        
+        return closestEnemy;
+    }
+    
 }

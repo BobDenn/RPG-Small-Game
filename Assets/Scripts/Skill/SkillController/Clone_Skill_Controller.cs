@@ -37,7 +37,7 @@ public class Clone_Skill_Controller : MonoBehaviour
     }
 
     // create a clone of player such as this function's name
-    public void SetupClone(Transform _newTransform, float _cloneDuration, bool _canAttack,Vector3 _offset)
+    public void SetupClone(Transform _newTransform, float _cloneDuration, bool _canAttack,Vector3 _offset, Transform _closestEnemy)
     {
         if (_canAttack)
             anim.SetInteger("AttackNum", Random.Range(1, 4)); // range( [x,y) )
@@ -46,6 +46,8 @@ public class Clone_Skill_Controller : MonoBehaviour
 
         cloneTimer = _cloneDuration;
 
+        closestEnemy = _closestEnemy;
+        
         FaceClosestTarget();
     }
 
@@ -68,27 +70,6 @@ public class Clone_Skill_Controller : MonoBehaviour
 
     private void FaceClosestTarget()
     {
-        // detect enemy within r=25's Circle 
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 25);
-
-        float closestDistance = Mathf.Infinity;
-
-        // to find the closest enemy
-        foreach (var hit in colliders)
-        {
-            if ((hit.GetComponent<Enemy>() != null))
-            {
-                float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
-                if (distanceToEnemy < closestDistance)
-                {
-                    // update closestDistance when detect enemy successfully
-                    closestDistance = distanceToEnemy;
-                    // got closestEnemy
-                    closestEnemy = hit.transform;
-                }
-            }
-        }
-
         // if clone on Enemy right side, then face to target
         if (closestEnemy != null) 
         {
