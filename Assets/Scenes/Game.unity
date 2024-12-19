@@ -270,6 +270,14 @@ MonoBehaviour:
   canExplode: 1
   canMoveToEnemy: 1
   moveSpeed: 5
+  canUseMultiStacks: 1
+  amountOfStacks: 3
+  multiStackCooldown: 4
+  useTimeWindow: 2
+  crystalleft:
+  - {fileID: 2295464848245908377, guid: 6a3329a75212892479a1198d8f6a1ada, type: 3}
+  - {fileID: 2295464848245908377, guid: 6a3329a75212892479a1198d8f6a1ada, type: 3}
+  - {fileID: 2295464848245908377, guid: 6a3329a75212892479a1198d8f6a1ada, type: 3}
 --- !u!1 &117471022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1476,7 +1484,7 @@ Transform:
   m_GameObject: {fileID: 556269779}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
