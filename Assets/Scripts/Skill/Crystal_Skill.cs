@@ -95,7 +95,7 @@ public class Crystal_Skill : Skill
     
     private void RefillCrystal()
     {
-        // to encourage player to use up their skills
+        // encourage player to use up their skills
         int amountToAdd = amountOfStacks - crystalleft.Count;
         
         for (int i = 0; i < amountToAdd; i++)

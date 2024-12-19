@@ -11,6 +11,11 @@ public class Clone_Skill : Skill
 
     [SerializeField] private bool canAttack;
 
+    // you can create clone when you start to use dash or dash state is finished
+    [SerializeField] private bool createCloneOnDashStart;
+    [SerializeField] private bool createCloneOnDashOver;
+    
+
     public void CreateClone(Transform _clonePosition, Vector3 offset)
     {
 
@@ -19,6 +24,17 @@ public class Clone_Skill : Skill
 
         // clone's position
         newClone.GetComponent<Clone_Skill_Controller>().SetupClone(_clonePosition, cloneDuration, canAttack, offset, FindClosestEnemy(newClone.transform));
+    }
+
+    public void CreateCloneOnDashStart()
+    {
+        if (createCloneOnDashStart)
+            CreateClone(player.transform, Vector3.zero);
+    }
+    public void CreateCloneOnDashOver()
+    {
+        if (createCloneOnDashOver)
+            CreateClone(player.transform, Vector3.zero);
     }
 
 }
