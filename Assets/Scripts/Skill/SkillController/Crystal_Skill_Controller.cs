@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class Crystall_Skill_Controller : MonoBehaviour
+public class Crystal_Skill_Controller : MonoBehaviour
 {
     // advance write type
     private Animator anim => GetComponent<Animator>();
@@ -33,13 +34,12 @@ public class Crystall_Skill_Controller : MonoBehaviour
     public void ChooseRandomEnemy()
     {
         // get correct radius
-        float radius = SkillManager.instance.balckhole.getBlackHoleRadius();
+        float radius = SkillManager.instance.blackHole.getBlackHoleRadius();
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius, whatIsEnemy);
 
-        if(colliders.Length > 0)
+        if (colliders.Length > 0)
             closestTarget = colliders[Random.Range(0, colliders.Length)].transform;
-            
     }
 
     private void Update()

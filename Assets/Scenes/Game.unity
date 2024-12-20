@@ -205,6 +205,7 @@ MonoBehaviour:
   canCreateCloneOnCounterAttack: 0
   canDuplicateClone: 1
   chanceToDuplicate: 40
+  crystalInsteadOfClone: 1
 --- !u!114 &105818320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,10 +281,7 @@ MonoBehaviour:
   amountOfStacks: 3
   multiStackCooldown: 4
   useTimeWindow: 2
-  crystalleft:
-  - {fileID: 2295464848245908377, guid: 6a3329a75212892479a1198d8f6a1ada, type: 3}
-  - {fileID: 2295464848245908377, guid: 6a3329a75212892479a1198d8f6a1ada, type: 3}
-  - {fileID: 2295464848245908377, guid: 6a3329a75212892479a1198d8f6a1ada, type: 3}
+  crystalLeft: []
 --- !u!1 &117471022
 GameObject:
   m_ObjectHideFlags: 0

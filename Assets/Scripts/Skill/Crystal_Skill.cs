@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Crystal_Skill : Skill
 {
@@ -24,7 +25,7 @@ public class Crystal_Skill : Skill
     [SerializeField] private int amountOfStacks;
     [SerializeField] private float multiStackCooldown;
     [SerializeField] private float useTimeWindow;
-    [SerializeField] private List<GameObject> crystalleft = new List<GameObject>();
+    [SerializeField] private List<GameObject> crystalLeft = new List<GameObject>();
 
 
     protected override void UseSkill()
@@ -57,7 +58,7 @@ public class Crystal_Skill : Skill
             else
             {
                 // player.transform.position = _currentCrystal.transform.position;
-                _currentCrystal.GetComponent<Crystall_Skill_Controller>()?.CrystalExplode();
+                _currentCrystal.GetComponent<Crystal_Skill_Controller>()?.CrystalExplode();
             }
 
         }
@@ -65,7 +66,7 @@ public class Crystal_Skill : Skill
     public void CreateCrystal()
     {
         _currentCrystal = Instantiate(crystalPrefab, player.transform.position, Quaternion.identity);
-        Crystall_Skill_Controller currentCrystalScript = _currentCrystal.GetComponent<Crystall_Skill_Controller>();
+        Crystal_Skill_Controller currentCrystalScript = _currentCrystal.GetComponent<Crystal_Skill_Controller>();
 
         currentCrystalScript.SetupCrystal(crystalDuration, canExplode, canMoveToEnemy, moveSpeed, FindClosestEnemy(_currentCrystal.transform));
     }
@@ -78,22 +79,22 @@ public class Crystal_Skill : Skill
         if (canUseMultiStacks)
         {
             // respawn crystal
-            if (crystalleft.Count > 0)
+            if (crystalLeft.Count > 0)
             {
-                if (crystalleft.Count == amountOfStacks)
+                if (crystalLeft.Count == amountOfStacks)
                     Invoke("ResetAbility", useTimeWindow);
 
                 cooldown = 0;
-                //GameObject crystalToSpawn = crystalleft[crystalleft.Count - 1];
-                GameObject crystalToSpawn = crystalleft.Last();
+                //GameObject crystalToSpawn = crystalLeft[crystalLeft.Count - 1];
+                GameObject crystalToSpawn = crystalLeft.Last();
                 GameObject newCrystal = Instantiate(crystalToSpawn, player.transform.position, Quaternion.identity);
 
-                crystalleft.Remove(crystalToSpawn);
+                crystalLeft.Remove(crystalToSpawn);
 
-                newCrystal.GetComponent<Crystall_Skill_Controller>().
+                newCrystal.GetComponent<Crystal_Skill_Controller>().
                     SetupCrystal(crystalDuration, canExplode, canMoveToEnemy, moveSpeed, FindClosestEnemy(newCrystal.transform));
 
-                if (crystalleft.Count <= 0)
+                if (crystalLeft.Count <= 0)
                 {
                     // cooldown the skill
                     cooldown = multiStackCooldown;
@@ -112,11 +113,11 @@ public class Crystal_Skill : Skill
     private void RefillCrystal()
     {
         // encourage player to use up their skills
-        int amountToAdd = amountOfStacks - crystalleft.Count;
+        int amountToAdd = amountOfStacks - crystalLeft.Count;
 
         for (int i = 0; i < amountToAdd; i++)
         {
-            crystalleft.Add(crystalPrefab);
+            crystalLeft.Add(crystalPrefab);
         }
     }
 

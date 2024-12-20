@@ -117,10 +117,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2295464848245908377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e711a999794fa499eb5b07779f1763, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fe585ef2c4c9eb46a8f40bef96d798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growSpeed: 5
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!58 &1743996277785118388
 CircleCollider2D:
   m_ObjectHideFlags: 0
