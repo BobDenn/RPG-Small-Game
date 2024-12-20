@@ -8,23 +8,35 @@ public class Clone_Skill : Skill
     [Header("Clone info")]
     [SerializeField] private GameObject clonePrefab;
     [SerializeField] private float cloneDuration;
-
     [SerializeField] private bool canAttack;
 
     // you can create clone when you start to use dash or dash state is finished
     [SerializeField] private bool createCloneOnDashStart;
     [SerializeField] private bool createCloneOnDashOver;
     [SerializeField] private bool canCreateCloneOnCounterAttack;
+
+    [Header("Clone Can Duplicate")]
+    [SerializeField] private bool canDuplicateClone;
+    [SerializeField] private float chanceToDuplicate;
+    [Header("Crystal Instead Of  Clone")]
+    public bool crystalInsteadOfClone;
     
 
     public void CreateClone(Transform _clonePosition, Vector3 offset)
     {
+        // crystal can instead of clone
+        if(crystalInsteadOfClone)
+        {
+            SkillManager.instance.crystal.CreateCrystal();
+            SkillManager.instance.crystal.CurrentCrystalChooseRandomTarget();
+            return;
+        }
 
         // I don't know how to use Instantiate
         GameObject newClone = Instantiate(clonePrefab);
 
         // clone's position
-        newClone.GetComponent<Clone_Skill_Controller>().SetupClone(_clonePosition, cloneDuration, canAttack, offset, FindClosestEnemy(newClone.transform));
+        newClone.GetComponent<Clone_Skill_Controller>().SetupClone(_clonePosition, cloneDuration, canAttack, offset, FindClosestEnemy(newClone.transform), canDuplicateClone, chanceToDuplicate);
     }
 
     public void CreateCloneOnDashStart()

@@ -9,13 +9,13 @@ public class Crystal_Skill : Skill
     [SerializeField] private GameObject crystalPrefab;
     private GameObject _currentCrystal;
 
-    [Header("Crystal Mirage")] 
+    [Header("Crystal Mirage")]
     [SerializeField] private bool cloneInsteadOfCrystal;
-    
-    [Header("Explosive Crystal")] 
+
+    [Header("Explosive Crystal")]
     [SerializeField] private bool canExplode;
 
-    [Header("Moving Crystal")] 
+    [Header("Moving Crystal")]
     [SerializeField] private bool canMoveToEnemy;
     [SerializeField] private float moveSpeed;
 
@@ -30,24 +30,21 @@ public class Crystal_Skill : Skill
     protected override void UseSkill()
     {
         base.UseSkill();
-        
+
         // use multi crystal skill
-        if(CanUseMultiCrystal())
+        if (CanUseMultiCrystal())
             return;
-        
+
         // create crystal
         if (_currentCrystal == null)
         {
-            _currentCrystal = Instantiate(crystalPrefab, player.transform.position, Quaternion.identity);
-            Crystall_Skill_Controller currentCrystalScript = _currentCrystal.GetComponent<Crystall_Skill_Controller>();
-            
-            currentCrystalScript.SetupCrystal(crystalDuration, canExplode, canMoveToEnemy, moveSpeed, FindClosestEnemy(_currentCrystal.transform));
+            CreateCrystal();
         }
         else
         {
-            if(canMoveToEnemy)
+            if (canMoveToEnemy)
                 return;
-            
+
             // player exchanges position with crystal 
             Vector2 playerPos = player.transform.position;
             player.transform.position = _currentCrystal.transform.position;
@@ -65,6 +62,15 @@ public class Crystal_Skill : Skill
 
         }
     }
+    public void CreateCrystal()
+    {
+        _currentCrystal = Instantiate(crystalPrefab, player.transform.position, Quaternion.identity);
+        Crystall_Skill_Controller currentCrystalScript = _currentCrystal.GetComponent<Crystall_Skill_Controller>();
+
+        currentCrystalScript.SetupCrystal(crystalDuration, canExplode, canMoveToEnemy, moveSpeed, FindClosestEnemy(_currentCrystal.transform));
+    }
+
+    public void CurrentCrystalChooseRandomTarget() => _currentCrystal.GetComponent<Crystal_Skill_Controller>().ChooseRandomEnemy();
 
     // section multi crystal
     private bool CanUseMultiCrystal()
@@ -74,9 +80,9 @@ public class Crystal_Skill : Skill
             // respawn crystal
             if (crystalleft.Count > 0)
             {
-                if(crystalleft.Count == amountOfStacks)
+                if (crystalleft.Count == amountOfStacks)
                     Invoke("ResetAbility", useTimeWindow);
-                
+
                 cooldown = 0;
                 //GameObject crystalToSpawn = crystalleft[crystalleft.Count - 1];
                 GameObject crystalToSpawn = crystalleft.Last();
@@ -94,20 +100,20 @@ public class Crystal_Skill : Skill
                     // refill our crystal stacks
                     RefillCrystal();
                 }
-                
+
                 return true;
             }
         }
 
         return false;
     }
-    
-    
+
+
     private void RefillCrystal()
     {
         // encourage player to use up their skills
         int amountToAdd = amountOfStacks - crystalleft.Count;
-        
+
         for (int i = 0; i < amountToAdd; i++)
         {
             crystalleft.Add(crystalPrefab);
@@ -118,9 +124,9 @@ public class Crystal_Skill : Skill
     {
         if (cooldownTimer > 0)
             return;
-        
+
         cooldownTimer = multiStackCooldown;
         RefillCrystal();
     }
-    
+
 }
