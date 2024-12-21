@@ -204,7 +204,7 @@ MonoBehaviour:
   createCloneOnDashOver: 0
   canCreateCloneOnCounterAttack: 0
   canDuplicateClone: 1
-  chanceToDuplicate: 40
+  rateToDuplicate: 40
   crystalInsteadOfClone: 1
 --- !u!114 &105818320
 MonoBehaviour:
@@ -3006,6 +3006,7 @@ GameObject:
   - component: {fileID: 1347720322}
   - component: {fileID: 1347720321}
   - component: {fileID: 1347720323}
+  - component: {fileID: 1347720324}
   m_Layer: 7
   m_Name: Enemy_Skeleton
   m_TagString: Untagged
@@ -3154,6 +3155,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashDuration: 0.2
   hitMat: {fileID: 2100000, guid: 6e76868a7cfa650459f59a0e15652be5, type: 2}
+--- !u!114 &1347720324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347720318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab77f3d703192414c8ed6edbf95cf8d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    baseValue: 15
+    modifiers: 
+  maxHp:
+    baseValue: 100
+    modifiers: 
+  currentHp: 0
 --- !u!1 &1376143273
 GameObject:
   m_ObjectHideFlags: 0
@@ -3167,6 +3187,7 @@ GameObject:
   - component: {fileID: 1376143277}
   - component: {fileID: 1376143276}
   - component: {fileID: 1376143278}
+  - component: {fileID: 1376143279}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -3303,6 +3324,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashDuration: 0.1
   hitMat: {fileID: 2100000, guid: 6e76868a7cfa650459f59a0e15652be5, type: 2}
+--- !u!114 &1376143279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376143273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab77f3d703192414c8ed6edbf95cf8d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    baseValue: 7
+    modifiers: 
+  maxHp:
+    baseValue: 100
+    modifiers: 
+  currentHp: 0
 --- !u!1 &1413032153
 GameObject:
   m_ObjectHideFlags: 0

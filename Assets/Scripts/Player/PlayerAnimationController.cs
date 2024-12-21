@@ -20,7 +20,11 @@ public class PlayerAnimationController : MonoBehaviour
         foreach (var hit in colliders)
         {
             if (hit.GetComponent<Enemy>() != null)
+            {
                 hit.GetComponent<Enemy>().WasDamaged();
+                hit.GetComponent<CharacterStatus>().TakeDamage(player.status.damage.getValue());
+                Debug.Log(player.status.damage.getValue());
+            }
         }
     }
 
