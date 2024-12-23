@@ -52,5 +52,11 @@ public class PlayerState
         triggerCalled = true;
     }
     
+    protected override void Die()
+    {
+        base.Die();
+
+        player.Die();
+    }
     
 }

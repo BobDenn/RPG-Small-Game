@@ -11,6 +11,7 @@ public class Entity : MonoBehaviour
     public EntityFX fx { get; private set; }
     public SpriteRenderer sr { get; private set; }
     public CharacterStatus status { get; private set; }
+    public CapsuleCollider2D cd {get; private set;}
 
     #endregion
     
@@ -46,6 +47,7 @@ public class Entity : MonoBehaviour
         sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
         status = GetComponent<CharacterStatus>();
+        cd = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         fx = GetComponent<EntityFX>();
     }
@@ -145,5 +147,8 @@ public class Entity : MonoBehaviour
         
     }
     
-    
+    public virtual void Die()
+    {
+        // nothing
+    }
 }

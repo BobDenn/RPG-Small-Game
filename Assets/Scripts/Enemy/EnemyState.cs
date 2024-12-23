@@ -39,12 +39,18 @@ public class EnemyState
     public virtual void Exit()
     {
         enemyBase.anim.SetBool(animBoolName, false);
+        enemyBase.AssignLastAnimName(animBoolName);
         
     }
 
     public virtual void AnimationFinishTrigger()
     {
         triggerCalled = true;
+    }
+    protected override void Die()
+    {
+        base.Die();
+        enemy.Die();
     }
 
 }
