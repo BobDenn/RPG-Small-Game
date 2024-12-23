@@ -21,9 +21,12 @@ public class PlayerAnimationController : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                hit.GetComponent<Enemy>().WasDamaged();
-                hit.GetComponent<CharacterStatus>().TakeDamage(player.status.damage.getValue());
-                Debug.Log(player.status.damage.getValue());
+                // calculate value
+                EnemyStatus _target = hit.GetComponent<EnemyStatus>();
+                player.status.DoDamage(_target);
+
+
+                // hit.GetComponent<Enemy>().WasDamaged();
             }
         }
     }

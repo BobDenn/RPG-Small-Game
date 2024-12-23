@@ -8,22 +8,28 @@ using UnityEngine.Serialization;
 /// </summary>
 public class CharacterStatus : MonoBehaviour
 {
+    public Status strength;
     public Status damage;
     public Status maxHp;
     
     
     [SerializeField] private int currentHp;
     
-    void Start()
+    protected virtual void Start()
     {
-        currentHp = maxHp.getValue();
+        currentHp = maxHp.GetValue();
         
-        // example equip sword with 4 damage
-        damage.AddModifier(4);
+        
     }
-    
+    // [damage] player to enemy
+    public virtual void DoDamage(CharacterStatus _targetStatus)
+    {
+        int totalDamage = damage.GetValue() + strength.GetValue();
+        _targetStatus.TakeDamage(totalDamage);
+        Debug.Log(totalDamage);
+    }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         currentHp -= damage;
 
@@ -31,8 +37,8 @@ public class CharacterStatus : MonoBehaviour
             Die();
     }
 
-    private void Die()
+    protected virtual void Die()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }

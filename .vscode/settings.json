@@ -57,5 +57,8 @@
         "Temp/": true
     },
     "dotnet.defaultSolution": "RPG-small-game.sln",
-    "dotnet.preferCSharpExtension": true
+    "dotnet.preferCSharpExtension": true,
+    "cSpell.enabledFileTypes": {
+        "csharp": true
+    }
 }

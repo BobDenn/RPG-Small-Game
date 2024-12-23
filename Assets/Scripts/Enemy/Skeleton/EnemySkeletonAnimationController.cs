@@ -18,7 +18,11 @@ public class SkeletonAttackAnimationController : MonoBehaviour
         foreach (var hit in colliders)
         {
             if (hit.GetComponent<Player>() != null)
-                hit.GetComponent<Player>().WasDamaged();
+            {
+                //hit.GetComponent<Player>().WasDamaged();
+                PlayerStatus target = hit.GetComponent<PlayerStatus>();
+                enemy.status.DoDamage(target);
+            }
         }
     }
     // open and close red thing event

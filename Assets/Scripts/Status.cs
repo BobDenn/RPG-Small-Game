@@ -11,7 +11,7 @@ public class Status
     // modifiers base on initialized value
     public List<int> modifiers;
     
-    public int getValue()
+    public int GetValue()
     {
         int finalValue = baseValue;
 
