@@ -1915,9 +1915,9 @@ MonoBehaviour:
     baseValue: 20
     modifiers: 
   maxHp:
-    baseValue: 0
+    baseValue: 12
     modifiers: 
-  currentHp: 200
+  currentHp: 0
 --- !u!70 &1347720325
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2122,7 +2122,7 @@ MonoBehaviour:
     baseValue: 5
     modifiers: 
   maxHp:
-    baseValue: 500
+    baseValue: 22
     modifiers: 
   currentHp: 0
 --- !u!1 &1413032153

@@ -47,10 +47,4 @@ public class EnemyState
     {
         triggerCalled = true;
     }
-    protected override void Die()
-    {
-        base.Die();
-        enemy.Die();
-    }
-
 }

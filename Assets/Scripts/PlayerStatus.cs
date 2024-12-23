@@ -21,4 +21,9 @@ public class PlayerStatus : CharacterStatus
         player.WasDamaged();
         // PlayerManager.instance.WasDamaged();
     }
+    protected override void Die()
+    {
+        base.Die();
+        player.Die();
+    }
 }

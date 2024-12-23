@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerState 
+public class PlayerState
 {
     protected PlayerStateMachine stateMachine;
     protected Player player;
@@ -50,13 +50,6 @@ public class PlayerState
     public virtual void AnimationFinishTrigger()
     {
         triggerCalled = true;
-    }
-    
-    protected override void Die()
-    {
-        base.Die();
-
-        player.Die();
     }
     
 }
