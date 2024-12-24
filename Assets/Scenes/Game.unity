@@ -203,9 +203,9 @@ MonoBehaviour:
   createCloneOnDashStart: 0
   createCloneOnDashOver: 0
   canCreateCloneOnCounterAttack: 0
-  canDuplicateClone: 1
+  canDuplicateClone: 0
   rateToDuplicate: 40
-  crystalInsteadOfClone: 1
+  crystalInsteadOfClone: 0
 --- !u!114 &105818320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,14 +1908,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d80ab8bbfa3d54b8615f44c9c2edec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vitality:
+    baseValue: 0
+    modifiers: 
   strength:
+    baseValue: 5
+    modifiers: 
+  agility:
+    baseValue: 0
+    modifiers: 
+  intelligence:
     baseValue: 0
     modifiers: 
   damage:
     baseValue: 20
     modifiers: 
+  critChance:
+    baseValue: 99
+    modifiers: 
+  critPower:
+    baseValue: 0
+    modifiers: 
   maxHp:
-    baseValue: 12
+    baseValue: 1000
+    modifiers: 
+  armour:
+    baseValue: 8
+    modifiers: 
+  evasion:
+    baseValue: 0
     modifiers: 
   currentHp: 0
 --- !u!70 &1347720325
@@ -2115,14 +2136,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544738cfc83924b45bd8f2f7b9685226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vitality:
+    baseValue: 0
+    modifiers: 
   strength:
     baseValue: 0
     modifiers: 
+  agility:
+    baseValue: 0
+    modifiers: 
+  intelligence:
+    baseValue: 0
+    modifiers: 
   damage:
-    baseValue: 5
+    baseValue: 10
+    modifiers: 
+  critChance:
+    baseValue: 0
+    modifiers: 
+  critPower:
+    baseValue: 0
     modifiers: 
   maxHp:
-    baseValue: 22
+    baseValue: 1000
+    modifiers: 
+  armour:
+    baseValue: 0
+    modifiers: 
+  evasion:
+    baseValue: 0
     modifiers: 
   currentHp: 0
 --- !u!1 &1413032153

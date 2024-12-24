@@ -22,6 +22,12 @@ public class Status
         
         return finalValue;
     }
+
+    public void SetDefaultValue(int _value)
+    {
+        baseValue = _value;
+    }
+
     // conveniently do some plus or minus things on value, because it's RPG games, there are many items.
     public void AddModifier(int modifier)
     {
