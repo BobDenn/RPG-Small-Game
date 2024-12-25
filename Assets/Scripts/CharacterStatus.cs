@@ -47,12 +47,14 @@ public class CharacterStatus : MonoBehaviour
     private float _shockedTimer;
 
 
-    [SerializeField] private int currentHp;
+    public int currentHp;
+    public System.Action onHpChanged;
+
     
     protected virtual void Start()
     {
         critPower.SetDefaultValue(150);
-        currentHp = maxHp.GetValue();
+        currentHp = GetMaxHpValue();
     }
 
     protected virtual void Update()
@@ -74,8 +76,10 @@ public class CharacterStatus : MonoBehaviour
 
         if(_igniteDamageTimer < 0 && isIgnited)
         {
-            Debug.Log("Take burn damage");
-            currentHp -= _igniteDamage;
+            Debug.Log("Take burn damage" + _igniteDamage);
+
+
+            DecreaseHpBy(_igniteDamage);
             if(currentHp < 0)
                 Die();
 
@@ -118,6 +122,14 @@ public class CharacterStatus : MonoBehaviour
 
         if (currentHp <= 0)
             Die();
+    }
+
+    protected virtual void DecreaseHpBy(int _damage)
+    {
+        DecreaseHpBy(_damage);
+
+        if(onHpChanged != null)
+            onHpChanged();
     }
 
     // [damage] 攻击别人
@@ -263,6 +275,11 @@ public class CharacterStatus : MonoBehaviour
     protected virtual void Die()
     {
         //throw new System.NotImplementedException();
+    }
+    // calculate health value
+    public int GetMaxHpValue()
+    {
+        return maxHealth.GetValue() + vitality.GetValue() * 5;
     }
 
 }
