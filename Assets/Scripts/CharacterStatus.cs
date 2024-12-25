@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using UnityEngine.Serialization;
-using System.Collections;
 using UnityEngine;
 using System;
 
@@ -48,7 +45,7 @@ public class CharacterStatus : MonoBehaviour
 
 
     public int currentHp;
-    public System.Action onHpChanged;
+    public Action OnHpChanged;
 
     
     protected virtual void Start()
@@ -87,26 +84,26 @@ public class CharacterStatus : MonoBehaviour
         }
     }
     // 施加负面效果
-    public void ApplyAilments(bool _ignite, bool _chill, bool _shock)
+    private void ApplyAilments(bool ignite, bool chill, bool shock)
     {
         if(isIgnited || isChilled || isShocked)
             return;
 
-        if(_ignite)
+        if(ignite)
         {
-            isIgnited = _ignite;
+            isIgnited = ignite;
             _ignitedTimer = 2;
         }
 
-        if(_chill)
+        if(chill)
         {
-            isChilled = _chill;
+            isChilled = chill;
             _chilledTimer = 2;
         }
 
-        if(_shock)
+        if(shock)
         {
-            isShocked = _shock;
+            isShocked = shock;
             _shockedTimer = 2;
         }
     }
@@ -116,7 +113,7 @@ public class CharacterStatus : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
-        currentHp -= damage;
+        DecreaseHpBy(damage);
 
         //Debug.Log(damage);
 
@@ -124,12 +121,12 @@ public class CharacterStatus : MonoBehaviour
             Die();
     }
 
-    protected virtual void DecreaseHpBy(int _damage)
+    protected virtual void DecreaseHpBy(int damage)
     {
-        DecreaseHpBy(_damage);
+        currentHp -= damage;
 
-        if(onHpChanged != null)
-            onHpChanged();
+        if(OnHpChanged != null)
+            OnHpChanged();
     }
 
     // [damage] 攻击别人
@@ -279,7 +276,7 @@ public class CharacterStatus : MonoBehaviour
     // calculate health value
     public int GetMaxHpValue()
     {
-        return maxHealth.GetValue() + vitality.GetValue() * 5;
+        return maxHp.GetValue() + vitality.GetValue() * 5;
     }
 
 }

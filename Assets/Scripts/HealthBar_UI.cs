@@ -17,19 +17,19 @@ public class HealthBar_UI : MonoBehaviour
         _slider = GetComponentInChildren<Slider>();
         _myStatus = GetComponentInParent<CharacterStatus>();
 
-        _entity.onFlipped += FlipUI;
-        _myStatus.onHpChanged += UpdateHealthUI;
+        _entity.OnFlipped += FlipUI;
+        _myStatus.OnHpChanged += UpdateHpUI;
 
-        UpdateHealthUI();
+        UpdateHpUI();
     }
 
-    private void Update()
+    /*private void Update()
     {
-        UpdateHealthUI();
-    }
+        UpdateHpUI();
+    }*/
 
 // Hp bar is same as HpValue
-    private void UpdateHealthUI()
+    private void UpdateHpUI()
     {
         _slider.maxValue =  _myStatus.GetMaxHpValue();
         _slider.value    = _myStatus.currentHp;
@@ -40,9 +40,8 @@ public class HealthBar_UI : MonoBehaviour
 
     private void OnDisable() 
     {
-        _entity.onFlipped -= FlipUI;
-        _myStatus.onHpChanged -= UpdateHealthUI;
-
+        _entity.OnFlipped -= FlipUI;
+        _myStatus.OnHpChanged -= UpdateHpUI;
     }
     
     
