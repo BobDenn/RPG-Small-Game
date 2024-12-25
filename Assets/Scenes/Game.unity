@@ -1924,7 +1924,7 @@ MonoBehaviour:
     baseValue: 20
     modifiers: 
   critChance:
-    baseValue: 99
+    baseValue: 0
     modifiers: 
   critPower:
     baseValue: 0
@@ -1938,6 +1938,21 @@ MonoBehaviour:
   evasion:
     baseValue: 0
     modifiers: 
+  magicResistance:
+    baseValue: 0
+    modifiers: 
+  fireDamage:
+    baseValue: 27
+    modifiers: 
+  iceDamage:
+    baseValue: 25
+    modifiers: 
+  lightningDamage:
+    baseValue: 25
+    modifiers: 
+  isIgnited: 0
+  isChilled: 0
+  isShocked: 0
   currentHp: 0
 --- !u!70 &1347720325
 CapsuleCollider2D:
@@ -2161,11 +2176,26 @@ MonoBehaviour:
     baseValue: 1000
     modifiers: 
   armour:
-    baseValue: 0
+    baseValue: 10
     modifiers: 
   evasion:
     baseValue: 0
     modifiers: 
+  magicResistance:
+    baseValue: 20
+    modifiers: 
+  fireDamage:
+    baseValue: 9
+    modifiers: 
+  iceDamage:
+    baseValue: 6
+    modifiers: 
+  lightningDamage:
+    baseValue: 7
+    modifiers: 
+  isIgnited: 0
+  isChilled: 0
+  isShocked: 0
   currentHp: 0
 --- !u!1 &1413032153
 GameObject:

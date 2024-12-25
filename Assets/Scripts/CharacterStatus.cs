@@ -6,7 +6,7 @@ using System;
 
 
 /// <summary>
-/// basic value of character
+/// basic value of character and attack activities
 /// </summary>
 public class CharacterStatus : MonoBehaviour
 {
@@ -33,9 +33,19 @@ public class CharacterStatus : MonoBehaviour
     public Status iceDamage;
     public Status lightningDamage;
 
-    public bool isIgnited;
-    public bool isChilled;
-    public bool isShocked;
+    [Header("Ailments status")]
+    public bool isIgnited; //持续伤害
+    private float _ignitedTimer;
+    private int   _igniteDamage;
+    private float _igniteDamageTimer;
+    private float _igniteDamageCool = .3f;
+
+    public bool isChilled; //减少护甲
+    private float _chilledTimer;
+    
+    public bool isShocked; //减少正确攻击率
+    private float _shockedTimer;
+
 
     [SerializeField] private int currentHp;
     
@@ -43,59 +53,62 @@ public class CharacterStatus : MonoBehaviour
     {
         critPower.SetDefaultValue(150);
         currentHp = maxHp.GetValue();
-        
     }
-    // [damage] 
-    public virtual void DoDamage(CharacterStatus _targetStatus)
+
+    protected virtual void Update()
     {
-        if(TargetCanAvoidAttack(_targetStatus))
-            return;
-        
-        // 总伤害
-        int totalDamage = damage.GetValue() + strength.GetValue();
-        if(CanCrit())
+        _ignitedTimer -= Time.deltaTime;
+        _chilledTimer -= Time.deltaTime;
+        _shockedTimer -= Time.deltaTime;
+
+        _igniteDamageTimer -= Time.deltaTime;
+
+        if(_ignitedTimer < 0)
+            isIgnited = false;
+
+        if(_chilledTimer < 0)
+            isChilled = false;
+
+        if(_shockedTimer < 0)
+            isShocked = false;
+
+        if(_igniteDamageTimer < 0 && isIgnited)
         {
-            totalDamage = CalculateCriticalDamage(totalDamage);
-            Debug.Log("Total Crit Damage is " + totalDamage);
+            Debug.Log("Take burn damage");
+            currentHp -= _igniteDamage;
+            if(currentHp < 0)
+                Die();
+
+            _igniteDamageTimer = _igniteDamageCool;
         }
-        // 护甲衰减
-        totalDamage = CheckTargetArmour(_targetStatus, totalDamage);
-
-        //_targetStatus.TakeDamage(totalDamage);
-        //Debug.Log(totalDamage);
-
-        DoMagicDamage(_targetStatus);
     }
-
-    public virtual void DoMagicDamage(CharacterStatus _targetStatus)
-    {
-        int _fireDamage = fireDamage.GetValue();
-        int _iceDamage = iceDamage.GetValue();
-        int _lightningDamage = lightningDamage.GetValue();
-
-        int totalMagicDamage = _fireDamage + _iceDamage + _lightningDamage + intelligence.GetValue();
-        // 由智力提供的魔抗是3倍
-        totalMagicDamage = CheckTargetMagicResistance(_targetStatus, totalMagicDamage);
-
-        _targetStatus.TakeDamage(totalMagicDamage);
-    }
-
-    private static int CheckTargetMagicResistance(CharacterStatus _targetStatus, int totalMagicDamage)
-    {
-        totalMagicDamage -= _targetStatus.magicResistance.GetValue() + (_targetStatus.intelligence.GetValue() * 3);
-        totalMagicDamage = Mathf.Clamp(totalMagicDamage, 0, int.MaxValue);
-        return totalMagicDamage;
-    }
-
+    // 施加负面效果
     public void ApplyAilments(bool _ignite, bool _chill, bool _shock)
     {
         if(isIgnited || isChilled || isShocked)
             return;
 
-        isIgnited = _ignite;
-        isChilled = _chill;
-        isShocked = _shock;
+        if(_ignite)
+        {
+            isIgnited = _ignite;
+            _ignitedTimer = 2;
+        }
+
+        if(_chill)
+        {
+            isChilled = _chill;
+            _chilledTimer = 2;
+        }
+
+        if(_shock)
+        {
+            isShocked = _shock;
+            _shockedTimer = 2;
+        }
     }
+#region damage calculate
+
+    public void SetupIgniteDamage(int _damage) => _igniteDamage = _damage;
 
     public virtual void TakeDamage(int damage)
     {
@@ -107,35 +120,81 @@ public class CharacterStatus : MonoBehaviour
             Die();
     }
 
-    protected virtual void Die()
+    // [damage] 攻击别人
+    public virtual void DoDamage(CharacterStatus _targetStatus)
     {
-        //throw new System.NotImplementedException();
-    }
-
-    private bool TargetCanAvoidAttack(CharacterStatus _targetStatus)
-    {
-        int totalEvasion = _targetStatus.evasion.GetValue() + _targetStatus.agility.GetValue();
+        if(TargetCanAvoidAttack(_targetStatus))
+            return;
         
-        // 闪避
-        // .Net 和 Unity中都有Random这个方法，冲突时要加以前缀区分
-        if(UnityEngine.Random.Range(0, 100) < totalEvasion)
+        // 总伤害
+        int totalDamage = damage.GetValue() + strength.GetValue();
+        if(CanCrit())
         {
-            return true;
-            //Debug.Log("ATTACK AVOIDED")
+            totalDamage = CalculateCriticalDamage(totalDamage);
+
+            //Debug.Log("Total Crit Damage is " + totalDamage);
         }
-        return false;
+        // 护甲衰减
+        totalDamage = CheckTargetArmour(_targetStatus, totalDamage);
+        //_targetStatus.TakeDamage(totalDamage);
+        //Debug.Log(totalDamage);
+        DoMagicDamage(_targetStatus);
     }
 
-    private  int CheckTargetArmour(CharacterStatus _targetStatus, int totalDamage)
+#endregion
+#region magic damage
+    public virtual void DoMagicDamage(CharacterStatus _targetStatus)
     {
-        // 护甲会使总伤害衰减
-        totalDamage -= _targetStatus.armour.GetValue();
-        // 防止护甲为负数，以免总伤会出现治疗目标的情况
-        totalDamage = Math.Clamp(totalDamage, 0, int.MaxValue);
+        int _fireDamage = fireDamage.GetValue();
+        int _iceDamage = iceDamage.GetValue();
+        int _lightningDamage = lightningDamage.GetValue();
 
-        return totalDamage;
+        int totalMagicDamage = _fireDamage + _iceDamage + _lightningDamage + intelligence.GetValue();
+
+        totalMagicDamage = CheckTargetMagicResistance(_targetStatus, totalMagicDamage);
+
+        _targetStatus.TakeDamage(totalMagicDamage);
+        //Debug.Log("totalMagicDamage is" + totalMagicDamage);//25+26+27-20 = 58
+        // 异常处理
+        if(Mathf.Max(_fireDamage, _iceDamage, _lightningDamage) <= 0)
+            return;
+
+        bool canApplyIgnite = _fireDamage > _iceDamage && _fireDamage > _lightningDamage;
+        bool canApplyChill  = _iceDamage > _fireDamage && _iceDamage > _lightningDamage;
+        bool canApplyShock  = _lightningDamage > _fireDamage && _lightningDamage > _iceDamage;
+        //  增加随机性  如果有相等的伤害值 则进入下面循环
+        while(!canApplyIgnite && !canApplyChill && !canApplyShock)
+        {
+            if(UnityEngine.Random.value < 0.3f && _fireDamage > 0)
+            {
+                canApplyIgnite = true;
+                _targetStatus.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+                Debug.Log("Apply Ignite");
+                return;
+            }
+            if(UnityEngine.Random.value < 0.3f && _iceDamage > 0)
+            {
+                canApplyChill = true;
+                _targetStatus.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+                Debug.Log("Apply Chill");
+                return;
+            }
+            if(UnityEngine.Random.value < 0.3f && _lightningDamage > 0)
+            {
+                canApplyShock = true;
+                _targetStatus.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+                Debug.Log("Apply Shock");
+                return;
+            }
+        }
+        if(canApplyIgnite)
+            _targetStatus.SetupIgniteDamage(Mathf.RoundToInt(_fireDamage * .2f));
+
+        _targetStatus.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
     }
-
+    
+#endregion
+#region crit damage
     private bool CanCrit()
     {
         int totalCriticalChance = critChance.GetValue() + agility.GetValue();
@@ -150,13 +209,60 @@ public class CharacterStatus : MonoBehaviour
     // 暴击伤害
     private int CalculateCriticalDamage(int _damage)
     {
+                            //  150 + 5 = 155%
         float totalCritPower = (critPower.GetValue() + strength.GetValue()) * 0.01f;
         //Debug.Log("Total crit power is " + totalCritPower*100+ "%");
-
+                            // 25 * 1.55 = 38.75
         float critDamage = _damage * totalCritPower;
         //Debug.Log("crit damage before round up " + critDamage);
 
-        return Mathf.RoundToInt(critDamage);
+        return Mathf.RoundToInt(critDamage);// 39
+    }
+#endregion
+
+#region check defense 
+    private bool TargetCanAvoidAttack(CharacterStatus _targetStatus)
+    {   // 满值 100
+        int totalEvasion = _targetStatus.evasion.GetValue() + _targetStatus.agility.GetValue();
+
+        if(isShocked)
+            totalEvasion += 20;
+        
+        // 闪避
+        // .Net 和 Unity中都有Random这个方法，冲突时要加以前缀区分
+        if(UnityEngine.Random.Range(0, 101) < totalEvasion)
+        {
+            return true;
+            //Debug.Log("ATTACK AVOIDED")
+        }
+        return false;
+    }
+
+    private  int CheckTargetArmour(CharacterStatus _targetStatus, int totalDamage)
+    {
+
+        if(_targetStatus.isChilled)
+            totalDamage -= Mathf.RoundToInt(_targetStatus.armour.GetValue() * 0.8f);
+        else
+            totalDamage -= _targetStatus.armour.GetValue();
+
+        // 护甲会使总伤害衰减，直接减护甲值 不是百分比
+        // 防止护甲为负数，以免总伤会出现治疗目标的情况
+        totalDamage = Math.Clamp(totalDamage, 0, int.MaxValue);
+        return totalDamage;
+    }
+    private static int CheckTargetMagicResistance(CharacterStatus _targetStatus, int totalMagicDamage)
+    {
+        // 由智力提供的魔抗是3倍
+        totalMagicDamage -= _targetStatus.magicResistance.GetValue() + (_targetStatus.intelligence.GetValue() * 3);
+        totalMagicDamage = Mathf.Clamp(totalMagicDamage, 0, int.MaxValue);
+        return totalMagicDamage;
+    }
+
+#endregion
+    protected virtual void Die()
+    {
+        //throw new System.NotImplementedException();
     }
 
 }
