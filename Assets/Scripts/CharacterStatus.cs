@@ -121,7 +121,7 @@ public class CharacterStatus : MonoBehaviour
         {
             if(!isShocked)
             {
-                ApplyShock(_shock);
+                ApplyShock(shock);
                 
             }
             else
@@ -140,7 +140,7 @@ public class CharacterStatus : MonoBehaviour
                 // to find the closest enemy
                 foreach (var hit in colliders)
                 {
-                    if ((hit.GetComponent<Enemy>() != null && Vector2.Distance(transform.position, hit.transform.position)) > 1)
+                    if ((hit.GetComponent<Enemy>() != null && Vector2.Distance(transform.position, hit.transform.position)>1))
                     {
                         float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
                         if (distanceToEnemy < closestDistance)
@@ -221,7 +221,7 @@ public class CharacterStatus : MonoBehaviour
             return;
             
         _shockedTimer = ailmentsDuration;
-        isShocked = shock;
+        isShocked = _shock;
 
         _fx.ShockFxFor(ailmentsDuration);
     }
