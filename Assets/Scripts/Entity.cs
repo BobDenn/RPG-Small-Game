@@ -59,7 +59,17 @@ public class Entity : MonoBehaviour
     {
         
     }
-    
+
+    // chill ailment effect
+    public virtual void SlowEntityBy(float _slowPercentage, float _slowDuration)
+    {
+
+    }
+
+    protected virtual void ReturnDefaultSpeed()
+    {
+        anim.speed = 1;
+    }
     public void WasDamaged()
     {
         fx.StartCoroutine("FlashFX");
@@ -148,7 +158,6 @@ public class Entity : MonoBehaviour
             sr.color = Color.clear;
         else
             sr.color = Color.white;
-        
     }
     
     public virtual void Die()

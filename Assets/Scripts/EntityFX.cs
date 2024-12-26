@@ -12,6 +12,11 @@ public class EntityFX : MonoBehaviour
     [SerializeField] private Material hitMat;
     private Material _originalMat;
 
+    [Header("Ailment colors")]
+    [SerializeField] private Color[] igniteColor;
+    [SerializeField] private Color[] chillColor;
+    [SerializeField] private Color[] shockColor;
+
     private void Start()
     {
         _sr = GetComponentInChildren<SpriteRenderer>();
@@ -21,13 +26,16 @@ public class EntityFX : MonoBehaviour
 
     }
 
-    // hit flash
+    // hit flash conflict with ailment color(solved)
     private IEnumerator FlashFX()
     {
         _sr.material = hitMat;
+        Color currentColor = _sr.color;
+        _sr.color = Color.white;
 
         yield return new WaitForSeconds(flashDuration);
 
+        _sr.color = currentColor;
         _sr.material = _originalMat;
     }
 
@@ -41,10 +49,50 @@ public class EntityFX : MonoBehaviour
     }
     
     // cancel repeating
-    private void CancelRebBlink()
+    private void CancelColorChange()
     {
         // stop repeating
         CancelInvoke();
         _sr.color = Color.white;
+    }
+
+    public void IgniteFxFor(float _seconds)
+    {
+        InvokeRepeating("IgniteColorFX", 0, .3f);
+        Invoke("CancelColorChange", _seconds);
+    }
+    public void ChillFxFor(float _seconds)
+    {
+        InvokeRepeating("ChillColorFX", 0, .3f);
+        Invoke("CancelColorChange", _seconds);
+    }
+    public void ShockFxFor(float _seconds)
+    {
+        InvokeRepeating("ShockColorFX", 0, .3f);
+        Invoke("CancelColorChange", _seconds);
+    }
+
+    private void IgniteColorFX()
+    {
+        if(_sr.color != igniteColor[0])
+            _sr.color = igniteColor[0];
+        else
+            _sr.color = igniteColor[1];
+    }
+
+    private void ChillColorFX()
+    {
+        if(_sr.color != chillColor[0])
+            _sr.color = chillColor[0];
+        else
+            _sr.color = chillColor[1];
+    }
+
+    private void ShockColorFX()
+    {
+        if(_sr.color != shockColor[0])
+            _sr.color = shockColor[0];
+        else
+            _sr.color = shockColor[1];
     }
 }
