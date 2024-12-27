@@ -33,13 +33,12 @@ public class CharacterStatus : MonoBehaviour
     public Status lightningDamage;
 
     [Header("Ailments status")]
+    // 负面效果持续时间 4s
     [SerializeField] private float ailmentsDuration = 4;
     public bool isIgnited; //持续伤害
     private float _ignitedTimer;
     private int   _igniteDamage;
-    // relate to thunder
-    [SerializeField] private GameObject shockStrikePrefab;
-    private int shockDamage;
+    
     private float _igniteDamageTimer;
     private float _igniteDamageCool = .3f;
 
@@ -48,6 +47,9 @@ public class CharacterStatus : MonoBehaviour
     
     public bool isShocked; //减少正确攻击率
     private float _shockedTimer;
+    // relate to thunder
+    [SerializeField] private GameObject shockStrikePrefab;
+    private int _shockDamage;
 
 
     public int currentHp;
@@ -122,7 +124,6 @@ public class CharacterStatus : MonoBehaviour
             if(!isShocked)
             {
                 ApplyShock(shock);
-                
             }
             else
             {
@@ -161,7 +162,7 @@ public class CharacterStatus : MonoBehaviour
                 {
                     GameObject newShockStrike = Instantiate(shockStrikePrefab, transform.position, Quaternion.identity);
 
-                    newShockStrike.GetComponent<Thunder_Controller>().Setup(shockDamage, closestEnemy.GetComponent<CharacterStatus>());
+                    newShockStrike.GetComponent<Thunder_Controller>().Setup(_shockDamage, closestEnemy.GetComponent<CharacterStatus>());
                 }
 
             }
@@ -172,7 +173,7 @@ public class CharacterStatus : MonoBehaviour
 
     public void SetupIgniteDamage(int _damage) => _igniteDamage = _damage;
 
-    public void SetupShockStrikeDamage(int _damage) => shockDamage = _damage;
+    public void SetupShockStrikeDamage(int _damage) => _shockDamage = _damage;
 
     public virtual void TakeDamage(int damage)
     {
@@ -183,7 +184,7 @@ public class CharacterStatus : MonoBehaviour
         if (currentHp <= 0)
             Die();
     }
-
+    // 生命值变化
     protected virtual void DecreaseHpBy(int damage)
     {
         currentHp -= damage;

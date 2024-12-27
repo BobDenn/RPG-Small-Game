@@ -34,6 +34,7 @@ public class Thunder_Controller : MonoBehaviour
             return;
 
         transform.position = Vector2.MoveTowards(transform.position, targetStatus.transform.position, speed * Time.deltaTime);
+        // 右转？
         transform.right = transform.position - targetStatus.transform.position;
 
         if(Vector2.Distance(transform.position, targetStatus.transform.position) < .1f)
