@@ -18,7 +18,7 @@ public class PlayerStatus : CharacterStatus
     {
         base.TakeDamage(damage);
 
-        player.WasDamaged();
+        //player.WasDamaged();
         // PlayerManager.instance.WasDamaged();
     }
     protected override void Die()

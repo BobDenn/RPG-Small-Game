@@ -179,6 +179,8 @@ public class CharacterStatus : MonoBehaviour
     {
         DecreaseHpBy(damage);
 
+        GetComponent<Entity>().WasDamaged();
+        _fx.StartCoroutine("FlashFX");
         //Debug.Log(damage);
 
         if (currentHp <= 0)
@@ -209,9 +211,11 @@ public class CharacterStatus : MonoBehaviour
         }
         // 护甲衰减
         totalDamage = CheckTargetArmour(_targetStatus, totalDamage);
-        //_targetStatus.TakeDamage(totalDamage);
+        _targetStatus.TakeDamage(totalDamage);
         //Debug.Log(totalDamage);
-        DoMagicDamage(_targetStatus);
+        
+        //if you want you can enable this or if inventory current weapon has fire effect
+        //DoMagicDamage(_targetStatus);
     }
 
 #endregion

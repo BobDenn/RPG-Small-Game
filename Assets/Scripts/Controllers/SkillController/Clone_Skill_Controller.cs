@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Clone_Skill_Controller : MonoBehaviour
 {
+    private Player player;
     private SpriteRenderer sr;
     private Animator anim;
 
@@ -40,10 +41,12 @@ public class Clone_Skill_Controller : MonoBehaviour
     }
 
     // create a clone of player such as this function's name
-    public void SetupClone(Transform _newTransform, float _cloneDuration, bool _canAttack,Vector3 _offset, Transform _closestEnemy, bool _canDuplicate, float _chanceToDuplicate)
+    public void SetupClone(Transform _newTransform, float _cloneDuration, bool _canAttack,Vector3 _offset, Transform _closestEnemy, bool _canDuplicate, float _chanceToDuplicate,Player _player)
     {
         if (_canAttack)
             anim.SetInteger("AttackNum", Random.Range(1, 4)); // range( [x,y) )
+
+        player = _player;
 
         transform.position = _newTransform.position + _offset;
 
@@ -71,12 +74,14 @@ public class Clone_Skill_Controller : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                hit.GetComponent<Enemy>().WasDamaged();
+                // player damages
+                //hit.GetComponent<Enemy>().WasDamaged();
+                player.status.DoDamage(hit.GetComponent<CharacterStatus>());
                 
                 if(canDuplicateClone)
                 {
                     // generate clone rate
-                    if(Random.Range(1, 100) < chanceToDuplicate)
+                    if(Random.Range(1, 101) < chanceToDuplicate)
                     {
                         SkillManager.instance.clone.CreateClone(hit.transform, new Vector3(1.1f * facingDir, 0, 0));
                     }

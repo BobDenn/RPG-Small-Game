@@ -63,21 +63,15 @@ public class Entity : MonoBehaviour
     // chill ailment effect
     public virtual void SlowEntityBy(float _slowPercentage, float _slowDuration)
     {
-
+        // nothing here dude
     }
 
     protected virtual void ReturnDefaultSpeed()
     {
         anim.speed = 1;
     }
-    public void WasDamaged()
-    {
-        fx.StartCoroutine("FlashFX");
-        StartCoroutine("HitKnockBack");
-        
+    public void WasDamaged() => StartCoroutine("HitKnockBack");
         //Debug.Log(gameObject.name + " was Damaged");
-    }
-
     protected virtual IEnumerator HitKnockBack()
     {
         IsKnocked = true;
@@ -88,11 +82,8 @@ public class Entity : MonoBehaviour
         IsKnocked = false;
 
     }
-    
-    
 
-
-    #region Velocity
+#region Velocity
 
     // I can move & flip
     public void SetZeroVelocity()

@@ -63,7 +63,7 @@ public class Sword_Skill_Controller : MonoBehaviour
         
         if(_pierceAmount <= 0)
             _anim.SetBool("Rotate", true);
-        // ???
+        // ??? 限制变量大小
         _spinDir = Mathf.Clamp(_rb.velocity.x, -1, 1);
         
         Invoke("DestroyMe", 7);
@@ -92,8 +92,7 @@ public class Sword_Skill_Controller : MonoBehaviour
         _spinDuration = spinDuration;
         _hitCooldown = hitCooldown;
     }
-    
-    #endregion
+#endregion
     public void ReturnSword()
     {
         // sword backs to player
@@ -206,10 +205,10 @@ public class Sword_Skill_Controller : MonoBehaviour
 
 
         if (collision.GetComponent<Enemy>() != null)
-        {
+        {   // damaged
             Enemy enemy = collision.GetComponent<Enemy>();
-            
-            enemy.WasDamaged();
+            _player.status.DoDamage(enemy.GetComponent<CharacterStatus>());
+            //enemy.WasDamaged();
             enemy.StartCoroutine("FreezeTimeFor", _freezeTimeDuration);
         }
         // difficult

@@ -17,7 +17,7 @@ public class EnemyStatus : CharacterStatus
     {
         base.TakeDamage(damage);
 
-        enemy.WasDamaged();
+        //enemy.WasDamaged();
     }
     protected override void Die()
     {
