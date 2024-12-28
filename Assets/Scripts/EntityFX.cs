@@ -22,10 +22,16 @@ public class EntityFX : MonoBehaviour
         _sr = GetComponentInChildren<SpriteRenderer>();
         _originalMat = _sr.material;
         
-        
-
     }
-
+    // disappear
+    public void MakeTransparent(bool transparent)
+    {
+        if (transparent)
+            _sr.color = Color.clear;
+        else
+            _sr.color = Color.white;
+    }
+    
     // hit flash conflict with ailment color(solved)
     private IEnumerator FlashFX()
     {

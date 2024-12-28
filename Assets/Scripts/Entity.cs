@@ -83,7 +83,7 @@ public class Entity : MonoBehaviour
 
     }
 
-#region Velocity
+    #region Velocity
 
     // I can move & flip
     public void SetZeroVelocity()
@@ -141,15 +141,6 @@ public class Entity : MonoBehaviour
     }
     
     #endregion
-    
-    // disappear
-    public void MakeTransparent(bool transparent)
-    {
-        if (transparent)
-            sr.color = Color.clear;
-        else
-            sr.color = Color.white;
-    }
     
     public virtual void Die()
     {
