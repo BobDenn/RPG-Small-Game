@@ -165,6 +165,7 @@ public class CharacterStatus : MonoBehaviour
     }
 
     #endregion
+    
     #region damage calculate
 
     public virtual void TakeDamage(int damage)
@@ -211,6 +212,7 @@ public class CharacterStatus : MonoBehaviour
     }
 
     #endregion
+    
     #region magical damage
     public void SetupIgniteDamage(int _damage) => _igniteDamage = _damage;
 
@@ -297,7 +299,8 @@ public class CharacterStatus : MonoBehaviour
         _targetStatus.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
     }
     
-#endregion
+    #endregion
+    
     #region crit damage
     private bool CanCrit()
     {
@@ -322,7 +325,7 @@ public class CharacterStatus : MonoBehaviour
 
         return Mathf.RoundToInt(critDamage);// 39
     }
-#endregion
+    #endregion
 
     #region check defense 
     private bool TargetCanAvoidAttack(CharacterStatus _targetStatus)
@@ -363,7 +366,7 @@ public class CharacterStatus : MonoBehaviour
         return totalMagicDamage;
     }
 
-#endregion
+    #endregion
     protected virtual void Die()
     {
         IsDead = true;

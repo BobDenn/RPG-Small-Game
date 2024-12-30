@@ -9,8 +9,12 @@ public class Inventory : MonoBehaviour
     public static Inventory instance;
     public List<InventoryItem> inventoryItems;
     public Dictionary<ItemData, InventoryItem> inventoryDictionary;
-    
-    
+
+
+    [Header("Inventory UI")] 
+    [SerializeField] private Transform allBagItems;
+
+    private UIItemSlot[] itemSlots;
     private void Awake()
     {
         if (instance == null)
@@ -23,8 +27,9 @@ public class Inventory : MonoBehaviour
     {
         inventoryItems = new List<InventoryItem>();
         inventoryDictionary = new Dictionary<ItemData, InventoryItem>();
-    }
 
+        itemSlots = allBagItems.GetComponentsInChildren<UIItemSlot>();
+    }
     /*private void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
@@ -36,6 +41,14 @@ public class Inventory : MonoBehaviour
         }
     }*/
 
+    private void UpdateSlotUI()
+    {
+        for (int i = 0; i < inventoryItems.Count; i++)
+        {
+            itemSlots[i].InitSlot(inventoryItems[i]);
+        }
+    }
+    
     public void AddItem(ItemData _item)
     {
         // 物品堆叠
@@ -50,6 +63,7 @@ public class Inventory : MonoBehaviour
             inventoryItems.Add(newItem);
             inventoryDictionary.Add(_item, newItem);
         }
+        UpdateSlotUI();
     }
     
     public void RemoveItem(ItemData _item)
@@ -66,6 +80,7 @@ public class Inventory : MonoBehaviour
                 value.RemoveStack();
             }
         }
+        UpdateSlotUI();
     }
     
 }
