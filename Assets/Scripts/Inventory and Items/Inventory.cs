@@ -3,18 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
-    public List<InventoryItem> inventoryItems;
+    public List<InventoryItem> inventory;
     public Dictionary<ItemData, InventoryItem> inventoryDictionary;
-
-
+    public List<InventoryItem> stash;
+    public Dictionary<ItemData, InventoryItem> stashDictionary;
+    
     [Header("Inventory UI")] 
-    [SerializeField] private Transform allBagItems;
+    [SerializeField] private Transform inventorySlotParent;
+    [SerializeField] private Transform stashSlotParent;
 
-    private UIItemSlot[] itemSlots;
+    private UIItemSlot[] inventoryItemSlots;
+    private UIItemSlot[] stashItemSlots;
     private void Awake()
     {
         if (instance == null)
@@ -25,10 +29,13 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        inventoryItems = new List<InventoryItem>();
+        stash = new List<InventoryItem>();
+        inventory = new List<InventoryItem>();
+        stashDictionary = new Dictionary<ItemData, InventoryItem>();
         inventoryDictionary = new Dictionary<ItemData, InventoryItem>();
 
-        itemSlots = allBagItems.GetComponentsInChildren<UIItemSlot>();
+        stashItemSlots = stashSlotParent.GetComponentsInChildren<UIItemSlot>();
+        inventoryItemSlots = inventorySlotParent.GetComponentsInChildren<UIItemSlot>();
     }
     /*private void Update()
     {
@@ -43,15 +50,46 @@ public class Inventory : MonoBehaviour
 
     private void UpdateSlotUI()
     {
-        for (int i = 0; i < inventoryItems.Count; i++)
+        for (int i = 0; i < inventory.Count; i++)
         {
-            itemSlots[i].InitSlot(inventoryItems[i]);
+            inventoryItemSlots[i].InitSlot(inventory[i]);
         }
+
+        for (int i = 0; i < stash.Count; i++)
+        {
+            stashItemSlots[i].InitSlot(stash[i]);
+        }
+        
     }
     
     public void AddItem(ItemData _item)
     {
-        // 物品堆叠
+        if(_item.itemType == ItemType.Equipment)
+            AddToInventory(_item);
+        else if (_item.itemType == ItemType.Material)
+            AddToStash(_item);
+            
+        
+        UpdateSlotUI();
+    }
+
+    private void AddToStash(ItemData _item)
+    {
+        if (stashDictionary.TryGetValue(_item, out InventoryItem value))
+        {
+            value.AddStack();
+        }
+        else
+        {
+            InventoryItem newItem = new InventoryItem(_item);
+            
+            stash.Add(newItem);
+            stashDictionary.Add(_item, newItem);
+        }
+    }
+
+    private void AddToInventory(ItemData _item)
+    {
         if (inventoryDictionary.TryGetValue(_item, out InventoryItem value))
         {
             value.AddStack();
@@ -60,19 +98,18 @@ public class Inventory : MonoBehaviour
         {
             InventoryItem newItem = new InventoryItem(_item);
             
-            inventoryItems.Add(newItem);
+            inventory.Add(newItem);
             inventoryDictionary.Add(_item, newItem);
         }
-        UpdateSlotUI();
     }
-    
+
     public void RemoveItem(ItemData _item)
     {
         if (inventoryDictionary.TryGetValue(_item, out InventoryItem value))
         {
             if (value.stackSize <= 1)
             {
-                inventoryItems.Remove(value);
+                inventory.Remove(value);
                 inventoryDictionary.Remove(_item);
             }
             else
@@ -80,6 +117,20 @@ public class Inventory : MonoBehaviour
                 value.RemoveStack();
             }
         }
+        
+        if (stashDictionary.TryGetValue(_item, out InventoryItem stashValue))
+        {
+            if (stashValue.stackSize <= 1)
+            {
+                stash.Remove(stashValue);
+                stashDictionary.Remove(_item);
+            }
+            else
+            {
+                stashValue.RemoveStack();
+            }
+        }
+        
         UpdateSlotUI();
     }
     

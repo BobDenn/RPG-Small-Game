@@ -1,6 +1,5 @@
 using System;
 
-
 [Serializable]
 
 public class InventoryItem // Item data and a mount of it
