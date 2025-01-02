@@ -17,8 +17,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform stashSlotParent;
 
-    private UIItemSlot[] inventoryItemSlots;
-    private UIItemSlot[] stashItemSlots;
+    private UI_ItemSlot[] inventoryItemSlots;
+    private UI_ItemSlot[] stashItemSlots;
     private void Awake()
     {
         if (instance == null)
@@ -34,8 +34,8 @@ public class Inventory : MonoBehaviour
         stashDictionary = new Dictionary<ItemData, InventoryItem>();
         inventoryDictionary = new Dictionary<ItemData, InventoryItem>();
 
-        stashItemSlots = stashSlotParent.GetComponentsInChildren<UIItemSlot>();
-        inventoryItemSlots = inventorySlotParent.GetComponentsInChildren<UIItemSlot>();
+        stashItemSlots = stashSlotParent.GetComponentsInChildren<UI_ItemSlot>();
+        inventoryItemSlots = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
     }
     /*private void Update()
     {
