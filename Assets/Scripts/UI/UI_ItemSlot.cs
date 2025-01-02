@@ -1,13 +1,14 @@
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;// IPointerDownHandler
 
-public class UIItemSlot : MonoBehaviour
+public class UI_ItemSlot : MonoBehaviour , IPointerDownHandler // mouseclick interface
 {
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
 
-    public InventoryItem item;
+    public InventoryItem item;//data(type + name + icon) + stackSize
 
     public void InitSlot(InventoryItem _newItem)
     {
@@ -24,5 +25,25 @@ public class UIItemSlot : MonoBehaviour
             else
                 itemText.text = "";
         }
+    }
+
+    public void CleanUpSlot()
+    {
+        item = null;
+
+        itemImage.sprite = null;
+        itemImage.color = Color.clear;
+        itemText.text = "";
+    }
+    
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if(item.stackSize <= 0)
+            return;
+        
+        // only equip equipment
+        if(item.data.itemType == ItemType.Equipment)
+            Inventory.instance.EquipItem(item.data);
     }
 }
