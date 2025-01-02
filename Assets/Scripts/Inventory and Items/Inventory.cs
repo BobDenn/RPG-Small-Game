@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour
     {
         // temporary value to store equipment
         ItemData_Equipment newEquipment = item as ItemData_Equipment;
-        InventoryItem newItem = new InventoryItem(item);
+        InventoryItem newItem = new InventoryItem(newEquipment);
 
         ItemData_Equipment oldEquipment = null;
         
@@ -71,6 +71,8 @@ public class Inventory : MonoBehaviour
         
         equipment.Add(newItem);
         equipmentDictionary.Add(newEquipment, newItem);
+        // apply item modifier
+        newEquipment.AddModifier();
         
         RemoveItem(item);
         
@@ -83,6 +85,7 @@ public class Inventory : MonoBehaviour
         {
             equipment.Remove(value);
             equipmentDictionary.Remove(itemToRemove);
+            itemToRemove.RemoveModifier();
         }
     }
 
@@ -90,10 +93,10 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < equipmentSlots.Length; i++)
         {
-            foreach (KeyValuePair<ItemData_Equipment, InventoryItem> _item in equipmentDictionary)
+            foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
             {
-                if (_item.Key.equipmentType == equipmentSlots[i].slotType)
-                    equipmentSlots[i].InitSlot(_item.Value);
+                if (item.Key.equipmentType == equipmentSlots[i].slotType)
+                    equipmentSlots[i].InitSlot(item.Value);
             }
         }
         

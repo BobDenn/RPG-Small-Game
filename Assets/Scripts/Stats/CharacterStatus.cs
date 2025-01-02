@@ -10,10 +10,10 @@ public class CharacterStatus : MonoBehaviour
     private EntityFX _fx;
 
     [Header("Major status")]
-    public Status vitality; // 生命力 每1点 增加3/5 hp
-    public Status strength; // 力量 每1点增加1点damage和1%的critPower
-    public Status agility;  // 敏捷 每1点增加1%的evasion和critChance
-    public Status intelligence; // 智力 每1点增加1点魔法伤害和1点魔法抗性
+    public Status vitality; // 生命力 每 1点 增加 10 hp
+    public Status strength; // 力量 每 1点增加 1点 damage和 1%的 critPower
+    public Status agility;  // 敏捷 每 1点增加 1%的 evasion和 critChance
+    public Status intelligence; // 智力 每 1点增加 1点魔法伤害和 1点魔法抗性
 
     [Header("Offensive status")]
     public Status damage;    // 基础伤害
@@ -57,6 +57,7 @@ public class CharacterStatus : MonoBehaviour
     
     protected virtual void Start()
     {
+        // create default value
         critPower.SetDefaultValue(150);
         currentHp = GetMaxHpValue();
 
@@ -360,8 +361,8 @@ public class CharacterStatus : MonoBehaviour
     }
     private int CheckTargetMagicResistance(CharacterStatus _targetStatus, int totalMagicDamage)
     {
-        // 由智力提供的魔抗是3倍
-        totalMagicDamage -= _targetStatus.magicResistance.GetValue() + (_targetStatus.intelligence.GetValue() * 3);
+        // 由智力提供的魔抗是 1倍
+        totalMagicDamage -= _targetStatus.magicResistance.GetValue() + (_targetStatus.intelligence.GetValue());
         totalMagicDamage = Mathf.Clamp(totalMagicDamage, 0, int.MaxValue);
         return totalMagicDamage;
     }
@@ -375,7 +376,7 @@ public class CharacterStatus : MonoBehaviour
     // calculate health value
     public int GetMaxHpValue()
     {
-        return maxHp.GetValue() + vitality.GetValue() * 5;
+        return maxHp.GetValue() + vitality.GetValue() * 10;
     }
 
 }
