@@ -107,6 +107,15 @@ public class Inventory : MonoBehaviour
                     equipmentSlots[i].InitSlot(_item.Value);
             }
         }
+        // use clean up function
+        for (int i = 0; i < inventoryItemSlots.Length; i++)
+        {
+            inventoryItemSlots[i].CleanUpSlot();
+        }
+        for (int i = 0; i < stashItemSlots.Length; i++)
+        {
+            stashItemSlots[i].CleanUpSlot();
+        }
         
         
         for (int i = 0; i < inventory.Count; i++)
@@ -117,15 +126,6 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < stash.Count; i++)
         {
             stashItemSlots[i].InitSlot(stash[i]);
-        }
-        // use clean up function
-        for (int i = 0; i < inventoryItemSlots.Length; i++)
-        {
-            //inventoryItemSlots[i].CleanUpSlot();
-        }
-        for (int i = 0; i < stashItemSlots.Length; i++)
-        {
-            //stashItemSlots[i].CleanUpSlot();
         }
         
     }

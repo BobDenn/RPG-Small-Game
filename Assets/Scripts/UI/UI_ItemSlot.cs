@@ -28,7 +28,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
     }
     
     // force to update our slot
-    /*public void CleanUpSlot()
+    public void CleanUpSlot()
     {
         item = null;
         itemImage.sprite = null;
@@ -36,7 +36,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
         itemImage.color = Color.clear;
 
         itemText.text = "";
-    }*/
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
