@@ -2364,12 +2364,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d595e26f57e3535458f46514139df6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipment: []
   inventory: []
   stash: []
+  equipment: []
   inventorySlotParent: {fileID: 374696965}
   stashSlotParent: {fileID: 1553585413}
-  equipmentSloParent: {fileID: 1027227420}
+  equipmentSlotParent: {fileID: 1027227420}
 --- !u!4 &707686450
 Transform:
   m_ObjectHideFlags: 0
@@ -3011,8 +3011,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -758, y: -148}
-  m_SizeDelta: {x: 400, y: 310}
+  m_AnchoredPosition: {x: -783.1, y: -149.9}
+  m_SizeDelta: {x: 350, y: 310}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1027227421
 MonoBehaviour:
@@ -3035,7 +3035,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 150, y: 150}
-  m_Spacing: {x: 100, y: 10}
+  m_Spacing: {x: 50, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &1088667206

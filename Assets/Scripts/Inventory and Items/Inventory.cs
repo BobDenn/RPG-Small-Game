@@ -8,9 +8,6 @@ using UnityEngine.Serialization;
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
-
-    public List<InventoryItem> equipment;
-    public Dictionary<ItemData_Equipment, InventoryItem> equipmentDictionary;
     
     public List<InventoryItem> inventory;
     public Dictionary<ItemData, InventoryItem> inventoryDictionary;
@@ -18,10 +15,13 @@ public class Inventory : MonoBehaviour
     public List<InventoryItem> stash;
     public Dictionary<ItemData, InventoryItem> stashDictionary;
     
+    public List<InventoryItem> equipment;
+    public Dictionary<ItemData_Equipment, InventoryItem> equipmentDictionary;
+    
     [Header("Inventory UI")] 
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform stashSlotParent;
-    [SerializeField] private Transform equipmentSloParent;
+    [SerializeField] private Transform equipmentSlotParent;
     
     private UI_ItemSlot[] inventoryItemSlots;
     private UI_ItemSlot[] stashItemSlots;
@@ -46,7 +46,7 @@ public class Inventory : MonoBehaviour
 
         stashItemSlots = stashSlotParent.GetComponentsInChildren<UI_ItemSlot>();
         inventoryItemSlots = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
-        equipmentSlots = inventorySlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
+        equipmentSlots = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
     }
 
     public void EquipItem(ItemData item)
@@ -100,17 +100,6 @@ public class Inventory : MonoBehaviour
             }
         }
         
-        
-        for (int i = 0; i < inventory.Count; i++)
-        {
-            inventoryItemSlots[i].InitSlot(inventory[i]);
-        }
-
-        for (int i = 0; i < stash.Count; i++)
-        {
-            stashItemSlots[i].InitSlot(stash[i]);
-        }
-
         for (int i = 0; i < inventoryItemSlots.Length; i++)
         {
             inventoryItemSlots[i].CleanUpSlot();
@@ -121,6 +110,15 @@ public class Inventory : MonoBehaviour
             stashItemSlots[i].CleanUpSlot();
         }
         
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            inventoryItemSlots[i].InitSlot(inventory[i]);
+        }
+
+        for (int i = 0; i < stash.Count; i++)
+        {
+            stashItemSlots[i].InitSlot(stash[i]);
+        }
     }
     
     public void AddItem(ItemData _item)

@@ -39,8 +39,6 @@ public class UI_ItemSlot : MonoBehaviour , IPointerDownHandler // mouseclick int
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        
-        
         // only equip equipment
         if(item.data.itemType == ItemType.Equipment)
             Inventory.instance.EquipItem(item.data);
