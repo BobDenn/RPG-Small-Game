@@ -35,9 +35,8 @@ public class UI_ItemSlot : MonoBehaviour , IPointerDownHandler // mouseclick int
         itemImage.color = Color.clear;
         itemText.text = "";
     }
-    
 
-    public void OnPointerDown(PointerEventData eventData)
+    public virtual void OnPointerDown(PointerEventData eventData)
     {
         // only equip equipment
         if(item.data.itemType == ItemType.Equipment)
