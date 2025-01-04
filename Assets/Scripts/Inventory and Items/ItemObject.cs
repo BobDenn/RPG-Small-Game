@@ -21,7 +21,7 @@ public class ItemObject : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M))
             rb.velocity = velocity;
     }
-
+    // item + velocity
     public void SetupItem(ItemData _itemData, Vector2 _velocity)
     {
         itemData = _itemData;
