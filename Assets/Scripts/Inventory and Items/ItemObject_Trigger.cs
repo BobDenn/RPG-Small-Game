@@ -12,6 +12,11 @@ public class ItemObject_Trigger : MonoBehaviour
         // Once touched items, then it disappeared
         if (collision.GetComponent<Player>() != null)
         {
+            if(collision.GetComponent<CharacterStatus>().IsDead)
+                return;
+            
+            
+            Debug.Log("Picked up item ");
             myItemObject.PickUpItem();
         }
         

@@ -53,7 +53,7 @@ public class CharacterStatus : MonoBehaviour
     
     public int currentHp;
     public Action OnHpChanged;
-    protected bool IsDead;
+    public bool IsDead { get; private set; }
     
     protected virtual void Start()
     {
