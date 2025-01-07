@@ -243,7 +243,7 @@ public class CharacterStatus : MonoBehaviour
         }
     }
 
-    public virtual void DoMagicDamage(CharacterStatus _targetStatus)
+    public virtual void DoMagicalDamage(CharacterStatus _targetStatus)
     {
         int _fireDamage = fireDamage.GetValue();
         int _iceDamage = iceDamage.GetValue();

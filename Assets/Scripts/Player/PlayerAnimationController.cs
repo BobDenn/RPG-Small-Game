@@ -26,7 +26,7 @@ public class PlayerAnimationController : MonoBehaviour
                 player.status.DoDamage(_target);
                 
                 //inventory get weapon call item effect
-                Inventory.instance.GetEquipment(EquipmentType.Weapon).ExecuteItemEffect();
+                Inventory.instance.GetEquipment(EquipmentType.Weapon)?.Effect(_target.transform);
                 
                 // hit.GetComponent<Enemy>().WasDamaged();
             }

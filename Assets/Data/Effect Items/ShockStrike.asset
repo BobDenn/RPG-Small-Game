@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79415903fd545c9478b58ddfd2872c12, type: 3}
-  m_Name: Thunder Strike
+  m_Script: {fileID: 11500000, guid: dd529d8c376c7894c8fbf5c774c061e4, type: 3}
+  m_Name: ShockStrike
   m_EditorClassIdentifier: 
+  shockStrikePrefab: {fileID: 2814026472226623217, guid: 9494bab8923264047a9bb90f8e54ae12, type: 3}

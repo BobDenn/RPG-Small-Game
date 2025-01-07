@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 
-[CreateAssetMenu(fileName = "Thunder Strike Effect", menuName = "Data/Shock Strike")]
+[CreateAssetMenu(fileName = "Thunder Strike Effect", menuName = "Data/Item Effect/Shock Strike")]
 public class ShockStrike : ItemEffect
 {
-    [FormerlySerializedAs("ShockStrikePrefab")] [SerializeField] private GameObject shockStrikePrefab;
+    [SerializeField] private GameObject shockStrikePrefab;
 
-    public override void ExecuteEffect()
+    public override void ExecuteEffect(Transform enemyPosition)
     {
-        GameObject newShockStrike = Instantiate(shockStrikePrefab);
-        
-        //TODO: setup new shock strike
+        // shocked when attacking enemy through thunder claw, then destroyed
+        GameObject newShockStrike = Instantiate(shockStrikePrefab, enemyPosition.position, Quaternion.identity);
+        Destroy(newShockStrike, 1f);
     }
 }

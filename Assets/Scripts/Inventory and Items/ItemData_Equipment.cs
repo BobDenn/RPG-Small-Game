@@ -14,6 +14,7 @@ public class ItemData_Equipment : ItemData
 {
     public EquipmentType equipmentType;
 
+    // make special items have some unique effections
     public ItemEffect[] ItemEffects;
     
     
@@ -44,11 +45,11 @@ public class ItemData_Equipment : ItemData
     [Header("Craft requirements")]
     public List<InventoryItem> craftingMaterials;
 
-    public void ExecuteItemEffect()
+    public void Effect(Transform enemyPosition)
     {
         foreach (var item in ItemEffects)
         {
-            item.ExecuteEffect();
+            item.ExecuteEffect(enemyPosition);
         }
     }
     
