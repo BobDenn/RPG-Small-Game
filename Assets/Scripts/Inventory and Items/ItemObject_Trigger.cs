@@ -16,7 +16,7 @@ public class ItemObject_Trigger : MonoBehaviour
                 return;
             
             
-            Debug.Log("Picked up item ");
+            //Debug.Log("Picked up item ");
             myItemObject.PickUpItem();
         }
         

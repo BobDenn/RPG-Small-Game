@@ -2107,8 +2107,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d595e26f57e3535458f46514139df6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: []
-  stash: []
+  startingEquipment:
+  - {fileID: 11400000, guid: 0f17fbeeca73b8747b68e4049e6260f4, type: 2}
+  - {fileID: 11400000, guid: 700df22cbe817804cb5ceb3f008f2ca2, type: 2}
+  - {fileID: 11400000, guid: 9d265274c950ebe4099f9f50a704ef12, type: 2}
+  - {fileID: 11400000, guid: e0acb80593591c4469c5f8ea76b10df0, type: 2}
+  - {fileID: 11400000, guid: bc9a973a57b5f5848bdc17d00bc5ec4a, type: 2}
+  inventory:
+  - data: {fileID: 11400000, guid: ad0d3cf29369bbd48a8d40e399426644, type: 2}
+    stackSize: 1
+  - data: {fileID: 11400000, guid: dd0bf2574ddad31459b34a93b44c3431, type: 2}
+    stackSize: 1
+  - data: {fileID: 11400000, guid: 0f17fbeeca73b8747b68e4049e6260f4, type: 2}
+    stackSize: 1
+  stash:
+  - data: {fileID: 11400000, guid: e0acb80593591c4469c5f8ea76b10df0, type: 2}
+    stackSize: 1
+  - data: {fileID: 11400000, guid: bc9a973a57b5f5848bdc17d00bc5ec4a, type: 2}
+    stackSize: 1
+  - data: {fileID: 11400000, guid: 9d265274c950ebe4099f9f50a704ef12, type: 2}
+    stackSize: 1
   equipment: []
   inventorySlotParent: {fileID: 374696965}
   stashSlotParent: {fileID: 1553585413}

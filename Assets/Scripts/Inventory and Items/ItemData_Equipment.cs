@@ -14,6 +14,10 @@ public class ItemData_Equipment : ItemData
 {
     public EquipmentType equipmentType;
 
+    public ItemEffect[] ItemEffects;
+    
+    
+
     [Header("Major status")]
     public int vitality; // 生命力
     public int strength; // 力量 
@@ -39,8 +43,16 @@ public class ItemData_Equipment : ItemData
 
     [Header("Craft requirements")]
     public List<InventoryItem> craftingMaterials;
-    
 
+    public void ExecuteItemEffect()
+    {
+        foreach (var item in ItemEffects)
+        {
+            item.ExecuteEffect();
+        }
+    }
+    
+    
     public void AddModifier()
     {
         PlayerStatus playerStatus = PlayerManager.instance.player.GetComponent<PlayerStatus>();

@@ -38,6 +38,13 @@ public class UI_ItemSlot : MonoBehaviour , IPointerDownHandler // mouseclick int
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            Inventory.instance.RemoveItem(item.data);
+            return;
+        }
+        
+        
         // only equip equipment
         if(item.data.itemType == ItemType.Equipment)
             Inventory.instance.EquipItem(item.data);

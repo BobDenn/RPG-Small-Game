@@ -8,6 +8,8 @@ using UnityEngine.Serialization;
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
+
+    public List<ItemData> startingEquipment;
     
     public List<InventoryItem> inventory;
     public Dictionary<ItemData, InventoryItem> inventoryDictionary;
@@ -47,6 +49,17 @@ public class Inventory : MonoBehaviour
         stashItemSlots = stashSlotParent.GetComponentsInChildren<UI_ItemSlot>();
         inventoryItemSlots = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlots = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
+
+        AddStartingItems();
+        
+    }
+
+    private void AddStartingItems()
+    {
+        for (int i = 0; i < startingEquipment.Count; i++)
+        {
+            AddItem(startingEquipment[i]);
+        }
     }
 
     public void EquipItem(ItemData item)
@@ -236,4 +249,16 @@ public class Inventory : MonoBehaviour
 
     public List<InventoryItem> GetStashList() => stash;
 
+    public ItemData_Equipment GetEquipment(EquipmentType _type)
+    {
+        ItemData_Equipment equippedItem = null;
+        
+        foreach (KeyValuePair<ItemData_Equipment, InventoryItem> _item in equipmentDictionary)
+        {
+            if (_item.Key.equipmentType == _type)
+                equippedItem = _item.Key;
+        }
+
+        return equippedItem;
+    }
 }
