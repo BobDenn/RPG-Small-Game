@@ -2188,6 +2188,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bc9a973a57b5f5848bdc17d00bc5ec4a, type: 2}
   - {fileID: 11400000, guid: f3401f4b2f02df8438c1e3af5768e072, type: 2}
   - {fileID: 11400000, guid: 571fc15aaf1637043a5d9abb46f2e5ad, type: 2}
+  - {fileID: 11400000, guid: 915de58f2ab987c4fb5e814fcadc513f, type: 2}
+  - {fileID: 11400000, guid: bed569fb0d4e6bd47ad02de8a8f77883, type: 2}
   inventory:
   - data: {fileID: 11400000, guid: ad0d3cf29369bbd48a8d40e399426644, type: 2}
     stackSize: 1

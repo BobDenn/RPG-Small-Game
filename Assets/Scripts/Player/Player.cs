@@ -99,6 +99,10 @@ public class Player : Entity
         // crystal skill
         if (Input.GetKeyDown(KeyCode.F))
             skill.crystal.CanUseSkill();
+
+        // use Flask
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+            Inventory.instance.UseFlask();
     }
     // 寒冰减速效果
     public override void SlowEntityBy(float _slowPercentage, float _slowDuration)

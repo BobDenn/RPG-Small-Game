@@ -7,6 +7,7 @@ using System;
 /// </summary>
 public class CharacterStatus : MonoBehaviour
 {
+    #region Variables
     private EntityFX _fx;
 
     [Header("Major status")]
@@ -54,7 +55,7 @@ public class CharacterStatus : MonoBehaviour
     public int currentHp;
     public Action OnHpChanged;
     public bool IsDead { get; private set; }
-    
+    #endregion
     protected virtual void Start()
     {
         // create default value
@@ -82,6 +83,28 @@ public class CharacterStatus : MonoBehaviour
             isShocked = false;
         if(isIgnited)
             ApplyIgniteDamage();
+    }
+
+    public virtual void IncreaseHealthBy(int _amount)
+    {
+        currentHp += _amount;
+
+        if(currentHp > GetMaxHpValue())
+            currentHp = GetMaxHpValue();
+
+        if(OnHpChanged != null)
+        {
+            OnHpChanged();
+        }
+    }
+
+    // 生命值变化
+    protected virtual void DecreaseHpBy(int damage)
+    {
+        currentHp -= damage;
+
+        if(OnHpChanged != null)
+            OnHpChanged();
     }
     
     #region Ailments effect
@@ -179,14 +202,6 @@ public class CharacterStatus : MonoBehaviour
 
         if (currentHp <= 0 && !IsDead)
             Die();
-    }
-    // 生命值变化
-    protected virtual void DecreaseHpBy(int damage)
-    {
-        currentHp -= damage;
-
-        if(OnHpChanged != null)
-            OnHpChanged();
     }
 
     // [damage] 攻击别人
