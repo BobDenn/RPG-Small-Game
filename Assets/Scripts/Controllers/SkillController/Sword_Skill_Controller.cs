@@ -92,7 +92,9 @@ public class Sword_Skill_Controller : MonoBehaviour
         _spinDuration = spinDuration;
         _hitCooldown = hitCooldown;
     }
-#endregion
+
+    #endregion
+
     public void ReturnSword()
     {
         // sword backs to player
@@ -137,7 +139,7 @@ public class Sword_Skill_Controller : MonoBehaviour
             {
                 _spinTimer -= Time.deltaTime;
 
-                transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + _spinDir, transform.position.y), 1.5f * Time.deltaTime);
+                //transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + _spinDir, transform.position.y), 1.5f * Time.deltaTime);
                 
                 if (_spinTimer < 0)
                 {
@@ -207,18 +209,30 @@ public class Sword_Skill_Controller : MonoBehaviour
         if (collision.GetComponent<Enemy>() != null)
         {   // damaged
             Enemy enemy = collision.GetComponent<Enemy>();
-            _player.status.DoDamage(enemy.GetComponent<CharacterStatus>());
-            //enemy.WasDamaged();
-            enemy.StartCoroutine("FreezeTimeFor", _freezeTimeDuration);
+            SwordSkillDamage(enemy);
         }
         // difficult
         // collision.GetComponent<Enemy>()?.WasDamaged();
-        
-        
+
+
         // Add enemy to our target list
         SetupTargetsForBounce(collision);
         
         StuckInto(collision);
+    }
+
+    private void SwordSkillDamage(Enemy enemy)
+    {
+        _player.status.DoDamage(enemy.GetComponent<CharacterStatus>());
+        //enemy.WasDamaged();
+        enemy.StartCoroutine("FreezeTimeFor", _freezeTimeDuration);
+
+
+        // item effect: this equipment can call shock strike
+        ItemData_Equipment equippedAmulet = Inventory.instance.GetEquipment(EquipmentType.Amulet);
+
+        if(equippedAmulet != null)
+            equippedAmulet.Effect(enemy.transform);
     }
 
     private void SetupTargetsForBounce(Collider2D collision)

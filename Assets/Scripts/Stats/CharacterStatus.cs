@@ -48,7 +48,7 @@ public class CharacterStatus : MonoBehaviour
     public bool isShocked; //减少正确攻击率
     private float _shockedTimer;
     // relate to thunder
-    [SerializeField] private GameObject shockStrikePrefab;
+    [SerializeField] private GameObject thunderStrikePrefab;
     private int _shockDamage;
     
     public int currentHp;
@@ -106,7 +106,7 @@ public class CharacterStatus : MonoBehaviour
             _chilledTimer = ailmentsDuration;
 
             float slowPercentage = .2f;
-            // chill effection
+            //chill
             GetComponent<Entity>().SlowEntityBy(slowPercentage, ailmentsDuration);
             _fx.ChillFxFor(ailmentsDuration);
         }
@@ -140,7 +140,7 @@ public class CharacterStatus : MonoBehaviour
         // to find the closest enemy
         foreach (var hit in colliders)
         {
-            if ((hit.GetComponent<Enemy>() != null && Vector2.Distance(transform.position, hit.transform.position)>1))
+            if ((hit.GetComponent<Enemy>() != null) && Vector2.Distance(transform.position, hit.transform.position)>1)
             {
                 float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
                 if (distanceToEnemy < closestDistance)
@@ -159,7 +159,7 @@ public class CharacterStatus : MonoBehaviour
 
         if(closestEnemy != null)
         {
-            GameObject newShockStrike = Instantiate(shockStrikePrefab, transform.position, Quaternion.identity);
+            GameObject newShockStrike = Instantiate(thunderStrikePrefab, transform.position, Quaternion.identity);
 
             newShockStrike.GetComponent<Thunder_Controller>().Setup(_shockDamage, closestEnemy.GetComponent<CharacterStatus>());
         }

@@ -60,5 +60,8 @@
     "dotnet.preferCSharpExtension": true,
     "cSpell.enabledFileTypes": {
         "csharp": true
-    }
+    },
+    "cSpell.ignoreWords": [
+        "Behaviour"
+    ]
 }

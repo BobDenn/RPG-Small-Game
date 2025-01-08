@@ -236,6 +236,10 @@ PrefabInstance:
       propertyPath: level
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 261104810683325092, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
+      propertyPath: thunderStrikePrefab
+      value: 
+      objectReference: {fileID: 6781130749201083021, guid: a3c7a0edece178b45ba50ae2df4ba896, type: 3}
     - target: {fileID: 1202579706729981912, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: m_Name
       value: Enemy_Skeleton (1)
@@ -505,7 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  swordType: 1
+  swordType: 3
   amountOfBounce: 4
   bounceGravity: 0.5
   bounceSpeed: 20
@@ -517,7 +521,7 @@ MonoBehaviour:
   spinGravity: 1
   swordPrefab: {fileID: 7615105612757292131, guid: d0eac174bf7ebe8488d60d22ab845f31, type: 3}
   launchForce: {x: 35, y: 25}
-  swordGravity: 3
+  swordGravity: 2
   freezeTimeDuration: 1
   returnSpeed: 15
   numberOfDots: 20
@@ -564,9 +568,9 @@ MonoBehaviour:
   canMoveToEnemy: 1
   moveSpeed: 5
   canUseMultiStacks: 1
-  amountOfStacks: 3
+  amountOfStacks: 4
   multiStackCooldown: 4
-  useTimeWindow: 2
+  useTimeWindow: 1
   crystalLeft: []
 --- !u!1 &121449743
 GameObject:
@@ -2183,6 +2187,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e0acb80593591c4469c5f8ea76b10df0, type: 2}
   - {fileID: 11400000, guid: bc9a973a57b5f5848bdc17d00bc5ec4a, type: 2}
   - {fileID: 11400000, guid: f3401f4b2f02df8438c1e3af5768e072, type: 2}
+  - {fileID: 11400000, guid: 571fc15aaf1637043a5d9abb46f2e5ad, type: 2}
   inventory:
   - data: {fileID: 11400000, guid: ad0d3cf29369bbd48a8d40e399426644, type: 2}
     stackSize: 1
@@ -3158,7 +3163,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 75, y: -75}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1360837998
@@ -3451,7 +3456,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   damage:
-    baseValue: 12
+    baseValue: 24
     modifiers: 
   critChance:
     baseValue: 0
@@ -3475,16 +3480,16 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   iceDamage:
-    baseValue: 1
+    baseValue: 0
     modifiers: 
   lightningDamage:
-    baseValue: 0
+    baseValue: 5
     modifiers: 
   ailmentsDuration: 4
   isIgnited: 0
   isChilled: 0
   isShocked: 0
-  shockStrikePrefab: {fileID: 6781130749201083021, guid: a3c7a0edece178b45ba50ae2df4ba896, type: 3}
+  thunderStrikePrefab: {fileID: 6781130749201083021, guid: a3c7a0edece178b45ba50ae2df4ba896, type: 3}
   currentHp: 0
 --- !u!114 &1376143280
 MonoBehaviour:
@@ -8103,6 +8108,10 @@ PrefabInstance:
       propertyPath: level
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 261104810683325092, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
+      propertyPath: thunderStrikePrefab
+      value: 
+      objectReference: {fileID: 6781130749201083021, guid: a3c7a0edece178b45ba50ae2df4ba896, type: 3}
     - target: {fileID: 1202579706729981912, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: m_Name
       value: Enemy_Skeleton
