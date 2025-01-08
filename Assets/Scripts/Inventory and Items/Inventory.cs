@@ -29,7 +29,7 @@ public class Inventory : MonoBehaviour
     private UI_ItemSlot[] stashItemSlots;
     private UI_EquipmentSlot[] equipmentSlots;
 
-    [Header("Items cooldown")]
+    [Header("Items cool down")]
     private float lastTimeUseFlask;
 
     private void Awake()
