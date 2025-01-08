@@ -23,7 +23,9 @@ public class PlayerAnimationController : MonoBehaviour
             {
                 // calculate value
                 EnemyStatus _target = hit.GetComponent<EnemyStatus>();
-                player.status.DoDamage(_target);
+                
+                if(_target != null)
+                    player.status.DoDamage(_target);
                 
                 //inventory get weapon call item effect
                 Inventory.instance.GetEquipment(EquipmentType.Weapon)?.Effect(_target.transform);
