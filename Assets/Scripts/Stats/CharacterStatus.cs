@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 
 /// <summary>
@@ -85,6 +86,19 @@ public class CharacterStatus : MonoBehaviour
             ApplyIgniteDamage();
     }
 
+    public virtual void IncreaseStatusBy(int _modifer, float _duration, Status _statusToModify)
+    {
+        // start corotoutine for status increase
+        StartCoroutine(StatusModCoroutine(_modifer, _duration, _statusToModify));
+    }
+
+    private IEnumerator StatusModCoroutine(int _modifer, float _duration, Status _statusToModify)
+    {
+        _statusToModify.AddModifier(_modifer);// plus
+        yield return new WaitForSeconds(_duration);// update
+        _statusToModify.RemoveModifier(_modifer);// remove
+    }
+    
     public virtual void IncreaseHealthBy(int _amount)
     {
         currentHp += _amount;
@@ -224,7 +238,7 @@ public class CharacterStatus : MonoBehaviour
         //Debug.Log(totalDamage);
         
         //if you want you can enable this or if inventory current weapon has fire effect
-        //DoMagicDamage(_targetStatus);
+        DoMagicalDamage(_targetStatus);// remove if you don't want to apply magic hit on primary attack
     }
 
     #endregion
