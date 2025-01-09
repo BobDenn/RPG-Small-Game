@@ -29,4 +29,14 @@ public class PlayerStatus : CharacterStatus
         // 玩家掉落物品
         GetComponent<PlayerItemDrop>()?.GenerateDrop();
     }
+
+    protected override void DecreaseHpBy(int damage)
+    {
+        base.DecreaseHpBy(damage);
+
+        ItemData_Equipment currentArmor = Inventory.instance.GetEquipment(EquipmentType.Armor);
+        if(currentArmor != null)
+            currentArmor.Effect(player.transform);
+        
+    }
 }
