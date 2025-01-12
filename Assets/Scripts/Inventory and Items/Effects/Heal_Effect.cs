@@ -12,10 +12,10 @@ public class Heal_Effect : ItemEffect
     public override void ExecuteEffect(Transform enemyPosition)
     {
         // player stats
-        PlayerStatus playerStatus = PlayerManager.instance.player.GetComponent<PlayerStatus>();
+        PlayerStats playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
         // how much to heal
-        int healAmount = Mathf.RoundToInt(playerStatus.GetMaxHpValue() * healPercent);
+        int healAmount = Mathf.RoundToInt(playerStats.GetMaxHpValue() * healPercent);
         // heal
-        playerStatus.IncreaseHealthBy(healAmount);
+        playerStats.IncreaseHealthBy(healAmount);
     }
 }

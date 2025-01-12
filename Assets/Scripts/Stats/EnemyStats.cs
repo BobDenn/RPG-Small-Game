@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStatus : CharacterStatus
+public class EnemyStats : CharacterStats
 {
     private Enemy enemy;
     private ItemDrop myDropSystem;
@@ -43,13 +43,13 @@ public class EnemyStatus : CharacterStatus
         Modify(lightningDamage);
     }
 
-    private void Modify(Status _status)
+    private void Modify(Stats stats)
     {
         for (int i = 1; i < level; i++)
         {
-            float modifier = _status.GetValue() * percentageModifier;
+            float modifier = stats.GetValue() * percentageModifier;
             
-            _status.AddModifier(Mathf.RoundToInt(modifier));
+            stats.AddModifier(Mathf.RoundToInt(modifier));
         }
     }
 

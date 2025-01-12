@@ -22,10 +22,10 @@ public class PlayerAnimationController : MonoBehaviour
             if (hit.GetComponent<Enemy>() != null)
             {
                 // calculate value
-                EnemyStatus _target = hit.GetComponent<EnemyStatus>();
+                EnemyStats _target = hit.GetComponent<EnemyStats>();
                 
                 if(_target != null)
-                    player.status.DoDamage(_target);
+                    player.stats.DoDamage(_target);
                 
                 //inventory get weapon call item effect
                 Inventory.instance.GetEquipment(EquipmentType.Weapon)?.Effect(_target.transform);

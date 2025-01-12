@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Thunder_Controller : MonoBehaviour
 {
-    [SerializeField] private CharacterStatus targetStatus;
+    [FormerlySerializedAs("targetStatus")] [SerializeField] private CharacterStats targetStats;
     [SerializeField] private float speed;
 
     private int damage;
@@ -18,26 +19,26 @@ public class Thunder_Controller : MonoBehaviour
         anim =  GetComponentInChildren<Animator>();
     }
 
-    public void Setup(int _damage, CharacterStatus _targetStatus)
+    public void Setup(int _damage, CharacterStats targetStats)
     {
         damage = _damage;
-        targetStatus = _targetStatus;
+        this.targetStats = targetStats;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!targetStatus)
+        if(!targetStats)
             return;
 
         if(triggered)
             return;
 
-        transform.position = Vector2.MoveTowards(transform.position, targetStatus.transform.position, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, targetStats.transform.position, speed * Time.deltaTime);
         // 右转？
-        transform.right = transform.position - targetStatus.transform.position;
+        transform.right = transform.position - targetStats.transform.position;
 
-        if(Vector2.Distance(transform.position, targetStatus.transform.position) < .1f)
+        if(Vector2.Distance(transform.position, targetStats.transform.position) < .1f)
         {
             anim.transform.localPosition = new Vector3(0, .5f);
                                         // ?
@@ -55,8 +56,8 @@ public class Thunder_Controller : MonoBehaviour
 
     private void DamageAndSelfDestroy()
     {
-        targetStatus.ApplyShock(true);
-        targetStatus.TakeDamage(damage);
+        targetStats.ApplyShock(true);
+        targetStats.TakeDamage(damage);
         Destroy(gameObject, .4f);
     }
 

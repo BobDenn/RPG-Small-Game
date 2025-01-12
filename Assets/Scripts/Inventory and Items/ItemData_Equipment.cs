@@ -57,48 +57,48 @@ public class ItemData_Equipment : ItemData
     
     public void AddModifier()
     {
-        PlayerStatus playerStatus = PlayerManager.instance.player.GetComponent<PlayerStatus>();
+        PlayerStats playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
         
-        playerStatus.vitality.AddModifier(vitality);
-        playerStatus.strength.AddModifier(strength);
-        playerStatus.agility.AddModifier(agility);
-        playerStatus.intelligence.AddModifier(intelligence);
+        playerStats.vitality.AddModifier(vitality);
+        playerStats.strength.AddModifier(strength);
+        playerStats.agility.AddModifier(agility);
+        playerStats.intelligence.AddModifier(intelligence);
         
-        playerStatus.damage.AddModifier(damage);
-        playerStatus.critChance.AddModifier(critChance);
-        playerStatus.critPower.AddModifier(critPower);
+        playerStats.damage.AddModifier(damage);
+        playerStats.critChance.AddModifier(critChance);
+        playerStats.critPower.AddModifier(critPower);
         
-        playerStatus.maxHp.AddModifier(maxHp);
-        playerStatus.armour.AddModifier(armour);
-        playerStatus.evasion.AddModifier(evasion);
-        playerStatus.magicResistance.AddModifier(magicResistance);
+        playerStats.maxHp.AddModifier(maxHp);
+        playerStats.armour.AddModifier(armour);
+        playerStats.evasion.AddModifier(evasion);
+        playerStats.magicResistance.AddModifier(magicResistance);
         
-        playerStatus.fireDamage.AddModifier(fireDamage);
-        playerStatus.iceDamage.AddModifier(iceDamage);
-        playerStatus.lightningDamage.AddModifier(lightningDamage);
+        playerStats.fireDamage.AddModifier(fireDamage);
+        playerStats.iceDamage.AddModifier(iceDamage);
+        playerStats.lightningDamage.AddModifier(lightningDamage);
         
     }
 
     public void RemoveModifier()
     {
-        PlayerStatus playerStatus = PlayerManager.instance.player.GetComponent<PlayerStatus>();
+        PlayerStats playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
         
-        playerStatus.vitality.RemoveModifier(vitality);
-        playerStatus.strength.RemoveModifier(strength);
-        playerStatus.agility.RemoveModifier(agility);
-        playerStatus.intelligence.RemoveModifier(intelligence);
+        playerStats.vitality.RemoveModifier(vitality);
+        playerStats.strength.RemoveModifier(strength);
+        playerStats.agility.RemoveModifier(agility);
+        playerStats.intelligence.RemoveModifier(intelligence);
         
-        playerStatus.damage.RemoveModifier(damage);
-        playerStatus.critChance.RemoveModifier(critChance);
-        playerStatus.critPower.RemoveModifier(critPower);
+        playerStats.damage.RemoveModifier(damage);
+        playerStats.critChance.RemoveModifier(critChance);
+        playerStats.critPower.RemoveModifier(critPower);
         
-        playerStatus.maxHp.RemoveModifier(maxHp);
-        playerStatus.armour.RemoveModifier(armour);
-        playerStatus.evasion.RemoveModifier(evasion);
-        playerStatus.magicResistance.RemoveModifier(magicResistance);
+        playerStats.maxHp.RemoveModifier(maxHp);
+        playerStats.armour.RemoveModifier(armour);
+        playerStats.evasion.RemoveModifier(evasion);
+        playerStats.magicResistance.RemoveModifier(magicResistance);
         
-        playerStatus.fireDamage.RemoveModifier(fireDamage);
-        playerStatus.iceDamage.RemoveModifier(iceDamage);
-        playerStatus.lightningDamage.RemoveModifier(lightningDamage);
+        playerStats.fireDamage.RemoveModifier(fireDamage);
+        playerStats.iceDamage.RemoveModifier(iceDamage);
+        playerStats.lightningDamage.RemoveModifier(lightningDamage);
     }
 }

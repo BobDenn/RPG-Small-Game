@@ -4,7 +4,7 @@ using UnityEngine;
 
 [System.Serializable]
 
-public class Status
+public class Stats
 {
     [SerializeField] private int baseValue;
 

@@ -20,8 +20,8 @@ public class SkeletonAttackAnimationController : MonoBehaviour
             if (hit.GetComponent<Player>() != null)
             {
                 //hit.GetComponent<Player>().WasDamaged();
-                PlayerStatus target = hit.GetComponent<PlayerStatus>();
-                enemy.status.DoDamage(target);
+                PlayerStats target = hit.GetComponent<PlayerStats>();
+                enemy.stats.DoDamage(target);
             }
         }
     }

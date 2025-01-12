@@ -2,37 +2,51 @@ using UnityEngine;
 using System;
 using System.Collections;
 
+public enum StatsType
+{
+    Strength,
+    Agility,
+    Intelligence,
+    Vitality,
+    Damage,
+    CritChance,
+    CritPower,
+    Health,
+    Armor,
+    Evasion,
+    MagicRes,
+    FireDamage,
+    IceDamage,
+    LightingDamage
+}
 
-/// <summary>
-/// basic value of character and attack activities
-/// </summary>
-public class CharacterStatus : MonoBehaviour
+public class CharacterStats : MonoBehaviour
 {
     #region Variables
     private EntityFX _fx;
 
     [Header("Major status")]
-    public Status vitality; // 生命力 每 1点 增加 10 hp
-    public Status strength; // 力量 每 1点增加 1点 damage和 1%的 critPower
-    public Status agility;  // 敏捷 每 1点增加 1%的 evasion和 critChance
-    public Status intelligence; // 智力 每 1点增加 1点魔法伤害和 1点魔法抗性
+    public Stats vitality; // 生命力 每 1点 增加 10 hp
+    public Stats strength; // 力量 每 1点增加 1点 damage和 1%的 critPower
+    public Stats agility;  // 敏捷 每 1点增加 1%的 evasion和 critChance
+    public Stats intelligence; // 智力 每 1点增加 1点魔法伤害和 1点魔法抗性
 
     [Header("Offensive status")]
-    public Status damage;    // 基础伤害
-    public Status critChance;// 暴击率
-    public Status critPower; // 暴击伤害 default value 150%
+    public Stats damage;    // 基础伤害
+    public Stats critChance;// 暴击率
+    public Stats critPower; // 暴击伤害 default value 150%
 
 
     [Header("Defensive status")]
-    public Status maxHp;   //生命值
-    public Status armour;  //护甲
-    public Status evasion; //闪避
-    public Status magicResistance; // 魔法抗性
+    public Stats maxHp;   //生命值
+    public Stats armour;  //护甲
+    public Stats evasion; //闪避
+    public Stats magicResistance; // 魔法抗性
 
     [Header("Magic status")]
-    public Status fireDamage;
-    public Status iceDamage;
-    public Status lightningDamage;
+    public Stats fireDamage;
+    public Stats iceDamage;
+    public Stats lightningDamage;
 
     [Header("Ailments status")]
     // 负面效果持续时间 4s
@@ -86,17 +100,17 @@ public class CharacterStatus : MonoBehaviour
             ApplyIgniteDamage();
     }
 
-    public virtual void IncreaseStatusBy(int _modifer, float _duration, Status _statusToModify)
+    public virtual void IncreaseStatusBy(int _modifer, float _duration, Stats statsToModify)
     {
         // start corotoutine for status increase
-        StartCoroutine(StatusModCoroutine(_modifer, _duration, _statusToModify));
+        StartCoroutine(StatusModCoroutine(_modifer, _duration, statsToModify));
     }
 
-    private IEnumerator StatusModCoroutine(int _modifer, float _duration, Status _statusToModify)
+    private IEnumerator StatusModCoroutine(int _modifer, float _duration, Stats statsToModify)
     {
-        _statusToModify.AddModifier(_modifer);// plus
+        statsToModify.AddModifier(_modifer);// plus
         yield return new WaitForSeconds(_duration);// update
-        _statusToModify.RemoveModifier(_modifer);// remove
+        statsToModify.RemoveModifier(_modifer);// remove
     }
     
     public virtual void IncreaseHealthBy(int _amount)
@@ -198,7 +212,7 @@ public class CharacterStatus : MonoBehaviour
         {
             GameObject newShockStrike = Instantiate(thunderStrikePrefab, transform.position, Quaternion.identity);
 
-            newShockStrike.GetComponent<Thunder_Controller>().Setup(_shockDamage, closestEnemy.GetComponent<CharacterStatus>());
+            newShockStrike.GetComponent<Thunder_Controller>().Setup(_shockDamage, closestEnemy.GetComponent<CharacterStats>());
         }
     }
 
@@ -219,9 +233,9 @@ public class CharacterStatus : MonoBehaviour
     }
 
     // [damage] 攻击别人
-    public virtual void DoDamage(CharacterStatus _targetStatus)
+    public virtual void DoDamage(CharacterStats targetStats)
     {
-        if(TargetCanAvoidAttack(_targetStatus))
+        if(TargetCanAvoidAttack(targetStats))
             return;
         
         // 总伤害
@@ -233,12 +247,12 @@ public class CharacterStatus : MonoBehaviour
             //Debug.Log("Total Crit Damage is " + totalDamage);
         }
         // 护甲衰减
-        totalDamage = CheckTargetArmour(_targetStatus, totalDamage);
-        _targetStatus.TakeDamage(totalDamage);
+        totalDamage = CheckTargetArmour(targetStats, totalDamage);
+        targetStats.TakeDamage(totalDamage);
         //Debug.Log(totalDamage);
         
         //if you want you can enable this or if inventory current weapon has fire effect
-        DoMagicalDamage(_targetStatus);// remove if you don't want to apply magic hit on primary attack
+        DoMagicalDamage(targetStats);// remove if you don't want to apply magic hit on primary attack
     }
 
     #endregion
@@ -272,7 +286,7 @@ public class CharacterStatus : MonoBehaviour
         }
     }
 
-    public virtual void DoMagicalDamage(CharacterStatus _targetStatus)
+    public virtual void DoMagicalDamage(CharacterStats targetStats)
     {
         int _fireDamage = fireDamage.GetValue();
         int _iceDamage = iceDamage.GetValue();
@@ -280,19 +294,19 @@ public class CharacterStatus : MonoBehaviour
 
         int totalMagicDamage = _fireDamage + _iceDamage + _lightningDamage + intelligence.GetValue();
 
-        totalMagicDamage = CheckTargetMagicResistance(_targetStatus, totalMagicDamage);
+        totalMagicDamage = CheckTargetMagicResistance(targetStats, totalMagicDamage);
 
-        _targetStatus.TakeDamage(totalMagicDamage);
+        targetStats.TakeDamage(totalMagicDamage);
         //Debug.Log("totalMagicDamage is" + totalMagicDamage);//25+26+27-20 = 58
         // 异常处理
         if(Mathf.Max(_fireDamage, _iceDamage, _lightningDamage) <= 0)
             return;
 
-        AttemptyToApplyAilments(_targetStatus, _fireDamage, _iceDamage, _lightningDamage);
+        AttemptyToApplyAilments(targetStats, _fireDamage, _iceDamage, _lightningDamage);
         
     }
 
-    private void AttemptyToApplyAilments(CharacterStatus _targetStatus, int _fireDamage, int _iceDamage,
+    private void AttemptyToApplyAilments(CharacterStats targetStats, int _fireDamage, int _iceDamage,
         int _lightningDamage)
     {
         bool canApplyIgnite = _fireDamage > _iceDamage && _fireDamage > _lightningDamage;
@@ -304,29 +318,29 @@ public class CharacterStatus : MonoBehaviour
             if(UnityEngine.Random.value < 0.3f && _fireDamage > 0)
             {
                 canApplyIgnite = true;
-                _targetStatus.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+                targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
                 return;
             }
             if(UnityEngine.Random.value < 0.3f && _iceDamage > 0)
             {
                 canApplyChill = true;
-                _targetStatus.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+                targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
                 return;
             }
             if(UnityEngine.Random.value < 0.3f && _lightningDamage > 0)
             {
                 canApplyShock = true;
-                _targetStatus.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock); 
+                targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock); 
                 return;
             }
         }
         if(canApplyIgnite)
-            _targetStatus.SetupIgniteDamage(Mathf.RoundToInt(_fireDamage * .2f));
+            targetStats.SetupIgniteDamage(Mathf.RoundToInt(_fireDamage * .2f));
 
         if(canApplyShock)
-            _targetStatus.SetupShockStrikeDamage(Mathf.RoundToInt(_lightningDamage * .1f));
+            targetStats.SetupShockStrikeDamage(Mathf.RoundToInt(_lightningDamage * .1f));
 
-        _targetStatus.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
+        targetStats.ApplyAilments(canApplyIgnite, canApplyChill, canApplyShock);
     }
     
     #endregion
@@ -358,9 +372,9 @@ public class CharacterStatus : MonoBehaviour
     #endregion
 
     #region check defense 
-    private bool TargetCanAvoidAttack(CharacterStatus _targetStatus)
+    private bool TargetCanAvoidAttack(CharacterStats targetStats)
     {   // 满值 100
-        int totalEvasion = _targetStatus.evasion.GetValue() + _targetStatus.agility.GetValue();
+        int totalEvasion = targetStats.evasion.GetValue() + targetStats.agility.GetValue();
 
         if(isShocked)
             totalEvasion += 20;
@@ -375,23 +389,23 @@ public class CharacterStatus : MonoBehaviour
         return false;
     }
 
-    private int CheckTargetArmour(CharacterStatus _targetStatus, int totalDamage)
+    private int CheckTargetArmour(CharacterStats targetStats, int totalDamage)
     {
 
-        if(_targetStatus.isChilled)
-            totalDamage -= Mathf.RoundToInt(_targetStatus.armour.GetValue() * 0.8f);
+        if(targetStats.isChilled)
+            totalDamage -= Mathf.RoundToInt(targetStats.armour.GetValue() * 0.8f);
         else
-            totalDamage -= _targetStatus.armour.GetValue();
+            totalDamage -= targetStats.armour.GetValue();
 
         // 护甲会使总伤害衰减，直接减护甲值 不是百分比
         // 防止护甲为负数，以免总伤会出现治疗目标的情况
         totalDamage = Math.Clamp(totalDamage, 0, int.MaxValue);
         return totalDamage;
     }
-    private int CheckTargetMagicResistance(CharacterStatus _targetStatus, int totalMagicDamage)
+    private int CheckTargetMagicResistance(CharacterStats targetStats, int totalMagicDamage)
     {
         // 由智力提供的魔抗是 1倍
-        totalMagicDamage -= _targetStatus.magicResistance.GetValue() + (_targetStatus.intelligence.GetValue());
+        totalMagicDamage -= targetStats.magicResistance.GetValue() + (targetStats.intelligence.GetValue());
         totalMagicDamage = Mathf.Clamp(totalMagicDamage, 0, int.MaxValue);
         return totalMagicDamage;
     }
@@ -408,4 +422,24 @@ public class CharacterStatus : MonoBehaviour
         return maxHp.GetValue() + vitality.GetValue() * 10;
     }
 
+    public Stats StatusOfType(StatsType statsType)
+    {
+        if (statsType == StatsType.Strength) return strength;
+        else if (statsType == StatsType.Agility) return agility;
+        else if (statsType == StatsType.Intelligence) return intelligence;
+        else if (statsType == StatsType.Vitality) return vitality;
+        else if (statsType == StatsType.Damage) return damage;
+        else if (statsType == StatsType.CritChance) return critChance;
+        else if (statsType == StatsType.CritPower) return critPower;
+        else if (statsType == StatsType.Health) return maxHp;
+        else if (statsType == StatsType.Armor) return armour;
+        else if (statsType == StatsType.Evasion) return evasion;
+        else if (statsType == StatsType.MagicRes) return magicResistance;
+        else if (statsType == StatsType.Evasion) return evasion;
+        else if (statsType == StatsType.FireDamage) return fireDamage;
+        else if (statsType == StatsType.IceDamage) return iceDamage;
+        else if (statsType == StatsType.LightingDamage) return lightningDamage;
+        
+        return null;
+    }
 }

@@ -76,7 +76,7 @@ public class Clone_Skill_Controller : MonoBehaviour
             {
                 // player damages
                 //hit.GetComponent<Enemy>().WasDamaged();
-                player.status.DoDamage(hit.GetComponent<CharacterStatus>());
+                player.stats.DoDamage(hit.GetComponent<CharacterStats>());
                 
                 if(canDuplicateClone)
                 {

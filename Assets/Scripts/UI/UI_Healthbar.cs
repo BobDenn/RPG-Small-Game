@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UI_Healthbar : MonoBehaviour
 {
     private Entity _entity;
-    private CharacterStatus _myStatus;
+    private CharacterStats _myStats;
     private RectTransform _myTransform;
     private Slider _slider;
 
@@ -15,10 +15,10 @@ public class UI_Healthbar : MonoBehaviour
         _myTransform = GetComponent<RectTransform>();
         _entity = GetComponentInParent<Entity>();
         _slider = GetComponentInChildren<Slider>();
-        _myStatus = GetComponentInParent<CharacterStatus>();
+        _myStats = GetComponentInParent<CharacterStats>();
 
         _entity.OnFlipped += FlipUI;
-        _myStatus.OnHpChanged += UpdateHpUI;
+        _myStats.OnHpChanged += UpdateHpUI;
 
         UpdateHpUI();
     }
@@ -31,8 +31,8 @@ public class UI_Healthbar : MonoBehaviour
 // Hp bar is same as HpValue
     private void UpdateHpUI()
     {
-        _slider.maxValue =  _myStatus.GetMaxHpValue();
-        _slider.value    = _myStatus.currentHp;
+        _slider.maxValue =  _myStats.GetMaxHpValue();
+        _slider.value    = _myStats.currentHp;
     }
 
     private void FlipUI() => _myTransform.Rotate(0, 180, 0);
@@ -41,7 +41,7 @@ public class UI_Healthbar : MonoBehaviour
     private void OnDisable() 
     {
         _entity.OnFlipped -= FlipUI;
-        _myStatus.OnHpChanged -= UpdateHpUI;
+        _myStats.OnHpChanged -= UpdateHpUI;
     }
     
     

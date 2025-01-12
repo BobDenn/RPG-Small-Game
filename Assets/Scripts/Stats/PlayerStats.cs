@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStatus : CharacterStatus
+public class PlayerStats : CharacterStats
 {
 
     private Player player;

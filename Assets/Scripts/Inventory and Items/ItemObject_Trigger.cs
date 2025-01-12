@@ -12,7 +12,7 @@ public class ItemObject_Trigger : MonoBehaviour
         // Once touched items, then it disappeared
         if (collision.GetComponent<Player>() != null)
         {
-            if(collision.GetComponent<CharacterStatus>().IsDead)
+            if(collision.GetComponent<CharacterStats>().IsDead)
                 return;
             
             

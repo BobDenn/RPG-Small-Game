@@ -11,10 +11,10 @@ public class FreezeEnemies_Effect : ItemEffect
 
     public override void ExecuteEffect(Transform _transform)
     {
-        PlayerStatus playerStatus = PlayerManager.instance.player.GetComponent<PlayerStatus>();
+        PlayerStats playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
         
         //only turn on if player's HP is below 10%
-        if (playerStatus.currentHp > playerStatus.GetMaxHpValue() * 0.5f)
+        if (playerStats.currentHp > playerStats.GetMaxHpValue() * 0.5f)
             return;
         
         if(!Inventory.instance.CanUseArmor())

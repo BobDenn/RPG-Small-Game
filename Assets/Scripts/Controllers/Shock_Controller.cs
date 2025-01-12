@@ -9,10 +9,10 @@ public class Shock_Controller : MonoBehaviour
     {
         if (other.GetComponent<Enemy>() != null)
         {
-            PlayerStatus playerStatus = PlayerManager.instance.player.GetComponent<PlayerStatus>();
-            EnemyStatus target = other.GetComponent<EnemyStatus>();
+            PlayerStats playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
+            EnemyStats target = other.GetComponent<EnemyStats>();
             
-            playerStatus.DoMagicalDamage(target);
+            playerStats.DoMagicalDamage(target);
         }
     }
 }
