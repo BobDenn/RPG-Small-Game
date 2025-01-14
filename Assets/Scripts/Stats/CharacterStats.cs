@@ -422,7 +422,7 @@ public class CharacterStats : MonoBehaviour
         return maxHp.GetValue() + vitality.GetValue() * 10;
     }
 
-    public Stats StatusOfType(StatsType statsType)
+    public Stats GetStats(StatsType statsType)
     {
         if (statsType == StatsType.Strength) return strength;
         else if (statsType == StatsType.Agility) return agility;

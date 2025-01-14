@@ -15,7 +15,7 @@ public class Buff_Effect : ItemEffect
     {
         _stats = PlayerManager.instance.player.GetComponent<PlayerStats>();
         
-        _stats.IncreaseStatusBy(buffAmount, buffDuration, _stats.StatusOfType(buffType));
+        _stats.IncreaseStatusBy(buffAmount, buffDuration, _stats.GetStats(buffType));
     }
 
     
