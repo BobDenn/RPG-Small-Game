@@ -12,6 +12,7 @@ public class UI : MonoBehaviour
     
     
     public UI_ItemInfoTip itemInfoTip;
+    public UI_StatInfoTip statInfoTip;
 
     public void Start()
     {
@@ -32,7 +33,7 @@ public class UI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
             SwitchWithKeyTo(skillsUI);
         
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.B))
             SwitchWithKeyTo(craftUI);
     }
 

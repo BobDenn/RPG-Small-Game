@@ -9,7 +9,7 @@ public class UI_ItemInfoTip : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemTypeText;
     [SerializeField] private TextMeshProUGUI itemDescription;
 
-    [SerializeField] private int defaultFontSize = 32;
+    
     
     public void ShowItemInfo(ItemData_Equipment item)
     {
@@ -19,18 +19,12 @@ public class UI_ItemInfoTip : MonoBehaviour
         itemNameText.text = item.itemName;
         itemTypeText.text = item.itemType.ToString();
         itemDescription.text = item.GetDescription();
-
-        if (itemNameText.text.Length > 12)
-            itemNameText.fontSize *= .7f;
-        else
-            itemNameText.fontSize = defaultFontSize;
         
         gameObject.SetActive(true);
     }
     
     public void HideItemInfo()
     {
-        itemNameText.fontSize = defaultFontSize;
         gameObject.SetActive(false);
     } 
         

@@ -108,26 +108,26 @@ public class ItemData_Equipment : ItemData
     {
         Sb.Length = 0;
         _descriptionLength = 0;
-        
+        // 说明顺序
+        AddItemDescription(vitality, "Vitality");
         AddItemDescription(strength, "Strength");
         AddItemDescription(agility, "Agility");
         AddItemDescription(intelligence, "Intelligence");
-        AddItemDescription(vitality, "Vitality");
         
         AddItemDescription(damage, "Damage");
-        AddItemDescription(critChance, "Critical Chance");
         AddItemDescription(critPower, "Critical Power");
+        AddItemDescription(critChance, "Critical Chance");
         
         AddItemDescription(maxHp, "Max HP");
-        AddItemDescription(evasion, "Evasion");
         AddItemDescription(armour, "Armor");
         AddItemDescription(magicResistance, "Magic Resistance");
+        AddItemDescription(evasion, "Evasion");
         
         AddItemDescription(fireDamage, "Fire Damage");
         AddItemDescription(iceDamage, "Ice Damage");
         AddItemDescription(lightningDamage, "Lightning Damage");
 
-        if (_descriptionLength < 4)
+        if (_descriptionLength < 3)
         {
             for (int i = 0; i < _descriptionLength; i++)
             {
