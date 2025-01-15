@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Dracula's Sword
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: 
+  itemName: Dracula's Sword
   icon: {fileID: -1944902997, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   dropChance: 5.7
+  itemCoolDown: 0
   equipmentType: 0
   ItemEffects:
   - {fileID: 11400000, guid: 7a218fddc1c16b24ab84fa63f1bc2f29, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Blue Coat
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: 
+  itemName: Blue Coat
   icon: {fileID: 288293509, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   dropChance: 0
   itemCoolDown: 5

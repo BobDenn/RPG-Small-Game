@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IcingFire Swords
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: 
+  itemName: IcingFire Swords
   icon: {fileID: 1398721256, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   dropChance: 12
   itemCoolDown: 0

@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Stolen Sword
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: 
+  itemName: Stolen Sword
   icon: {fileID: 1526008332, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  dropChance: 0
+  itemCoolDown: 0
   equipmentType: 0
+  ItemEffects: []
   vitality: 0
   strength: 3
   agility: 5

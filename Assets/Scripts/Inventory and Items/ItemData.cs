@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 
 public enum ItemType
@@ -15,4 +16,11 @@ public class ItemData : ScriptableObject
     public Sprite icon;
     [Range(0, 101)]
     public float dropChance;
+
+
+    protected StringBuilder Sb = new StringBuilder();
+    public virtual string GetDescription()
+    {
+        return "";
+    }
 }

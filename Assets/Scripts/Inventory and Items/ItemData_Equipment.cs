@@ -45,6 +45,8 @@ public class ItemData_Equipment : ItemData
 
     [Header("Craft requirements")]
     public List<InventoryItem> craftingMaterials;
+    
+    private int _descriptionLength;
 
     public void Effect(Transform enemyPosition)
     {
@@ -101,4 +103,56 @@ public class ItemData_Equipment : ItemData
         playerStats.iceDamage.RemoveModifier(iceDamage);
         playerStats.lightningDamage.RemoveModifier(lightningDamage);
     }
+
+    public override string GetDescription()
+    {
+        Sb.Length = 0;
+        _descriptionLength = 0;
+        
+        AddItemDescription(strength, "Strength");
+        AddItemDescription(agility, "Agility");
+        AddItemDescription(intelligence, "Intelligence");
+        AddItemDescription(vitality, "Vitality");
+        
+        AddItemDescription(damage, "Damage");
+        AddItemDescription(critChance, "Critical Chance");
+        AddItemDescription(critPower, "Critical Power");
+        
+        AddItemDescription(maxHp, "Max HP");
+        AddItemDescription(evasion, "Evasion");
+        AddItemDescription(armour, "Armor");
+        AddItemDescription(magicResistance, "Magic Resistance");
+        
+        AddItemDescription(fireDamage, "Fire Damage");
+        AddItemDescription(iceDamage, "Ice Damage");
+        AddItemDescription(lightningDamage, "Lightning Damage");
+
+        if (_descriptionLength < 4)
+        {
+            for (int i = 0; i < _descriptionLength; i++)
+            {
+                Sb.AppendLine();
+                Sb.Append(" ");
+            }
+        }
+        
+        
+        return Sb.ToString();
+    }
+
+    private void AddItemDescription(int value, string name)
+    {
+        if (value != 0)
+        {
+            if (Sb.Length > 0)
+                Sb.AppendLine();
+
+            if (value > 0)
+                Sb.Append("+ "+ value + "  " + name);
+
+            _descriptionLength++;
+
+        }
+    }
+    
 }
