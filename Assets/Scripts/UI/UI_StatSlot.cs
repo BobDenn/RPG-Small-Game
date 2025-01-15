@@ -31,6 +31,9 @@ public class UI_StatSlot : MonoBehaviour
         if (playerStats != null)
         {
             statValueText.text = playerStats.GetStats(statsType).GetValue().ToString();
+            
+            // 正确获取角色数值 并 展示
+            
         }
     }
 }

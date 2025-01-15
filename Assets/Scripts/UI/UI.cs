@@ -6,16 +6,34 @@ using UnityEngine;
 public class UI : MonoBehaviour
 {
     [SerializeField] private GameObject characterUI;
+    [SerializeField] private GameObject skillsUI;
+    [SerializeField] private GameObject craftUI;
+    [SerializeField] private GameObject optionsUI;
+    
+    
     public UI_ItemInfoTip itemInfoTip;
 
     public void Start()
     {
-        //itemInfoTip = FindObjectOfType<UI_ItemInfoTip>();
+        SwitchTo(null);
+        
+        itemInfoTip.gameObject.SetActive(false);
+        //statInfoTip.gameObject.SetActive(false);
     }
 
     public void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SwitchWithKeyTo(optionsUI);
         
+        if (Input.GetKeyDown(KeyCode.C))
+            SwitchWithKeyTo(characterUI);
+        
+        if (Input.GetKeyDown(KeyCode.K))
+            SwitchWithKeyTo(skillsUI);
+        
+        if (Input.GetKeyDown(KeyCode.V))
+            SwitchWithKeyTo(craftUI);
     }
 
     public void SwitchTo(GameObject _menu)
@@ -27,5 +45,16 @@ public class UI : MonoBehaviour
         
         if(_menu != null)
             _menu.SetActive(true);
+    }
+
+    public void SwitchWithKeyTo(GameObject menu)
+    {
+        if (menu != null && menu.activeSelf)
+        {
+            menu.SetActive(false);
+            return;
+        }
+        
+        SwitchTo(menu);
     }
 }
