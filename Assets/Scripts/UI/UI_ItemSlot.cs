@@ -6,15 +6,15 @@ using UnityEngine.EventSystems;// IPointerDownHandler
 
 public class UI_ItemSlot : MonoBehaviour , IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler // mouseclick interface
 {
-    [SerializeField] private Image itemImage;
-    [SerializeField] private TextMeshProUGUI itemText;
+    [SerializeField] protected Image itemImage;
+    [SerializeField] protected TextMeshProUGUI itemText;
 
     public InventoryItem item;//data(type + name + icon) + stackSize
-    private UI _ui;
+    protected UI UI;
 
-    public void Start()
+    protected virtual void Start()
     {
-        _ui = GetComponentInParent<UI>();
+        UI = GetComponentInParent<UI>();
     }
 
     public void InitSlot(InventoryItem _newItem)
@@ -66,7 +66,7 @@ public class UI_ItemSlot : MonoBehaviour , IPointerDownHandler, IPointerEnterHan
         if (item == null)
             return;
         
-        _ui.itemInfoTip.ShowItemInfo(item.data as ItemData_Equipment);
+        UI.itemInfoTip.ShowItemInfo(item.data as ItemData_Equipment);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -74,6 +74,6 @@ public class UI_ItemSlot : MonoBehaviour , IPointerDownHandler, IPointerEnterHan
         if(item == null)
             return;
         
-        _ui.itemInfoTip.HideItemInfo();
+        UI.itemInfoTip.HideItemInfo();
     }
 }
