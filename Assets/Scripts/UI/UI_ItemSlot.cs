@@ -59,6 +59,8 @@ public class UI_ItemSlot : MonoBehaviour , IPointerDownHandler, IPointerEnterHan
         // only equip equipment
         if(item.data.itemType == ItemType.Equipment)
             Inventory.instance.EquipItem(item.data);
+        
+        UI.itemInfoTip.HideItemInfo();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

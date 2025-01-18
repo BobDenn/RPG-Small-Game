@@ -11,38 +11,41 @@ public class UI_CraftList : MonoBehaviour, IPointerDownHandler
 
     [SerializeField] private List<ItemData_Equipment> craftEquipment;
     [SerializeField] private List<UI_CraftSlot> craftSlots;
-
+    
+    //private bool _isSetup = false;
+    
     private void Start()
     {
-        AssignCraftSlots();
-    }
-
-    private void AssignCraftSlots()
-    {
-        for (int i = 0; i < craftSlotParent.childCount; i++)
-        {
-            craftSlots.Add(craftSlotParent.GetChild(i).GetComponent<UI_CraftSlot>());
-        }
+        transform.parent.GetChild(0).GetComponent<UI_CraftList>().SetupCraftSlot();
+        SetupDefaultCraftWindow();
     }
 
     private void SetupCraftSlot()
     {
-        for (int i = 0; i < craftSlots.Count; i++)
+        for (int i = 0; i < craftSlotParent.childCount; i++)
         {
-            Destroy(craftSlots[i].gameObject);
+            Destroy(craftSlotParent.GetChild(i).gameObject);
         }
-
-        craftSlots = new List<UI_CraftSlot>();
 
         for (int i = 0; i < craftEquipment.Count; i++)
         {
             GameObject newSlot = Instantiate(craftSlotPrefab, craftSlotParent);
             newSlot.GetComponent<UI_CraftSlot>().SetupCraftSlot(craftEquipment[i]);
         }
+        
+        //_isSetup = true;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        SetupCraftSlot();
+        //if(_isSetup == false)
+            SetupCraftSlot();
     }
+
+    public void SetupDefaultCraftWindow()
+    {
+        if(craftEquipment[0] != null)
+                GetComponentInParent<UI>().craftWindow.SetupCraftWindow(craftEquipment[0]);
+    }
+    
 }

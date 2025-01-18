@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99830c2f8fc541f40af009b2e988c298, type: 3}
-  m_Name: IcingFire Swords
+  m_Name: IcingFire Sword
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: IcingFire Swords
+  itemName: IcingFire Sword
   icon: {fileID: 1398721256, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   dropChance: 12
   itemCoolDown: 0
@@ -35,4 +35,8 @@ MonoBehaviour:
   fireDamage: 5
   iceDamage: 7
   lightningDamage: 0
-  craftingMaterials: []
+  craftingMaterials:
+  - data: {fileID: 11400000, guid: e0acb80593591c4469c5f8ea76b10df0, type: 2}
+    stackSize: 2
+  - data: {fileID: 11400000, guid: 2d23af9d534abe24ca9a9ace2998300d, type: 2}
+    stackSize: 2

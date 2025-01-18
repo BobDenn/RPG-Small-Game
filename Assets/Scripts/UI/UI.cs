@@ -13,6 +13,7 @@ public class UI : MonoBehaviour
     
     public UI_ItemInfoTip itemInfoTip;
     public UI_StatInfoTip statInfoTip;
+    public UI_CraftWindow craftWindow;
 
     public void Start()
     {
