@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UI_CraftWindow : MonoBehaviour
 {
+
     [SerializeField] private Image itemIcon;
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemDescription;
