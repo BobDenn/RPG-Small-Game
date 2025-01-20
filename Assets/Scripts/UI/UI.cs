@@ -2,18 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class UI : MonoBehaviour
 {
     [SerializeField] private GameObject characterUI;
-    [SerializeField] private GameObject skillsUI;
     [SerializeField] private GameObject craftUI;
+    [SerializeField] private GameObject skillsUI;
     [SerializeField] private GameObject optionsUI;
     
     
     public UI_ItemInfoTip itemInfoTip;
     public UI_StatInfoTip statInfoTip;
     public UI_CraftWindow craftWindow;
+    public UI_SkillInfoTip skillInfoTip;
 
     public void Start()
     {
