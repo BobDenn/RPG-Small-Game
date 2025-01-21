@@ -2905,8 +2905,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2987,8 +2987,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Time Stop
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: 'When enemy hit by sword, his time stops
+
+'
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1534582651}
@@ -4680,8 +4682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Parry
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: You can parry attack to avoid damage
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked: []
   shouldBeLocked: []
@@ -4698,8 +4700,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5193,8 +5195,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Parry Mirage
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: You create a clone when you successful parry
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1866879388}
@@ -5212,8 +5214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6491,8 +6493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dodge
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: You getting 10% of a evasion.
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked: []
   shouldBeLocked: []
@@ -6509,8 +6511,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -7017,8 +7019,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dash
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: 'You can dash to avoid attacks
+
+    You are invincible in the
+    time of dash'
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked: []
   shouldBeLocked: []
@@ -7035,8 +7040,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -9382,8 +9387,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Multiple Mirage
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: 'Your mirage has 30% of your attack
+
+    Your mirage can spawn
+    another mirage
+
+    [Only one upgrade can be choosen]'
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1077489665}
@@ -9402,8 +9412,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -9676,8 +9686,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Crystal Explode
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: 'Crystal can explode.
+
+    [Only one crystal upgrade can be choosen]'
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1158596759}
@@ -9696,8 +9708,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -10120,8 +10132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Crystal Mirage
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: You create crystal instead of mirage, With all it's qualities
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1077489665}
@@ -10140,8 +10152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -11898,8 +11910,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -11980,8 +11992,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Vulnerability
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: Enemy hit by sword, takes 10% more damage
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1534582651}
@@ -13167,8 +13179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Agressive Mirage
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: Your mirage has 80% of your damage, Your mirage can apply on
+    hit effects
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1398788598}
@@ -13186,8 +13199,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -13980,8 +13993,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dash Clone
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: You leave a mirage when you dash
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 426189804}
@@ -13999,8 +14012,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -14256,8 +14269,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Crystal
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: 'You create magic crystal that does magic damage.
+
+    By click
+    ability again, you can teleport to your crystal'
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked: []
   shouldBeLocked: []
@@ -14274,8 +14290,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -14395,8 +14411,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Crystal Blink
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: 'You leave your mirage instead of you when you blink.
+
+    [Only
+    one crystal upgrade can be choosen]'
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1158596759}
@@ -14415,8 +14434,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -14809,7 +14828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1224446130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15995,8 +16014,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Multiply Destruction
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: 'You can create up to 3 crystals at a time '
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1902259088}
@@ -16014,8 +16033,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -16592,8 +16611,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Mirage
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: 'Your mirage can attack targets
+
+    Your mirage has 30% of your
+    damage'
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked: []
   shouldBeLocked: []
@@ -16610,8 +16632,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -16762,8 +16784,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dodge Mirage
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: You can create mirage on dodge.
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 382653385}
@@ -16781,8 +16803,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -20744,8 +20766,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -20827,7 +20849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Sword Throw
   skillDescription: can throw the sword
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  lockedColor: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
   unlocked: 0
   shouldBeUnlocked: []
   shouldBeLocked:
@@ -22772,8 +22794,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -22855,7 +22877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Bouncy Sword
   skillDescription: 'sword can bounce '
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1534582651}
@@ -23279,8 +23301,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Clone Dash
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: You create mirage at your arrival
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1148221546}
@@ -23298,8 +23320,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -24001,8 +24023,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -24084,7 +24106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Bullet Sword
   skillDescription: can spin the enemy
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1534582651}
@@ -24427,8 +24449,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Plus Hp Parry
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: You restore a bit of health with successfully parry
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 236485206}
@@ -24446,8 +24468,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -24753,8 +24775,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Crtrollered Destruction
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: 'Crystal moves towards the enemy.
+
+    You can no longer telteport
+    to crystal'
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 630537840}
@@ -24772,8 +24797,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -25309,8 +25334,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: BlackHole
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: You trap enemies in a blackhole which allows you to do tons of
+    damage
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1398788598}
@@ -25328,8 +25354,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -26321,8 +26347,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 0.7254902, g: 0.6666667, b: 0.6666667, a: 1}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -26403,8 +26429,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Chain saw sword
-  skillDescription: 
-  lockedColor: {r: 0, g: 0, b: 0, a: 0}
+  skillDescription: 'Sword will spin like a chain saw.
+
+    [Only one sword upgrade
+    can be choose]'
+  lockedColor: {r: 0.7264151, g: 0.66816485, b: 0.66816485, a: 1}
   unlocked: 0
   shouldBeUnlocked:
   - {fileID: 1534582651}

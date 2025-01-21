@@ -56,6 +56,7 @@ public class UI_SkillTreeSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitH
         }
         
         unlocked = true;
+        
         skillImage.color = Color.white;
     }
 
@@ -63,7 +64,7 @@ public class UI_SkillTreeSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitH
     {
         ui.skillInfoTip.ShowSkillInfoTip(skillName, skillDescription);
         
-        Vector2 mousePosition = Input.mousePosition;
+        /*Vector2 mousePosition = Input.mousePosition;
 
         float xOffset = 0;
         float yOffset = 0;
@@ -78,7 +79,7 @@ public class UI_SkillTreeSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitH
         else
             yOffset = 150;
         
-        ui.skillInfoTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);
+        ui.skillInfoTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);*/
 
     }
 
