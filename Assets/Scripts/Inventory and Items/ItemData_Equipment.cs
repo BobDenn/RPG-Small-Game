@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum EquipmentType
 {
@@ -15,9 +16,11 @@ public class ItemData_Equipment : ItemData
     public float itemCoolDown;
     public EquipmentType equipmentType;
 
+    [Header("Unique effect")]
     // make special items have some unique effections
     public ItemEffect[] ItemEffects;
-    
+    [TextArea]
+    public string itemEffectDescription;
     
 
     [Header("Major status")]
@@ -135,7 +138,12 @@ public class ItemData_Equipment : ItemData
                 Sb.Append(" ");
             }
         }
-        
+
+        if (itemEffectDescription.Length > 0)
+        {
+            Sb.AppendLine();
+            Sb.Append(itemEffectDescription);
+        }
         
         return Sb.ToString();
     }
