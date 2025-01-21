@@ -13,7 +13,7 @@ public class Clone_Skill : Skill
     // you can create clone when you start to use dash or dash state is finished
     /*[SerializeField] private bool createCloneOnDashStart;
     [SerializeField] private bool createCloneOnDashOver;*/
-    [SerializeField] private bool canCreateCloneOnCounterAttack;
+    //[SerializeField] private bool canCreateCloneOnCounterAttack;
 
     [Header("Clone Can Duplicate")]
     [SerializeField] private bool canDuplicateClone;
@@ -39,14 +39,14 @@ public class Clone_Skill : Skill
         newClone.GetComponent<Clone_Skill_Controller>().SetupClone(_clonePosition, cloneDuration, canAttack, offset, FindClosestEnemy(newClone.transform), canDuplicateClone, rateToDuplicate, player);
     }
     
-    public void CreateCloneOnCounterAttack(Transform enemyTransform)
+    public void CreateCloneWithDelay(Transform enemyTransform)
     {
-        if (canCreateCloneOnCounterAttack)
-            StartCoroutine(CreateCloneDelay(enemyTransform, new Vector3(1 * player.facingDir, 0f, 0f)));
+        //if (canCreateCloneOnCounterAttack)
+            StartCoroutine(CloneDelayCoroutine(enemyTransform, new Vector3(1 * player.facingDir, 0f, 0f)));
 
     }
 
-    private IEnumerator CreateCloneDelay(Transform transform, Vector3 offset)
+    private IEnumerator CloneDelayCoroutine(Transform transform, Vector3 offset)
     {
         yield return new WaitForSeconds(.5f);
             CreateClone(transform, offset);

@@ -19,7 +19,7 @@ public class Blackhole_Skill : Skill
         return base.CanUseSkill();
     }
 
-    protected override void UseSkill()
+    public override void UseSkill()
     {
         base.UseSkill();
         // create black hole 
