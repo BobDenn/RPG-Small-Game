@@ -8,13 +8,13 @@ public class UI_SkillTreeSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitH
 {
     private UI ui;
     private Image skillImage;
-    
+    [SerializeField] private int skillPrice;
     [SerializeField] private string skillName;
     [TextArea]
     [SerializeField] private string skillDescription;
     [SerializeField] private Color lockedColor;
     
-    public bool unlocked = false;
+    public bool unlocked;
 
     [SerializeField] private UI_SkillTreeSlot[] shouldBeUnlocked;
     [SerializeField] private UI_SkillTreeSlot[] shouldBeLocked;
@@ -25,23 +25,27 @@ public class UI_SkillTreeSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitH
         gameObject.name = "UI_SkillTreeSlot - " + skillName;
     }
 
+    private void Awake()
+    {
+        GetComponent<Button>().onClick.AddListener(() => UnlockSkillSlot());
+    }
+
     private void Start()
     {
         skillImage = GetComponent<Image>();
         ui = GetComponentInParent<UI>();
         skillImage.color = lockedColor;
         
-        GetComponent<Button>().onClick.AddListener(() => UnlockSkillSlot());
     }
 
     public void UnlockSkillSlot()
     {
-        // 应该解锁
+        // 解锁
         foreach (var i in shouldBeUnlocked)
         {
             if (!i.unlocked)
             {
-                Debug.Log("can unlock skill");
+                Debug.Log("can't unlock skill");
                 return;
             }
         }
@@ -56,7 +60,9 @@ public class UI_SkillTreeSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitH
         }
         
         unlocked = true;
-        
+        // once unlocked then minus currency
+        if(PlayerManager.instance.HaveEnoughMoney(skillPrice) == false)
+            return;
         skillImage.color = Color.white;
     }
 
