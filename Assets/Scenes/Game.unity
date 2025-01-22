@@ -2440,11 +2440,11 @@ GameObject:
   - component: {fileID: 105818315}
   - component: {fileID: 105818317}
   - component: {fileID: 105818318}
+  - component: {fileID: 105818323}
+  - component: {fileID: 105818322}
   - component: {fileID: 105818319}
   - component: {fileID: 105818320}
   - component: {fileID: 105818321}
-  - component: {fileID: 105818322}
-  - component: {fileID: 105818323}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -2581,10 +2581,15 @@ MonoBehaviour:
   cooldown: 0
   crystalDuration: 3
   crystalPrefab: {fileID: 2295464848245908377, guid: 6a3329a75212892479a1198d8f6a1ada, type: 3}
+  unlockCrystalButton: {fileID: 1158596759}
+  unlockCloneInsteadButton: {fileID: 1168476669}
   cloneInsteadOfCrystal: 0
+  unlockExplosiveButton: {fileID: 630537840}
   canExplode: 0
+  unlockMovingCrystalButton: {fileID: 1902259088}
   canMoveToEnemy: 0
   moveSpeed: 5
+  unlockMultiStackButton: {fileID: 1371152955}
   canUseMultiStacks: 0
   amountOfStacks: 3
   multiStackCooldown: 4

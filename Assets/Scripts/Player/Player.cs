@@ -97,7 +97,7 @@ public class Player : Entity
         CheckForDashInput();
 
         // crystal skill
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && skill.crystal.crystalUnlocked)
             skill.crystal.CanUseSkill();
 
         // use Flask
