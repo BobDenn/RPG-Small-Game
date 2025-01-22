@@ -2443,8 +2443,8 @@ GameObject:
   - component: {fileID: 105818323}
   - component: {fileID: 105818322}
   - component: {fileID: 105818324}
-  - component: {fileID: 105818319}
   - component: {fileID: 105818320}
+  - component: {fileID: 105818319}
   - component: {fileID: 105818321}
   m_Layer: 0
   m_Name: SkillManager
@@ -2529,20 +2529,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   swordType: 3
+  bounceUnlockButton: {fileID: 1671237413}
   amountOfBounce: 4
   bounceGravity: 0.5
   bounceSpeed: 20
+  pierceUnlockButton: {fileID: 1770848688}
   amountOfPierce: 2
   pierceGravity: 1
+  spinUnlockButton: {fileID: 2075408892}
   hitCooldown: 0.33
   maxTravelDistance: 7
   spinDuration: 2
   spinGravity: 1
+  swordUnlockButton: {fileID: 1534582651}
   swordPrefab: {fileID: 7615105612757292131, guid: d0eac174bf7ebe8488d60d22ab845f31, type: 3}
   launchForce: {x: 35, y: 25}
   swordGravity: 2
   freezeTimeDuration: 1
   returnSpeed: 15
+  timeStopUnlockButton: {fileID: 115857072}
+  vulnerableUnlockButton: {fileID: 840368552}
   numberOfDots: 20
   spaceBetweenDots: 0.07
   dotPrefab: {fileID: 7498656892666710955, guid: d3fa1114caa0af04cb46d42a7baa5c4e, type: 3}

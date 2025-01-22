@@ -223,9 +223,19 @@ public class Sword_Skill_Controller : MonoBehaviour
 
     private void SwordSkillDamage(Enemy enemy)
     {
-        _player.stats.DoDamage(enemy.GetComponent<CharacterStats>());
+        EnemyStats enemyStats = enemy.GetComponent<EnemyStats>();
+        
+        _player.stats.DoDamage(enemyStats);
+
+        if (_player.skill.sword.timeStopUnlocked)
+            enemy.StartCoroutine("FreezeTimeFor", _freezeTimeDuration);
+        
+        if(_player.skill.sword.vulnerableUnlocked)
+            enemyStats.makeVulnerableFor(_freezeTimeDuration);
+        
+        
         //enemy.WasDamaged();
-        enemy.StartCoroutine("FreezeTimeFor", _freezeTimeDuration);
+        //enemy.StartCoroutine("FreezeTimeFor", _freezeTimeDuration);
 
 
         // item effect: this equipment can call shock strike

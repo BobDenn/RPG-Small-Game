@@ -70,6 +70,7 @@ public class CharacterStats : MonoBehaviour
     public int currentHp;
     public Action OnHpChanged;
     public bool IsDead { get; private set; }
+    private bool isVulnerable;
     #endregion
     protected virtual void Start()
     {
@@ -100,9 +101,21 @@ public class CharacterStats : MonoBehaviour
             ApplyIgniteDamage();
     }
 
+    public void makeVulnerableFor(float duration) => StartCoroutine(VulnerableForCoroutine(duration));
+    
+    private IEnumerator VulnerableForCoroutine(float duration)
+    {
+        isVulnerable = true;
+        
+        yield return new WaitForSeconds(duration);
+
+        isVulnerable = false;
+    }
+    
+    
     public virtual void IncreaseStatusBy(int _modifer, float _duration, Stats statsToModify)
     {
-        // start corotoutine for status increase
+        // start coroutine for status increase
         StartCoroutine(StatusModCoroutine(_modifer, _duration, statsToModify));
     }
 
@@ -129,6 +142,10 @@ public class CharacterStats : MonoBehaviour
     // 生命值变化
     protected virtual void DecreaseHpBy(int damage)
     {
+        // 增加伤害
+        if (isVulnerable)
+            damage = Mathf.RoundToInt(damage * 1.1f);
+        
         currentHp -= damage;
 
         if(OnHpChanged != null)
