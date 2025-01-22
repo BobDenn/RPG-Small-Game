@@ -148,12 +148,17 @@ public class Inventory : MonoBehaviour
             stashItemSlots[i].InitSlot(stash[i]);
         }
         
+        UpdateStatsUI();
+    }
+
+    public void UpdateStatsUI()
+    {
         foreach (var i in statsSlot)
         {
             i.UpdateStatValueUI();
         }
     }
-    
+
     public void AddItem(ItemData _item)
     {
         if(_item.itemType == ItemType.Equipment && CanAddItem())

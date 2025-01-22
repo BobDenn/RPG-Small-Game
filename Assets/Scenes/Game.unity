@@ -2442,6 +2442,7 @@ GameObject:
   - component: {fileID: 105818318}
   - component: {fileID: 105818323}
   - component: {fileID: 105818322}
+  - component: {fileID: 105818324}
   - component: {fileID: 105818319}
   - component: {fileID: 105818320}
   - component: {fileID: 105818321}
@@ -2615,6 +2616,22 @@ MonoBehaviour:
   restoreUnlockButton: {fileID: 1866879388}
   parryRestorePercentage: 0.09
   parryMirageUnlockButton: {fileID: 254117453}
+--- !u!114 &105818324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105818312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255af6eb4dda5b6438d0723b894369fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  unlockDodgeButton: {fileID: 382653385}
+  evasionAmount: 5
+  mirageDodgeButton: {fileID: 1415583863}
 --- !u!1 &106643321
 GameObject:
   m_ObjectHideFlags: 0

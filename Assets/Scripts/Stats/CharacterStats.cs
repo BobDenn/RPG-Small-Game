@@ -371,7 +371,13 @@ public class CharacterStats : MonoBehaviour
     }
     #endregion
 
-    #region check defense 
+    #region check defense
+
+    public virtual void OnEvasion()
+    {
+        
+    }
+    
     private bool TargetCanAvoidAttack(CharacterStats targetStats)
     {   // 满值 100
         int totalEvasion = targetStats.evasion.GetValue() + targetStats.agility.GetValue();
@@ -383,6 +389,7 @@ public class CharacterStats : MonoBehaviour
         // .Net 和 Unity中都有Random这个方法，冲突时要加以前缀区分
         if(UnityEngine.Random.Range(0, 101) < totalEvasion)
         {
+            targetStats.OnEvasion();    
             return true;
             //Debug.Log("ATTACK AVOIDED")
         }
