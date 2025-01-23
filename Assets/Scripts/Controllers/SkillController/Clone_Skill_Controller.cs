@@ -9,6 +9,7 @@ public class Clone_Skill_Controller : MonoBehaviour
     private Animator anim;
 
     private float cloneTimer;
+    private float attackMultiplier;
     private Transform closestEnemy;
     private bool canDuplicateClone;
     private int facingDir = 1;
@@ -41,11 +42,12 @@ public class Clone_Skill_Controller : MonoBehaviour
     }
 
     // create a clone of player such as this function's name
-    public void SetupClone(Transform _newTransform, float _cloneDuration, bool _canAttack,Vector3 _offset, Transform _closestEnemy, bool _canDuplicate, float _chanceToDuplicate,Player _player)
+    public void SetupClone(Transform _newTransform, float _cloneDuration, bool _canAttack,Vector3 _offset, Transform _closestEnemy, bool _canDuplicate, float _chanceToDuplicate,Player _player, float _attackMultiplier)
     {
         if (_canAttack)
             anim.SetInteger("AttackNum", Random.Range(1, 4)); // range( [x,y) )
 
+        _attackMultiplier = attackMultiplier;
         player = _player;
 
         transform.position = _newTransform.position + _offset;
@@ -76,7 +78,20 @@ public class Clone_Skill_Controller : MonoBehaviour
             {
                 // player damages
                 //hit.GetComponent<Enemy>().WasDamaged();
-                player.stats.DoDamage(hit.GetComponent<CharacterStats>());
+                //player.stats.DoDamage(hit.GetComponent<CharacterStats>());
+                PlayerStats playerStats = player.GetComponent<PlayerStats>();
+                EnemyStats enemyStats = hit.GetComponent<EnemyStats>();
+                
+                playerStats.CloneDamage(enemyStats, attackMultiplier);
+
+                if (player.skill.clone.canApplyOnHitEffect)
+                {
+                    //Inventory.instance.GetEquipment(EquipmentType.Weapon)?.Effect(hit.transform);
+                    ItemData_Equipment weaponData = Inventory.instance.GetEquipment(EquipmentType.Weapon);
+
+                    if (weaponData != null)
+                        weaponData.Effect(hit.transform);
+                }
                 
                 if(canDuplicateClone)
                 {

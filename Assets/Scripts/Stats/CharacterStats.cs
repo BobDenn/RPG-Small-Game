@@ -363,7 +363,7 @@ public class CharacterStats : MonoBehaviour
     #endregion
     
     #region crit damage
-    private bool CanCrit()
+    protected bool CanCrit()
     {
         int totalCriticalChance = critChance.GetValue() + agility.GetValue();
 
@@ -375,7 +375,7 @@ public class CharacterStats : MonoBehaviour
         return false;
     }
     // 暴击伤害
-    private int CalculateCriticalDamage(int _damage)
+    protected int CalculateCriticalDamage(int _damage)
     {
                             //  150 + 5 = 155%
         float totalCritPower = (critPower.GetValue() + strength.GetValue()) * 0.01f;
@@ -395,7 +395,7 @@ public class CharacterStats : MonoBehaviour
         
     }
     
-    private bool TargetCanAvoidAttack(CharacterStats targetStats)
+    protected bool TargetCanAvoidAttack(CharacterStats targetStats)
     {   // 满值 100
         int totalEvasion = targetStats.evasion.GetValue() + targetStats.agility.GetValue();
 
@@ -413,7 +413,7 @@ public class CharacterStats : MonoBehaviour
         return false;
     }
 
-    private int CheckTargetArmour(CharacterStats targetStats, int totalDamage)
+    protected int CheckTargetArmour(CharacterStats targetStats, int totalDamage)
     {
 
         if(targetStats.isChilled)

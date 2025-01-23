@@ -2511,9 +2511,17 @@ MonoBehaviour:
   cooldown: 2
   clonePrefab: {fileID: 2142452396873493595, guid: 8777c522d91ea1043ad9a9ab4a66364e, type: 3}
   cloneDuration: 2
-  canAttack: 0
+  cloneAttackUnlockButton: {fileID: 1398788598}
+  cloneAttackMultiplier: 0.2
+  cloneCanAttack: 0
+  aggressiveCloneUnlockButton: {fileID: 1077489665}
+  aggressiveCloneAttackMultiplier: 0.8
+  canApplyOnHitEffect: 0
+  duplicateUnlockButton: {fileID: 626048510}
+  duplicateAttackMultiplier: 0.3
   canDuplicateClone: 0
-  rateToDuplicate: 40
+  rateToDuplicate: 99
+  crystalInsteadUnlockButton: {fileID: 700090733}
   crystalInsteadOfClone: 0
 --- !u!114 &105818320
 MonoBehaviour:
@@ -2566,6 +2574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
+  blackHoleUnlockButton: {fileID: 1933579528}
   amountOfAttacks: 4
   cloneCooldown: 0.35
   blackHoleDuration: 4
@@ -16346,7 +16355,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   lightningDamage:
-    baseValue: 5
+    baseValue: 0
     modifiers: 
   ailmentsDuration: 4
   isIgnited: 0
@@ -27321,6 +27330,14 @@ PrefabInstance:
     - target: {fileID: 261104810683325092, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: level
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 261104810683325092, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
+      propertyPath: currentHp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 261104810683325092, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
+      propertyPath: maxHp.baseValue
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 261104810683325092, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: thunderStrikePrefab

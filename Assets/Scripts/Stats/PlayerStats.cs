@@ -43,4 +43,31 @@ public class PlayerStats : CharacterStats
     {
         player.skill.dodge.CreateMirageOnDodge();
     }
+
+    public void CloneDamage(CharacterStats targetStats, float _multiplier)
+    {
+        if(TargetCanAvoidAttack(targetStats))
+            return;
+        
+        // 总伤害
+        int totalDamage = damage.GetValue() + strength.GetValue();
+        
+        // 复制体 增伤
+        if(_multiplier > 0)
+            totalDamage = Mathf.RoundToInt(totalDamage * _multiplier);
+            
+        if(CanCrit())
+        {
+            totalDamage = CalculateCriticalDamage(totalDamage);
+
+            //Debug.Log("Total Crit Damage is " + totalDamage);
+        }
+        // 护甲衰减
+        totalDamage = CheckTargetArmour(targetStats, totalDamage);
+        targetStats.TakeDamage(totalDamage);
+        //Debug.Log(totalDamage);
+        
+        //if you want you can enable this or if inventory current weapon has fire effect
+        DoMagicalDamage(targetStats);
+    }
 }
