@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -13,6 +14,11 @@ public class UI : MonoBehaviour
     public UI_StatInfoTip statInfoTip;
     public UI_CraftWindow craftWindow;
     public UI_SkillInfoTip skillInfoTip;
+
+    private void Awake()
+    {
+        SwitchTo(skillsUI);
+    }
 
     public void Start()
     {
