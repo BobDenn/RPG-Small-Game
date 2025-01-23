@@ -28,7 +28,7 @@ public class UI_Healthbar : MonoBehaviour
         UpdateHpUI();
     }*/
 
-// Hp bar is same as HpValue
+    // Hp bar is same as HpValue
     private void UpdateHpUI()
     {
         _slider.maxValue =  _myStats.GetMaxHpValue();
@@ -43,6 +43,4 @@ public class UI_Healthbar : MonoBehaviour
         _entity.OnFlipped -= FlipUI;
         _myStats.OnHpChanged -= UpdateHpUI;
     }
-    
-    
 }
