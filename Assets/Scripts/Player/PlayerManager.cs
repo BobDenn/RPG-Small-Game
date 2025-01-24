@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
     public Player player;
 
-    public int currency;
+    public int souls;
 
     private void Awake()
     {
@@ -21,12 +22,14 @@ public class PlayerManager : MonoBehaviour
     // money function
     public bool HaveEnoughMoney(int price)
     {
-        if (price > currency)
+        if (price > souls)
         {
             Debug.Log("Not enough money");
             return false;
         }
-        currency -= price;
+        souls -= price;
         return true;
     }
+
+    public int GetSouls() => souls;
 }

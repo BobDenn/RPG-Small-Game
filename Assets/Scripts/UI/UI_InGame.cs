@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +14,9 @@ public class UI_InGame : MonoBehaviour
     [SerializeField] private Image blackHoleImage;
     [SerializeField] private Image flaskImage;
 
+    // record souls
+    [SerializeField] private TextMeshProUGUI currentSouls;
+    
     private SkillManager skills;
     private void Start()
     {
@@ -27,22 +28,24 @@ public class UI_InGame : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        currentSouls.text = PlayerManager.instance.GetSouls().ToString("N0");
+        
+        if(Input.GetKeyDown(KeyCode.LeftShift) && skills.dash.dashUnlocked)
             SetColdDownOf(dashImage);
         
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.Q) && skills.parry.parryUnlocked)
             SetColdDownOf(parryImage);
         
-        if(Input.GetKeyDown(KeyCode.F))
+        if(Input.GetKeyDown(KeyCode.F) && skills.crystal.crystalUnlocked)
             SetColdDownOf(crystalImage);
         
-        if(Input.GetKeyDown(KeyCode.Mouse1))
+        if(Input.GetKeyDown(KeyCode.Mouse1) && skills.sword.swordUnlocked)
             SetColdDownOf(swordImage);
         
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.R) && skills.blackHole.blackHoleUnlocked)
             SetColdDownOf(blackHoleImage);
         
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.Alpha1) && Inventory.instance.GetEquipment(EquipmentType.Flask) != null)
             SetColdDownOf(flaskImage);
         
         CheckColdDownOf(dashImage, skills.dash.cooldown);
