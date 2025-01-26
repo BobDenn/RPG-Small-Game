@@ -70,25 +70,6 @@ public class UI_SkillTreeSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitH
     {
         ui.skillInfoTip.ShowSkillInfoTip(skillName, skillDescription);
         
-        // need to show on the mouse's position
-        /* 
-        Vector2 mousePosition = Input.mousePosition;
-
-        float xOffset = 0;
-        float yOffset = 0;
-
-        if (mousePosition.x > 600)
-            xOffset = -150;
-        else
-            xOffset = 150;
-        
-        if (mousePosition.y > 320)
-            yOffset = -150;
-        else
-            yOffset = 150;
-        
-        ui.skillInfoTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);*/
-
     }
 
     public void OnPointerExit(PointerEventData eventData)

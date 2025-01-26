@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class UI_SkillInfoTip : MonoBehaviour
+public class UI_SkillInfoTip : UI_ToolTips
 {
     [SerializeField] private TextMeshProUGUI _skillName;
     [SerializeField] private TextMeshProUGUI skillText;
@@ -10,6 +10,7 @@ public class UI_SkillInfoTip : MonoBehaviour
     {
         _skillName.text = skillName;
         skillText.text = skillDescription;
+        AdjustPosition();
         gameObject.SetActive(true);
     }
     
