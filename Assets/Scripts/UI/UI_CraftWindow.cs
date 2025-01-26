@@ -43,5 +43,6 @@ public class UI_CraftWindow : MonoBehaviour
         itemDescription.text = data.GetDescription();
         
         craftButton.onClick.AddListener(() => Inventory.instance.CanCraft(data, data.craftingMaterials));
+
     }
 }
