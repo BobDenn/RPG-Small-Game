@@ -25,7 +25,7 @@ public class UI : MonoBehaviour
         SwitchTo(inGameUI);
         
         itemInfoTip.gameObject.SetActive(false);
-        //happy new year/statInfoTip.gameObject.SetActive(false);
+        //happy new year1/statInfoTip.gameObject.SetActive(false);
     }
 
     public void Update()
