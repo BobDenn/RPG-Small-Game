@@ -35,7 +35,6 @@ public class UI_SkillTreeSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitH
         skillImage = GetComponent<Image>();
         ui = GetComponentInParent<UI>();
         skillImage.color = lockedColor;
-        
     }
 
     public void UnlockSkillSlot()
@@ -68,8 +67,7 @@ public class UI_SkillTreeSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        ui.skillInfoTip.ShowSkillInfoTip(skillName, skillDescription);
-        
+        ui.skillInfoTip.ShowSkillInfoTip(skillName, skillDescription, skillPrice);
     }
 
     public void OnPointerExit(PointerEventData eventData)

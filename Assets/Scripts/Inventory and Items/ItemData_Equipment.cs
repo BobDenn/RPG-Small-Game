@@ -19,8 +19,8 @@ public class ItemData_Equipment : ItemData
     [Header("Unique effect")]
     // make special items have some unique effections
     public ItemEffect[] ItemEffects;
-    [TextArea]
-    public string itemEffectDescription;
+    /*[TextArea]
+    public string itemEffectDescription;*/
     
 
     [Header("Major status")]
@@ -130,19 +130,26 @@ public class ItemData_Equipment : ItemData
         AddItemDescription(iceDamage, "Ice Damage");
         AddItemDescription(lightningDamage, "Lightning Damage");
 
+        // 物品描述
+        foreach (var item in ItemEffects)
+        {
+            if (item.itemDescription.Length > 0)
+            {
+                Sb.AppendLine();
+                Sb.Append("Unique: " + item.itemDescription);
+            }
+        }
+        
+        
         if (_descriptionLength < 3)
         {
+            // 如果超过三条 就增加空白行
             for (int i = 0; i < _descriptionLength; i++)
             {
                 Sb.AppendLine();
                 Sb.Append(" ");
+                _descriptionLength++;
             }
-        }
-
-        if (itemEffectDescription.Length > 0)
-        {
-            Sb.AppendLine();
-            Sb.Append(itemEffectDescription);
         }
         
         return Sb.ToString();

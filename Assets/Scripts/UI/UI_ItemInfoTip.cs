@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class UI_ItemInfoTip : MonoBehaviour
+public class UI_ItemInfoTip : UI_ToolTips
 {
     [SerializeField] private TextMeshProUGUI itemNameText;
     [SerializeField] private TextMeshProUGUI itemTypeText;
@@ -19,6 +19,8 @@ public class UI_ItemInfoTip : MonoBehaviour
         itemDescription.text = item.GetDescription();
         
         gameObject.SetActive(true);
+        
+        AdjustPosition();
     }
     
     public void HideItemInfo()
