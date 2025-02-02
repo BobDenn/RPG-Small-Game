@@ -1,11 +1,17 @@
-using Cinemachine;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    private GameData gameData;
     public static SaveManager instance;
 
+    private GameData gameData;
+    private List<ISaveManager> _saveManagers;
+    private FileDataHandler _fileDataHandler;
+
+    [SerializeField] private string fileName;
+    
     private void Awake()
     {
         if(instance != null)
@@ -17,6 +23,9 @@ public class SaveManager : MonoBehaviour
     // load game data
     private void Start()
     {
+        _saveManagers = FindAllSaveManagers();
+        _fileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        
         LoadGame();
     }
 
@@ -27,23 +36,43 @@ public class SaveManager : MonoBehaviour
 
     public void LoadGame()
     {
-        // game data = data from data handler
+        gameData = _fileDataHandler.Load();
 
         if (this.gameData == null)
         {
             Debug.Log("No saved data found!");
             NewGame();
         }
-    }
 
-    public void SaveGame()
-    {
-        // data handler save gameData
-        Debug.Log("Game was saved!");
-    }
+        foreach (ISaveManager manager in _saveManagers)
+        {
+            manager.LoadData(gameData);
+        }
 
+        //Debug.Log("Loaded souls " + gameData.souls);
+    }
+    
     private void OnApplicationQuit()
     {
         SaveGame();
+    }
+    
+    public void SaveGame()
+    {
+        // data handler save gameData
+        foreach (ISaveManager manager in _saveManagers)
+        {
+            manager.SaveData(ref gameData);
+        }
+        _fileDataHandler.Save(gameData);
+        //Debug.Log("Saved souls " + gameData.souls);
+    }
+
+    // need to learn
+    private List<ISaveManager> FindAllSaveManagers()
+    {
+        IEnumerable<ISaveManager> saveManagers = FindObjectsOfType<SaveManager>(true).OfType<ISaveManager>();
+
+        return new List<ISaveManager>(saveManagers);
     }
 }
