@@ -18,16 +18,18 @@ public class SaveManager : MonoBehaviour
             Destroy(instance.gameObject);
         else
             instance = this;
+        
+        //文 件 路 径
+        _fileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        _saveManagers = FindAllSaveManagers();
+        
+        LoadGame();
     }
     
     // load game data
     private void Start()
     {
-                                                //文 件 路 径
-        _fileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-        _saveManagers = FindAllSaveManagers();
         
-        LoadGame();
     }
 
     public void NewGame()

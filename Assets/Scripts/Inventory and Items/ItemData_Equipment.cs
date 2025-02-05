@@ -148,7 +148,7 @@ public class ItemData_Equipment : ItemData
             {
                 Sb.AppendLine();
                 Sb.Append(" ");
-                _descriptionLength++;
+                //_descriptionLength++;
             }
         }
         

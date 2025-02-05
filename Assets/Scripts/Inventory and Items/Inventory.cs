@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour , ISaveManager
 {
     public static Inventory instance;
 
@@ -38,6 +39,11 @@ public class Inventory : MonoBehaviour
     public float flaskCooldown { get; private set; }
     private float armorCooldown;
 
+    [Header("Data Base")]
+    public List<InventoryItem> loadedItems;
+
+    private bool isSaved = false;
+    
     private void Awake()
     {
         if (instance == null)
@@ -68,11 +74,24 @@ public class Inventory : MonoBehaviour
 
     private void AddStartingItems()
     {
+        if (loadedItems.Count > 0)
+        {
+            foreach (var item in loadedItems)
+            {
+                for (int i = 0; i < item.stackSize; i++)
+                {
+                    AddItem(item.data);
+                }
+            }
+            return;
+        }
+        
         for (int i = 0; i < startingEquipment.Count; i++)
         {
             if(startingEquipment[i] != null)
                 AddItem(startingEquipment[i]);
         }
+        
     }
 
     public void EquipItem(ItemData item)
@@ -331,4 +350,48 @@ public class Inventory : MonoBehaviour
         return false;
     }
     #endregion
+
+    public void LoadData(GameData data)
+    {
+
+        //GetItemDataBase();
+        foreach (var pair in data.inventory)
+        {
+            foreach (var item in GetItemDataBase())
+            {
+                if (item != null && item.itemId == pair.Key)
+                {
+                    InventoryItem itemToLoad = new InventoryItem(item);
+                    itemToLoad.stackSize = pair.Value;
+
+                    loadedItems.Add(itemToLoad);
+                }
+            }
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.inventory.Clear();
+
+        foreach (var pair in inventoryDictionary)
+        {
+            data.inventory.Add(pair.Key.itemId, pair.Value.stackSize);
+        }
+    }
+
+    private List<ItemData> GetItemDataBase()
+    {
+        List<ItemData> itemDataBase = new List<ItemData>();
+        String[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Equipments" });
+
+        foreach (var SOname in assetNames)
+        {
+            var SOpath = AssetDatabase.GUIDToAssetPath(SOname);
+            var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOpath);
+            itemDataBase.Add(itemData);
+        }
+        return itemDataBase;
+    }
+    
 }

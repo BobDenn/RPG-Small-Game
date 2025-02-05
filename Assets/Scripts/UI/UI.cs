@@ -39,7 +39,7 @@ public class UI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
             SwitchWithKeyTo(skillsUI);
         
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.P))
             SwitchWithKeyTo(craftUI);
     }
 
