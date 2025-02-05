@@ -23,8 +23,9 @@ public class SaveManager : MonoBehaviour
     // load game data
     private void Start()
     {
-        _saveManagers = FindAllSaveManagers();
+                                                //文 件 路 径
         _fileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        _saveManagers = FindAllSaveManagers();
         
         LoadGame();
     }
@@ -71,7 +72,7 @@ public class SaveManager : MonoBehaviour
     // need to learn
     private List<ISaveManager> FindAllSaveManagers()
     {
-        IEnumerable<ISaveManager> saveManagers = FindObjectsOfType<SaveManager>(true).OfType<ISaveManager>();
+        IEnumerable<ISaveManager> saveManagers = FindObjectsOfType<MonoBehaviour>().OfType<ISaveManager>();
 
         return new List<ISaveManager>(saveManagers);
     }

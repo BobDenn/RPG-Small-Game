@@ -15,7 +15,7 @@ public class FileDataHandler
 
     public void Save(GameData data)
     {
-        string fullPath = Path.Combine(this.dataDirPath, this.dataFileName);
+        string fullPath = Path.Combine(dataDirPath, dataFileName);
 
         try
         {
@@ -37,7 +37,7 @@ public class FileDataHandler
 
     public GameData Load()
     {
-        string fullPath = Path.Combine(this.dataDirPath, this.dataFileName);
+        string fullPath = Path.Combine(dataDirPath, dataFileName);
         GameData loadData = null;
 
         if (File.Exists(fullPath))
@@ -58,7 +58,7 @@ public class FileDataHandler
             }
             catch (Exception e)
             {
-                UnityEngine.Debug.LogError("Error on trying to load data from file: " + fullPath + "\n" + e);
+                Debug.LogError("Error on trying to load data from file: " + fullPath + "\n" + e);
             }
         }
 
