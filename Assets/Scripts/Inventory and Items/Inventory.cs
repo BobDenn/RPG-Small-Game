@@ -41,8 +41,7 @@ public class Inventory : MonoBehaviour , ISaveManager
 
     [Header("Data Base")]
     public List<InventoryItem> loadedItems;
-
-    private bool isSaved = false;
+    public List<ItemData_Equipment> loadedEquipment;
     
     private void Awake()
     {
@@ -74,6 +73,12 @@ public class Inventory : MonoBehaviour , ISaveManager
 
     private void AddStartingItems()
     {
+        
+        foreach (var item in loadedEquipment)
+        {
+            EquipItem(item);
+        }
+        
         if (loadedItems.Count > 0)
         {
             foreach (var item in loadedItems)
@@ -368,22 +373,43 @@ public class Inventory : MonoBehaviour , ISaveManager
                 }
             }
         }
+        // load equipments
+        foreach (var loadedItemId in data.equipmentId)
+        {
+            foreach (var item in GetItemDataBase())
+            {
+                if (item != null && item.itemId == loadedItemId)
+                {
+                    loadedEquipment.Add(item as ItemData_Equipment);
+                }
+            }
+        }
     }
 
     public void SaveData(ref GameData data)
     {
+        // before saving data we need to clear data
         data.inventory.Clear();
+        data.equipmentId.Clear();
 
         foreach (var pair in inventoryDictionary)
         {
             data.inventory.Add(pair.Key.itemId, pair.Value.stackSize);
+        }
+        foreach (var pair in stashDictionary)
+        {
+            data.inventory.Add(pair.Key.itemId, pair.Value.stackSize);
+        }
+        foreach (var pair in equipmentDictionary)
+        {
+            data.equipmentId.Add(pair.Key.itemId);
         }
     }
 
     private List<ItemData> GetItemDataBase()
     {
         List<ItemData> itemDataBase = new List<ItemData>();
-        String[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Equipments" });
+        String[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/Data/Items" });// contains materials and equipments
 
         foreach (var SOname in assetNames)
         {
