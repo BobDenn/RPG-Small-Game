@@ -34,6 +34,16 @@ public class Dash_Skill : Skill
         cloneOnArrivalUnlockButton.GetComponent<Button>().onClick.AddListener(UnlockCloneOnArrival);        
     }
 
+    #region unlock skill zone
+
+    protected override void LoadedSkillCheck()
+    {
+        UnlockDash();
+        UnlockCloneOnDash();
+        UnlockCloneOnArrival();
+    }
+
+
     private void UnlockDash()
     {
         // can't hide SkillTree_UI, otherwise there are errors that cant turn "Dash Unlocked" to be ture.
@@ -65,5 +75,5 @@ public class Dash_Skill : Skill
         if (cloneOnArrivalUnlocked)
             SkillManager.instance.clone.CreateClone(player.transform, Vector3.zero);
     }
-
+    #endregion
 }

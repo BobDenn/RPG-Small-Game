@@ -49,6 +49,14 @@ public class Clone_Skill : Skill
 
     #region Unlock Skills
 
+    protected override void LoadedSkillCheck()
+    {
+        UnlockCloneAttack();
+        UnlockAggressiveClone();
+        UnlockDuplicateClone();
+        UnlockCrystalInstead();
+    }
+
     // clone attack
     private void UnlockCloneAttack()
     {

@@ -25,7 +25,12 @@ public class Blackhole_Skill : Skill
         if (blackHoleUnlockButton.unlocked)
             blackHoleUnlocked = true;
     }
-    
+
+    protected override void LoadedSkillCheck()
+    {
+        UnlockBlackHole();
+    }
+
     public override bool CanUseSkill()
     {
         return base.CanUseSkill();

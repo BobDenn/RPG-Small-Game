@@ -13,6 +13,8 @@ public class Skill : MonoBehaviour
     protected virtual void Start()
     {
         player = PlayerManager.instance.player;
+
+        LoadedSkillCheck();
     }
 
     protected virtual void Update()
@@ -21,6 +23,11 @@ public class Skill : MonoBehaviour
         cooldownTimer -= Time.deltaTime;
     }
 
+    protected virtual void LoadedSkillCheck()
+    {
+        
+    }
+    
     public virtual bool CanUseSkill()
     {
         if (cooldownTimer < 0)
