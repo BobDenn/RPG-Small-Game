@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
@@ -6,7 +8,7 @@ public class UI_MainMenu : MonoBehaviour
 {
     [SerializeField] private string sceneName = "Game";
     [SerializeField] private GameObject continueButton;
-
+    [SerializeField] private UI_FadeScreen _fadeScreen;
     private void Start()
     {
         if(SaveManager.instance.HasSavedData() == false)
@@ -15,13 +17,13 @@ public class UI_MainMenu : MonoBehaviour
 
     public void ContinueGame()
     {
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(LoadSceneWithFadeScreen(1.5f));
     }
 
     public void NewGame()
     {
         SaveManager.instance.DeleteSavaData();
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(LoadSceneWithFadeScreen(1.5f));
     }
 
     public void ExitGame()
@@ -29,4 +31,14 @@ public class UI_MainMenu : MonoBehaviour
         Debug.Log("Exit Gaming");
         //Application.Quit();
     }
+
+    IEnumerator LoadSceneWithFadeScreen(float delay)
+    {
+        _fadeScreen.FadeIn();
+        
+        yield return new WaitForSeconds(delay);
+        
+        SceneManager.LoadScene(sceneName);
+    }
+    
 }
