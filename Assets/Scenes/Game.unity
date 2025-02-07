@@ -28629,7 +28629,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6e2d8f8e92d778438813ad70e6790dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: data.txt
+  fileName: data.bob
+  encryptData: 1
 --- !u!4 &1912129110
 Transform:
   m_ObjectHideFlags: 0
