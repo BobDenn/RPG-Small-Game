@@ -26,6 +26,9 @@ public class PlayerStats : CharacterStats
         base.Die();
         player.Die();
         
+        GameManager.instance.lostSoulsAmount = PlayerManager.instance.souls;
+        PlayerManager.instance.souls = 0;
+        
         // 玩家掉落物品
         GetComponent<PlayerItemDrop>()?.GenerateDrop();
     }

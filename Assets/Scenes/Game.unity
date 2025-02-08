@@ -18133,6 +18133,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkPoints: []
+  closestCheckpointId: 
+  lostSoulsPrefab: {fileID: 4953715216344759857, guid: 112bdd8b6e3cf3a45ae2f1c0f0ff784f, type: 3}
+  lostSoulsAmount: 0
+  lostSoulsX: 0
+  lostSoulsY: 0
 --- !u!4 &1281029253
 Transform:
   m_ObjectHideFlags: 0
@@ -18299,6 +18304,8 @@ MonoBehaviour:
   blackHoleImage: {fileID: 1479738139}
   flaskImage: {fileID: 948957347}
   currentSouls: {fileID: 1270211214}
+  soulsAmount: 0
+  increaseRate: 100
 --- !u!114 &1320388949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19137,16 +19144,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vitality:
-    baseValue: 0
+    baseValue: 3
     modifiers: 
   strength:
-    baseValue: 0
+    baseValue: 3
     modifiers: 
   agility:
-    baseValue: 0
+    baseValue: 3
     modifiers: 
   intelligence:
-    baseValue: 0
+    baseValue: 3
     modifiers: 
   damage:
     baseValue: 24
@@ -32240,7 +32247,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 261104810683325092, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: level
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 261104810683325092, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: currentHp
@@ -32248,7 +32255,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 261104810683325092, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: maxHp.baseValue
-      value: 1000
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 261104810683325092, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
+      propertyPath: percentageModifier
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 261104810683325092, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: thunderStrikePrefab
@@ -32469,7 +32480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8625335842950290482, guid: 6e6aa87c2407ba74d8736d8d66e87a91, type: 3}
       propertyPath: encryptData
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8676267159889215174, guid: 6e6aa87c2407ba74d8736d8d66e87a91, type: 3}
       propertyPath: m_LocalPosition.x

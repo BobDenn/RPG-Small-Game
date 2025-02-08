@@ -8,8 +8,18 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour, ISaveManager
 {
     public static GameManager instance;
+
+    private Transform _player;
+    
     [SerializeField] private CheckPoint[] checkPoints;
     [SerializeField] private string closestCheckpointId;
+    
+    [Header("Lost souls")]
+    [SerializeField] private GameObject lostSoulsPrefab;
+    public int lostSoulsAmount;
+    [SerializeField] private float lostSoulsX;
+    [SerializeField] private float lostSoulsY;
+    
     private void Awake()
     {
         // to make sure only one instance
@@ -24,7 +34,7 @@ public class GameManager : MonoBehaviour, ISaveManager
 
     private void Start()
     {
-        
+        _player = PlayerManager.instance.player.transform;
     }
 
     public void RestartGame()
@@ -36,7 +46,12 @@ public class GameManager : MonoBehaviour, ISaveManager
 
     public void SaveData(ref GameData data)
     {
-        data.closestCheckpointId = FindClosestCheckPoint().id;
+        data.lostSoulsAmount = lostSoulsAmount;
+        data.lostSoulsX = _player.position.x;
+        data.lostSoulsY = _player.position.y;
+        
+        if(FindClosestCheckPoint() != null)
+            data.closestCheckpointId = FindClosestCheckPoint().id;
         data.checkPoints.Clear();
         
         foreach (CheckPoint checkPoint in checkPoints)
@@ -45,7 +60,9 @@ public class GameManager : MonoBehaviour, ISaveManager
         }
     }
     
-    public void LoadData(GameData data)
+    public void LoadData(GameData data) => StartCoroutine(LoadWithDelay(data));
+
+    private void LoadCheckPoints(GameData data)
     {
         foreach (var pair in data.checkPoints)
         {
@@ -55,20 +72,46 @@ public class GameManager : MonoBehaviour, ISaveManager
                     checkPoint.ActivateCheckPoint();
             }
         }
-
-        closestCheckpointId = data.closestCheckpointId;
-        //Debug.Log("获取了最近的复活点");
-        Invoke("RespawnOnCheckpoint", .1f);// delay .1f to run
-//        Debug.Log("GameManager Loaded");
     }
 
-    public void RespawnOnCheckpoint()
+    private void LoadLostSouls(GameData data)
     {
+        lostSoulsAmount = data.lostSoulsAmount;
+        lostSoulsX = data.lostSoulsX;
+        lostSoulsY = data.lostSoulsY;
+
+        if (lostSoulsAmount > 0)
+        {
+            GameObject newLostSouls =
+                Instantiate(lostSoulsPrefab, new Vector3(lostSoulsX, lostSoulsY), Quaternion.identity);
+            newLostSouls.GetComponent<LostItems>().remainingSouls = lostSoulsAmount;
+        }
+        
+        lostSoulsAmount = 0;
+    }
+
+    private IEnumerator LoadWithDelay(GameData data)
+    {
+        yield return new WaitForSeconds(.1f);
+        LoadCheckPoints(data);
+        
+        RespawnOnCheckpoint(data);
+        
+        LoadLostSouls(data); 
+    }
+    
+    public void RespawnOnCheckpoint(GameData data)
+    {
+        if (data.closestCheckpointId == null)
+            return;
+        
+        closestCheckpointId = data.closestCheckpointId;
+        
         foreach (var point in checkPoints)
         {
             if(closestCheckpointId == point.id)
                 //player respawn near the check point
-                PlayerManager.instance.player.transform.position = point.transform.position;
+                _player.position = point.transform.position;
         }
     }
 
@@ -80,7 +123,7 @@ public class GameManager : MonoBehaviour, ISaveManager
         foreach (var point in checkPoints)
         {
             float distanceToPoint =
-                Vector2.Distance(PlayerManager.instance.player.transform.position, point.transform.position);
+                Vector2.Distance(_player.position, point.transform.position);
             if (distanceToPoint < shortDistance && point.status)
             {
                 shortDistance = distanceToPoint;

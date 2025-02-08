@@ -14,10 +14,14 @@ public class UI_InGame : MonoBehaviour
     [SerializeField] private Image blackHoleImage;
     [SerializeField] private Image flaskImage;
 
-    // record souls
-    [SerializeField] private TextMeshProUGUI currentSouls;
-    
     private SkillManager skills;
+    
+    // record souls
+    [Header("Souls info")]
+    [SerializeField] private TextMeshProUGUI currentSouls;
+    [SerializeField] private float soulsAmount;
+    [SerializeField] private int increaseRate = 100;
+    
     private void Start()
     {
         if (playerStats != null)
@@ -28,8 +32,8 @@ public class UI_InGame : MonoBehaviour
 
     private void Update()
     {
-        currentSouls.text = PlayerManager.instance.GetSouls().ToString("N0");
-        
+        UpdateSoulsUI();
+
         if(Input.GetKeyDown(KeyCode.LeftShift) && skills.dash.dashUnlocked)
             SetColdDownOf(dashImage);
         
@@ -55,6 +59,17 @@ public class UI_InGame : MonoBehaviour
         CheckColdDownOf(blackHoleImage, skills.blackHole.cooldown);
         CheckColdDownOf(flaskImage, Inventory.instance.flaskCooldown);
     }
+
+    private void UpdateSoulsUI()
+    {
+        if(soulsAmount < PlayerManager.instance.GetSouls())
+            soulsAmount += Time.deltaTime * increaseRate;
+        else
+            soulsAmount = PlayerManager.instance.GetSouls();
+
+        currentSouls.text = ((int)soulsAmount).ToString("N0");
+    }
+
     private void UpdateHpUI()
     {
         slider.maxValue =  playerStats.GetMaxHpValue();
