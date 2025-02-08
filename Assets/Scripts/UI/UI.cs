@@ -24,7 +24,10 @@ public class UI : MonoBehaviour
 
     private void Awake()
     {
+        
         SwitchTo(skillsUI);
+        
+        fadeScreen.gameObject.SetActive(true);
     }
 
     public void Start()

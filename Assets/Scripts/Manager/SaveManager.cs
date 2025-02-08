@@ -6,7 +6,7 @@ public class SaveManager : MonoBehaviour
 {
     public static SaveManager instance;
 
-    private GameData gameData;
+    public GameData gameData;
     private List<ISaveManager> _saveManagers;
     private FileDataHandler _fileDataHandler;
 
@@ -22,6 +22,7 @@ public class SaveManager : MonoBehaviour
     
     private void Awake()
     {
+        
         if(instance != null)
             Destroy(instance.gameObject);
         else
@@ -31,27 +32,20 @@ public class SaveManager : MonoBehaviour
         _fileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encryptData);
         _saveManagers = FindAllSaveManagers();
         
-        LoadGame();
     }
     
-    // load game data
     private void Start()
     {
-        
+        LoadGame();
+        //Debug.Log("加载完毕！");
     }
-
-    public void NewGame()
-    {
-        gameData = new GameData();
-    }
-
     public void LoadGame()
     {
         gameData = _fileDataHandler.Load();
 
         if (this.gameData == null)
         {
-            Debug.Log("No saved data found!");
+            //Debug.Log("No saved data found!");
             NewGame();
         }
 
@@ -62,6 +56,13 @@ public class SaveManager : MonoBehaviour
 
         //Debug.Log("Loaded souls " + gameData.souls);
     }
+    
+
+    public void NewGame()
+    {
+        gameData = new GameData();
+    }
+    
     
     private void OnApplicationQuit()
     {
@@ -79,6 +80,8 @@ public class SaveManager : MonoBehaviour
         //Debug.Log("Saved souls " + gameData.souls);
     }
 
+    
+    
     // need to learn
     private List<ISaveManager> FindAllSaveManagers()
     {

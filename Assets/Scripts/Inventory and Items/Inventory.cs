@@ -384,6 +384,8 @@ public class Inventory : MonoBehaviour , ISaveManager
                 }
             }
         }
+
+        //Debug.Log("装备加载了");
     }
 
     public void SaveData(ref GameData data)

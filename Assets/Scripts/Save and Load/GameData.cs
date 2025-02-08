@@ -9,6 +9,9 @@ public class GameData
     public SerializableDictionary<string, int> inventory;
     public List<string> equipmentId;
 
+    public SerializableDictionary<string, bool> checkPoints;
+    public string closestCheckpointId;
+    
     public GameData()
     {
         this.souls = 0;
@@ -16,5 +19,9 @@ public class GameData
         skillTree = new SerializableDictionary<string, bool>();
         inventory = new SerializableDictionary<string, int>();
         equipmentId = new List<string>();
+        
+        
+        closestCheckpointId = string.Empty;
+        checkPoints = new SerializableDictionary<string, bool>();
     }
 }
