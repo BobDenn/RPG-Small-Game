@@ -14,6 +14,8 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void AttackTrigger()
     {
+        
+        
         // detect enemies whom in circle and attack them
         Collider2D[] colliders = Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackCheckRadius);
 

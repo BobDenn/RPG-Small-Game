@@ -18,7 +18,8 @@ public class PlayerPrimaryAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
+        AudioManager.instance.PlaySFx(3);
+        
         xInput = 0; // we need this to fix bug on attack direction
 
         if (comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
@@ -11,7 +12,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource[] sfx;
     [SerializeField] private AudioSource[] bgm;
 
-    private bool _isPlaying;
+    public bool isPlaying;
     private int _bgmIndex;
     
     private void Awake()
@@ -24,7 +25,7 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-        if(!_isPlaying)
+        if(!isPlaying)
             StopBGM();
         else
             if(!bgm[_bgmIndex].isPlaying)
@@ -33,8 +34,11 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFx(int sfxIndex)
     {
-        if(sfxIndex < sfx.Length)
+        if (sfxIndex < sfx.Length)
+        {
+            sfx[sfxIndex].pitch = Random.Range(0.8f, 1.1f);
             sfx[sfxIndex].Play();
+        }
     }
     
     public void StopSFx(int sfxIndex) => sfx[sfxIndex].Stop();
