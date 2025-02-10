@@ -12,6 +12,7 @@ public class SkeletonMoveState : SkeletonGroundState
     public override void Enter()
     {
         base.Enter();
+        //AudioManager.instance.PlaySFx(1, enemy.transform);
     }
 
     public override void Update()
@@ -30,5 +31,6 @@ public class SkeletonMoveState : SkeletonGroundState
     public override void Exit()
     {
         base.Exit();
+        //AudioManager.instance.StopSFx(1);
     }
 }

@@ -27,5 +27,6 @@ public class SkeletonIdleState : SkeletonGroundState
     public override void Exit()
     {
         base.Exit();
+        
     }
 }

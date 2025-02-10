@@ -9,10 +9,11 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
+    [SerializeField] private float sfxMinDistance;
     [SerializeField] private AudioSource[] sfx;
     [SerializeField] private AudioSource[] bgm;
 
-    public bool isPlaying;
+    public bool bgmPlaying;
     private int _bgmIndex;
     
     private void Awake()
@@ -25,15 +26,21 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-        if(!isPlaying)
+        if(!bgmPlaying)
             StopBGM();
         else
             if(!bgm[_bgmIndex].isPlaying)
                 PlayBgm(_bgmIndex);
     }
 
-    public void PlaySFx(int sfxIndex)
+    public void PlaySFx(int sfxIndex, Transform source)
     {
+        if(sfx[sfxIndex].isPlaying)
+            return;
+        
+        if(source != null && Vector2.Distance(PlayerManager.instance.player.transform.position, source.position) > sfxMinDistance)
+            return;
+            
         if (sfxIndex < sfx.Length)
         {
             sfx[sfxIndex].pitch = Random.Range(0.8f, 1.1f);
