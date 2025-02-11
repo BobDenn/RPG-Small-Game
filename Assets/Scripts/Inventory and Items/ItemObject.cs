@@ -36,6 +36,7 @@ public class ItemObject : MonoBehaviour
         if (!Inventory.instance.CanAddItem() && itemData.itemType == ItemType.Equipment)
         {
             rb.velocity = new Vector2(0, 8);
+            AudioManager.instance.PlaySFx(0, transform);
             return;
         }
         Inventory.instance.AddItem(itemData);

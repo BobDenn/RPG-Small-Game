@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour
             StopBGM();
         else
             if(!bgm[_bgmIndex].isPlaying)
-                PlayBgm(_bgmIndex);
+                PlayRandomBGM();
     }
 
     public void PlaySFx(int sfxIndex, Transform source)

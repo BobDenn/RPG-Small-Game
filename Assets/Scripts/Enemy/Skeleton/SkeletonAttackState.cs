@@ -16,6 +16,7 @@ public class SkeletonAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        AudioManager.instance.PlaySFx(11, null);
     }
 
     public override void Update()
@@ -32,7 +33,7 @@ public class SkeletonAttackState : EnemyState
     public override void Exit()
     {
         base.Exit();
-
+        AudioManager.instance.StopSFx(11);
         enemy.lastTimeAttacked = Time.time;
     }
 }
