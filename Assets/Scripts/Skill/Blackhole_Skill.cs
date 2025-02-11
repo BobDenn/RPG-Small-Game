@@ -39,6 +39,9 @@ public class Blackhole_Skill : Skill
     public override void UseSkill()
     {
         base.UseSkill();
+        
+        // audio shock something
+        
         // create black hole 
         GameObject newBlackHole = Instantiate(blackHolePrefab, player.transform.position, Quaternion.identity);
         

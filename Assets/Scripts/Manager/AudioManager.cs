@@ -35,8 +35,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFx(int sfxIndex, Transform source)
     {
-        if(sfx[sfxIndex].isPlaying)
-            return;
+        /*if(sfx[sfxIndex].isPlaying)
+            return;*/
         
         if(source != null && Vector2.Distance(PlayerManager.instance.player.transform.position, source.position) > sfxMinDistance)
             return;
