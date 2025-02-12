@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 
 
-public class UI : MonoBehaviour
+public class UI : MonoBehaviour, ISaveManager
 {
     [Header("End Screen")]
     [SerializeField] private UI_FadeScreen fadeScreen;
@@ -22,25 +22,28 @@ public class UI : MonoBehaviour
     public UI_CraftWindow craftWindow;
     public UI_SkillInfoTip skillInfoTip;
 
+    [SerializeField] private UI_VolumeController[] volumeSettings;
+
     private void Awake()
     {
         
         SwitchTo(skillsUI);
         
         fadeScreen.gameObject.SetActive(true);
+        itemInfoTip.gameObject.SetActive(false);
+        statInfoTip.gameObject.SetActive(false);
     }
 
     public void Start()
     {
         SwitchTo(inGameUI);
         
-        itemInfoTip.gameObject.SetActive(false);
-        //statInfoTip.gameObject.SetActive(false)
+        
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.O))
             SwitchWithKeyTo(optionsUI);
         
         if (Input.GetKeyDown(KeyCode.C))
@@ -49,7 +52,7 @@ public class UI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
             SwitchWithKeyTo(skillsUI);
         
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.B))
             SwitchWithKeyTo(craftUI);
     }
 
@@ -106,4 +109,25 @@ public class UI : MonoBehaviour
     }
 
     public void RestartGameButton() => GameManager.instance.RestartGame();
+    public void LoadData(GameData data)
+    {
+        foreach (var pair in data.volumeSettings)
+        {
+            foreach (var item in volumeSettings)
+            {
+                if(item.parameter == pair.Key)
+                    item.LoadSlider(pair.Value);
+            }
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.volumeSettings.Clear();
+
+        foreach (var item in volumeSettings)
+        {
+            data.volumeSettings.Add(item.parameter, item.slider.value);
+        }
+    }
 }
