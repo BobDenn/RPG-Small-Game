@@ -67,9 +67,12 @@ public class UI : MonoBehaviour, ISaveManager
             if(fadeScreen == false)
                 transform.GetChild(i).gameObject.SetActive(false);
         }
-        
-        if(_menu != null)
+
+        if (_menu != null)
+        {
+            AudioManager.instance.PlaySFx(0, null);
             _menu.SetActive(true);
+        }
     }
 
     public void SwitchWithKeyTo(GameObject menu)
