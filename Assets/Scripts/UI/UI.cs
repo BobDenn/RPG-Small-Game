@@ -37,8 +37,6 @@ public class UI : MonoBehaviour, ISaveManager
     public void Start()
     {
         SwitchTo(inGameUI);
-        
-        
     }
 
     public void Update()

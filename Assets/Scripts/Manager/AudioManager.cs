@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -56,6 +57,25 @@ public class AudioManager : MonoBehaviour
     
     public void StopSFx(int sfxIndex) => sfx[sfxIndex].Stop();
 
+    public void StopSfxWithTime(int index) => StartCoroutine(DecreaseVoluem(sfx[index]));
+    
+    private IEnumerator DecreaseVoluem(AudioSource audio)
+    {
+        float defaultVolume = audio.volume;
+        while (audio.volume > .1f)
+        {
+            audio.volume -= audio.volume * .2f;
+            yield return new WaitForSeconds(0.2f);
+
+            if (audio.volume <= .1f)
+            {
+                audio.Stop();
+                audio.volume = defaultVolume;
+                break;
+            }
+        }
+    }
+    
     public void PlayRandomBGM()
     {
         _bgmIndex = Random.Range(0, bgm.Length);
