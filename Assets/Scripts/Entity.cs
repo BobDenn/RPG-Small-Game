@@ -32,7 +32,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float knockBackDuration;
     protected bool IsKnocked;
 
-
+    public int knockBackDir {get; private set;}
     public int facingDir { get; private set; } = 1;
     private bool facingRight = true;
 
@@ -71,12 +71,21 @@ public class Entity : MonoBehaviour
         anim.speed = 1;
     }
     public void WasDamaged() => StartCoroutine("HitKnockBack");
-        //Debug.Log(gameObject.name + " was Damaged");
+        
+    //Debug.Log(gameObject.name + " was Damaged");
+    public virtual void SetupKnockBackDir(Transform damageDir)
+    {
+        if (damageDir.position.x > transform.position.x)
+            knockBackDir = -1;
+        else if (damageDir.position.x < transform.position.x)
+            knockBackDir = 1;
+    }
+
     protected virtual IEnumerator HitKnockBack()
     {
         IsKnocked = true;
         
-        rb.velocity = new Vector2(knockBackDirection.x * -facingDir, knockBackDirection.y);
+        rb.velocity = new Vector2(knockBackDirection.x * knockBackDir, knockBackDirection.y);
 
         yield return new WaitForSeconds(knockBackDuration);
         IsKnocked = false;
