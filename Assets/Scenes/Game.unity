@@ -20831,7 +20831,7 @@ MonoBehaviour:
   wallCheck: {fileID: 1993852029}
   wallCheckDistance: 0.1
   knockBackDirection: {x: 0, y: 0}
-  knockBackDuration: 0
+  knockBackDuration: 0.2
   attackMovement:
   - {x: 0.5, y: 0.5}
   - {x: 1, y: 1}

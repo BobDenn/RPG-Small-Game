@@ -37,6 +37,15 @@ public class PlayerStats : CharacterStats
     {
         base.DecreaseHpBy(damage);
 
+        if(IsDead)
+            return;
+        
+        if (damage > GetMaxHpValue() * .3f)
+        {
+            player.SetupKnockBackPower(new Vector2(10, 6));
+            // can use some sounds 
+        }
+        
         ItemData_Equipment currentArmor = Inventory.instance.GetEquipment(EquipmentType.Armor);
         if(currentArmor != null)
             currentArmor.Effect(player.transform);

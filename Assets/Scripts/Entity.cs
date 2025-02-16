@@ -80,7 +80,8 @@ public class Entity : MonoBehaviour
         else if (damageDir.position.x < transform.position.x)
             knockBackDir = 1;
     }
-
+    public void SetupKnockBackPower(Vector2 knockBack) => knockBackDirection = knockBack;
+    
     protected virtual IEnumerator HitKnockBack()
     {
         IsKnocked = true;
@@ -89,7 +90,12 @@ public class Entity : MonoBehaviour
 
         yield return new WaitForSeconds(knockBackDuration);
         IsKnocked = false;
+        SetupZeroKnockBackPower();
+    }
 
+    protected virtual void SetupZeroKnockBackPower()
+    {
+        
     }
 
     #region Velocity

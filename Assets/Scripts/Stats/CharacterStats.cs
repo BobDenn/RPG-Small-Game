@@ -240,6 +240,8 @@ public class CharacterStats : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         DecreaseHpBy(damage);
+        
+        
 
         GetComponent<Entity>().WasDamaged();
         _fx.StartCoroutine("FlashFX");

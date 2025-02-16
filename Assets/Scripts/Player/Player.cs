@@ -174,4 +174,9 @@ public class Player : Entity
         base.Die();
         stateMachine.ChangeState(deadState);
     }
+
+    protected override void SetupZeroKnockBackPower()
+    {
+        knockBackDirection = new Vector2(0, 0);
+    }
 }
