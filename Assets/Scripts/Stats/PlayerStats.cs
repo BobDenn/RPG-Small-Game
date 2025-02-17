@@ -39,7 +39,6 @@ public class PlayerStats : CharacterStats
 
         if(IsDead)
             return;
-        
         if (damage > GetMaxHpValue() * .3f)
         {
             player.SetupKnockBackPower(new Vector2(10, 6));
