@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using UnityEditor.Tilemaps;
 
 public enum StatsType
 {
@@ -70,6 +71,7 @@ public class CharacterStats : MonoBehaviour
     public int currentHp;
     public Action OnHpChanged;
     public bool IsDead { get; private set; }
+    public bool IsInvincible { get; private set; }
     private bool isVulnerable;
     #endregion
     protected virtual void Start()
@@ -239,10 +241,11 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
+        if (IsInvincible)
+            return;
+        
         DecreaseHpBy(damage);
         
-        
-
         GetComponent<Entity>().WasDamaged();
         _fx.StartCoroutine("FlashFX");
         //Debug.Log(damage);
@@ -450,6 +453,8 @@ public class CharacterStats : MonoBehaviour
         if(!IsDead)
             Die();
     }
+
+    public void MakeInvincible(bool invincible) => IsInvincible = invincible;
     
     // calculate health value
     public int GetMaxHpValue()
