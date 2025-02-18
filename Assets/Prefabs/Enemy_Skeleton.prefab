@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCheck: {fileID: 6831129695500387129}
-  attackCheckRadius: 0.8
+  attackCheckRadius: 1.1
   groundCheck: {fileID: 6383770457492543000}
   groundCheckDistance: 1
   whatIsGround:
@@ -361,7 +361,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   maxHp:
-    baseValue: 100
+    baseValue: 200
     modifiers: 
   armour:
     baseValue: 8
@@ -385,10 +385,13 @@ MonoBehaviour:
   isIgnited: 0
   isChilled: 0
   isShocked: 0
-  shockStrikePrefab: {fileID: 6781130749201083021, guid: a3c7a0edece178b45ba50ae2df4ba896, type: 3}
+  thunderStrikePrefab: {fileID: 6781130749201083021, guid: a3c7a0edece178b45ba50ae2df4ba896, type: 3}
   currentHp: 0
-  level: 1
-  percentageModifier: 0.4
+  soulsDropAmount:
+    baseValue: 0
+    modifiers: 
+  level: 2
+  percentageModifier: 0.2
 --- !u!114 &2147218628862164645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,7 +484,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1593121777
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -85727878, guid: 687df074731fbf744b668d2275dbb675, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -749,7 +752,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1593121777
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0.78431374}
@@ -924,7 +927,7 @@ Transform:
   m_GameObject: {fileID: 8465135001103446528}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.087, y: -0.23, z: 0}
+  m_LocalPosition: {x: 1.248, y: -0.222, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
