@@ -444,6 +444,13 @@ public class CharacterStats : MonoBehaviour
         IsDead = true;
         //throw new System.NotImplementedException();
     }
+
+    public void KillEntity()
+    { 
+        if(!IsDead)
+            Die();
+    }
+    
     // calculate health value
     public int GetMaxHpValue()
     {

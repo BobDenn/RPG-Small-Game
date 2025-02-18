@@ -69,5 +69,7 @@ public class EnemyStats : CharacterStats
         enemy.Die();
         PlayerManager.instance.souls += soulsDropAmount.GetValue();
         myDropSystem.GenerateDrop();
+        
+        Destroy(gameObject, 5f);
     }
 }
