@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EntityFX : MonoBehaviour
 {
@@ -22,7 +23,10 @@ public class EntityFX : MonoBehaviour
     [SerializeField] private ParticleSystem chillFx;
     [SerializeField] private ParticleSystem shockFx;
     
-
+    [Header("Hit fx")]
+    [SerializeField] private GameObject hitFX;
+    [SerializeField] private GameObject criticalHitFX;
+    
     private void Start()
     {
         _sr = GetComponentInChildren<SpriteRenderer>();
@@ -113,5 +117,36 @@ public class EntityFX : MonoBehaviour
             _sr.color = shockColor[0];
         else
             _sr.color = shockColor[1];
+    }
+
+    public void CreateHitFx(Transform target, bool critical)
+    {
+        
+        float zRotation = Random.Range(-90, 90);
+        float xPosition = Random.Range(-.5f, .5f);
+        float yPosition = Random.Range(-.5f, .5f);
+        
+        Vector3 hitFxRotation = new Vector3(0, 0, zRotation);
+
+        GameObject hitPrefab = hitFX;
+
+        if (critical)
+        {
+            hitPrefab = criticalHitFX;
+            float yRotation = 0;
+            zRotation = Random.Range(-45, 45);
+
+            if (GetComponent<Entity>().facingDir == -1)
+                yRotation = 180;
+
+            hitFxRotation = new Vector3(0, yRotation, zRotation);
+
+        }
+        
+        GameObject newHitFx = Instantiate(hitFX, target.position + new Vector3(xPosition, yPosition), Quaternion.identity);
+        
+        newHitFx.transform.Rotate(hitFxRotation);  
+        
+        Destroy(newHitFx, .5f);
     }
 }

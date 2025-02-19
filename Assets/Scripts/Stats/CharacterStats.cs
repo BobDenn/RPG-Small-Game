@@ -257,6 +257,8 @@ public class CharacterStats : MonoBehaviour
     // [damage] 攻击别人
     public virtual void DoDamage(CharacterStats targetStats)
     {
+        bool isCritical = false;
+        
         if(TargetCanAvoidAttack(targetStats))
             return;
         
@@ -266,10 +268,14 @@ public class CharacterStats : MonoBehaviour
         int totalDamage = damage.GetValue() + strength.GetValue();
         if(CanCrit())
         {
+            isCritical = true;
             totalDamage = CalculateCriticalDamage(totalDamage);
 
             //Debug.Log("Total Crit Damage is " + totalDamage);
         }
+
+        _fx.CreateHitFx(targetStats.transform, isCritical);
+        
         // 护甲衰减
         totalDamage = CheckTargetArmour(targetStats, totalDamage);
         targetStats.TakeDamage(totalDamage);
