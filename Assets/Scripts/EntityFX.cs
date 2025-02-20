@@ -143,7 +143,7 @@ public class EntityFX : MonoBehaviour
 
         }
         
-        GameObject newHitFx = Instantiate(hitFX, target.position + new Vector3(xPosition, yPosition), Quaternion.identity);
+        GameObject newHitFx = Instantiate(hitPrefab, target.position + new Vector3(xPosition, yPosition), Quaternion.identity);
         
         newHitFx.transform.Rotate(hitFxRotation);  
         

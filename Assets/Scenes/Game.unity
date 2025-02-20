@@ -30744,7 +30744,7 @@ MonoBehaviour:
     baseValue: 100
     modifiers: 
   critChance:
-    baseValue: 100
+    baseValue: 50
     modifiers: 
   critPower:
     baseValue: 0
