@@ -286,6 +286,7 @@ public class Sword_Skill_Controller : MonoBehaviour
         
         _rb.isKinematic = true;
         _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        GetComponentInChildren<ParticleSystem>().Play();
         
         if(_isBouncing && _enemyTarget.Count > 1)
             return;
