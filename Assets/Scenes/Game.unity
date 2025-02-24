@@ -13975,7 +13975,7 @@ Transform:
   m_GameObject: {fileID: 429100724}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -36.085, y: 2.5539997, z: -10}
+  m_LocalPosition: {x: -36.081432, y: 2.5539997, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17590,7 +17590,7 @@ Transform:
   m_GameObject: {fileID: 671752344}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -36.085, y: 2.5539997, z: -10}
+  m_LocalPosition: {x: -36.081432, y: 2.5539997, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35539,6 +35539,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e42b23c3f5d41848bc73a0dcb7e7314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  afterImagePrefab: {fileID: 1661020984844355896, guid: 372552f6e2f0d764f99b38974665e51b, type: 3}
+  colorLoseRate: 3
+  afterImageCooldown: 0.35
   flashDuration: 0.2
   hitMat: {fileID: 2100000, guid: 6e76868a7cfa650459f59a0e15652be5, type: 2}
   igniteColor:

@@ -31,6 +31,8 @@ public class PlayerDashState : PlayerState
         
         if (!player.IsGroundDetected() && player.IsWallDetected())
             stateMachine.ChangeState(player.wallSlide);
+        
+        player.fx.CreateAfterImage();
     }
 
     public override void Exit()
