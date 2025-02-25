@@ -42,6 +42,7 @@ public class PlayerStats : CharacterStats
         if (damage > GetMaxHpValue() * .3f)
         {
             player.SetupKnockBackPower(new Vector2(10, 6));
+            player.fx.ScreenShake(player.fx.highDamageShake);
             // can use some sounds 
         }
         

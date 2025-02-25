@@ -13920,6 +13920,7 @@ GameObject:
   m_Component:
   - component: {fileID: 429100726}
   - component: {fileID: 429100725}
+  - component: {fileID: 429100727}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -13975,13 +13976,36 @@ Transform:
   m_GameObject: {fileID: 429100724}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -36.081432, y: 2.5539997, z: -10}
+  m_LocalPosition: {x: -36.074345, y: 2.5539997, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 121449744}
   m_Father: {fileID: 1953302067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &429100727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429100724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &429111978
 GameObject:
   m_ObjectHideFlags: 0
@@ -17590,7 +17614,7 @@ Transform:
   m_GameObject: {fileID: 671752344}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -36.081432, y: 2.5539997, z: -10}
+  m_LocalPosition: {x: -36.074345, y: 2.5539997, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35398,6 +35422,7 @@ GameObject:
   - component: {fileID: 1376143274}
   - component: {fileID: 1376143279}
   - component: {fileID: 1376143280}
+  - component: {fileID: 1376143281}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -35539,9 +35564,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e42b23c3f5d41848bc73a0dcb7e7314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeMultiplier: 0.15
+  shakePower: {x: 1, y: 0, z: 0}
+  highDamageShake: {x: 1.5, y: 2, z: 0}
   afterImagePrefab: {fileID: 1661020984844355896, guid: 372552f6e2f0d764f99b38974665e51b, type: 3}
   colorLoseRate: 3
-  afterImageCooldown: 0.35
+  afterImageCooldown: 0.035
   flashDuration: 0.2
   hitMat: {fileID: 2100000, guid: 6e76868a7cfa650459f59a0e15652be5, type: 2}
   igniteColor:
@@ -35636,6 +35664,59 @@ MonoBehaviour:
   dropPrefab: {fileID: 5200531409767433940, guid: db2811a4fd9e13e40af57adeffedc181, type: 3}
   chanceToLoseItems: 20
   chanceToLoseMaterials: 75
+--- !u!114 &1376143281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376143273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: 0, z: 0}
 --- !u!1001 &1390071005
 PrefabInstance:
   m_ObjectHideFlags: 0
