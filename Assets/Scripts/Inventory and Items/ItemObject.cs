@@ -37,6 +37,7 @@ public class ItemObject : MonoBehaviour
         {
             AudioManager.instance.PlaySFx(0, transform);
             rb.velocity = new Vector2(0, 8);
+            PlayerManager.instance.player.fx.CreatePopUpText("Bag Not Enough");
             return;
         }
         Inventory.instance.AddItem(itemData);

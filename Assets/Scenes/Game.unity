@@ -1946,9 +1946,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 903711758}
     - target: {fileID: 3337811498926353782, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
+      propertyPath: _popUpText
+      value: 
+      objectReference: {fileID: 9035027359524120891, guid: c8a2e407896b420469d4e68db0d1390f, type: 3}
+    - target: {fileID: 3337811498926353782, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: criticalHitFX
       value: 
       objectReference: {fileID: 3470324897794929451, guid: 4ac97af30df71a945bde6854160c0077, type: 3}
+    - target: {fileID: 3337811498926353782, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
+      propertyPath: afterImagePrefab
+      value: 
+      objectReference: {fileID: 1661020984844355896, guid: 372552f6e2f0d764f99b38974665e51b, type: 3}
     - target: {fileID: 3906124010018952980, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -35564,6 +35572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e42b23c3f5d41848bc73a0dcb7e7314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _popUpText: {fileID: 9035027359524120891, guid: c8a2e407896b420469d4e68db0d1390f, type: 3}
   shakeMultiplier: 0.15
   shakePower: {x: 1, y: 0, z: 0}
   highDamageShake: {x: 1.5, y: 2, z: 0}
@@ -54437,9 +54446,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 903711758}
     - target: {fileID: 3337811498926353782, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
+      propertyPath: _popUpText
+      value: 
+      objectReference: {fileID: 9035027359524120891, guid: c8a2e407896b420469d4e68db0d1390f, type: 3}
+    - target: {fileID: 3337811498926353782, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: criticalHitFX
       value: 
       objectReference: {fileID: 3470324897794929451, guid: 4ac97af30df71a945bde6854160c0077, type: 3}
+    - target: {fileID: 3337811498926353782, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
+      propertyPath: afterImagePrefab
+      value: 
+      objectReference: {fileID: 1661020984844355896, guid: 372552f6e2f0d764f99b38974665e51b, type: 3}
     - target: {fileID: 3906124010018952980, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

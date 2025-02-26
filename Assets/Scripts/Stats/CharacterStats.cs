@@ -149,6 +149,9 @@ public class CharacterStats : MonoBehaviour
             damage = Mathf.RoundToInt(damage * 1.1f);
         
         currentHp -= damage;
+        
+        if(damage >= 0)
+            _fx.CreatePopUpText(damage.ToString());
 
         if(OnHpChanged != null)
             OnHpChanged();
