@@ -1949,6 +1949,10 @@ PrefabInstance:
       propertyPath: criticalHitFX
       value: 
       objectReference: {fileID: 3470324897794929451, guid: 4ac97af30df71a945bde6854160c0077, type: 3}
+    - target: {fileID: 3337811498926353782, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
+      propertyPath: afterImagePrefab
+      value: 
+      objectReference: {fileID: 1661020984844355896, guid: 372552f6e2f0d764f99b38974665e51b, type: 3}
     - target: {fileID: 3906124010018952980, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -54359,6 +54363,10 @@ PrefabInstance:
       propertyPath: criticalHitFX
       value: 
       objectReference: {fileID: 3470324897794929451, guid: 4ac97af30df71a945bde6854160c0077, type: 3}
+    - target: {fileID: 3337811498926353782, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
+      propertyPath: afterImagePrefab
+      value: 
+      objectReference: {fileID: 1661020984844355896, guid: 372552f6e2f0d764f99b38974665e51b, type: 3}
     - target: {fileID: 3906124010018952980, guid: 0c5b4c49ce9e3e84caaa47f496f97ca0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
