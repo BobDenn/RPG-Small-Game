@@ -66,7 +66,7 @@ public class EntityFX : MonoBehaviour
         float randomY = Random.Range(1.5f, 3);
         
         Vector3 pos = new Vector3(randomX, randomY, 0);
-        GameObject newPopUpText = Instantiate(afterImagePrefab, transform.position + pos, Quaternion.identity);
+        GameObject newPopUpText = Instantiate(_popUpText, transform.position + pos, Quaternion.identity);
         newPopUpText.GetComponent<TextMeshPro>().text = text;
     }
     

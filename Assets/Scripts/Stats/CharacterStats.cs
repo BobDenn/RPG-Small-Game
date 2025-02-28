@@ -150,7 +150,7 @@ public class CharacterStats : MonoBehaviour
         
         currentHp -= damage;
         
-        if(damage >= 0)
+        if(damage > 0)
             _fx.CreatePopUpText(damage.ToString());
 
         if(OnHpChanged != null)

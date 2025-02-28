@@ -68,6 +68,7 @@ public class UI : MonoBehaviour, ISaveManager
 
         if (_menu != null)
         {
+            // jingle
             AudioManager.instance.PlaySFx(0, null);
             _menu.SetActive(true);
         }
