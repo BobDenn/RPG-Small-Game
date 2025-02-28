@@ -13233,6 +13233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 405316677}
   - component: {fileID: 405316676}
+  - component: {fileID: 405316678}
   m_Layer: 0
   m_Name: DeadZone
   m_TagString: Untagged
@@ -13300,6 +13301,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &405316678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405316675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44b8166bf61009948bc150bfbffb42ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &418203661
 GameObject:
   m_ObjectHideFlags: 0
@@ -35842,7 +35855,7 @@ MonoBehaviour:
   highDamageShake: {x: 1.5, y: 2, z: 0}
   afterImagePrefab: {fileID: 1661020984844355896, guid: 372552f6e2f0d764f99b38974665e51b, type: 3}
   colorLoseRate: 1.5
-  afterImageCooldown: 0.01
+  afterImageCooldown: 0.05
 --- !u!1001 &1390071005
 PrefabInstance:
   m_ObjectHideFlags: 0
