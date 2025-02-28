@@ -39,7 +39,8 @@ public class Inventory : MonoBehaviour , ISaveManager
     public float flaskCooldown { get; private set; }
     private float armorCooldown;
 
-    [Header("Data Base")]
+    [Header("Data Base")] 
+    public List<ItemData> ItemDataBase;
     public List<InventoryItem> loadedItems;
     public List<ItemData_Equipment> loadedEquipment;
     
@@ -362,7 +363,7 @@ public class Inventory : MonoBehaviour , ISaveManager
         //GetItemDataBase();
         foreach (var pair in data.inventory)
         {
-            foreach (var item in GetItemDataBase())
+            foreach (var item in ItemDataBase)
             {
                 if (item != null && item.itemId == pair.Key)
                 {
@@ -376,7 +377,7 @@ public class Inventory : MonoBehaviour , ISaveManager
         // load equipments
         foreach (var loadedItemId in data.equipmentId)
         {
-            foreach (var item in GetItemDataBase())
+            foreach (var item in ItemDataBase)
             {
                 if (item != null && item.itemId == loadedItemId)
                 {
@@ -407,7 +408,10 @@ public class Inventory : MonoBehaviour , ISaveManager
             data.equipmentId.Add(pair.Key.itemId);
         }
     }
-
+#if UNITY_EDITOR
+    [ContextMenu("Fill up item data base")]
+    private void FillUpItemDataBase() => ItemDataBase = new List<ItemData>(GetItemDataBase());
+    
     private List<ItemData> GetItemDataBase()
     {
         List<ItemData> itemDataBase = new List<ItemData>();
@@ -421,5 +425,5 @@ public class Inventory : MonoBehaviour , ISaveManager
         }
         return itemDataBase;
     }
-    
+#endif    
 }

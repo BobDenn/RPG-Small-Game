@@ -13273,7 +13273,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 50.640976, y: 0.6028545}
+  m_Offset: {x: 69.366455, y: 0.6028545}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -13284,7 +13284,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 155.15302, y: 2.205709}
+  m_Size: {x: 192.60397, y: 2.205709}
   m_EdgeRadius: 0
 --- !u!4 &405316677
 Transform:
@@ -18056,6 +18056,7 @@ MonoBehaviour:
   stashSlotParent: {fileID: 1553585413}
   equipmentSlotParent: {fileID: 1027227420}
   statsSlotParent: {fileID: 2089210075}
+  ItemDataBase: []
   loadedItems: []
   loadedEquipment: []
 --- !u!4 &707686450
