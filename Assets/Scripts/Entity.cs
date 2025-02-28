@@ -8,7 +8,6 @@ public class Entity : MonoBehaviour
     #region Components
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
-    public EntityFX fx { get; private set; }
     public SpriteRenderer sr { get; private set; }
     public CharacterStats stats { get; private set; }
     public CapsuleCollider2D cd {get; private set;}
@@ -51,7 +50,6 @@ public class Entity : MonoBehaviour
         stats = GetComponent<CharacterStats>();
         cd = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
-        fx = GetComponent<EntityFX>();
     }
 
     // Update is called once per frame

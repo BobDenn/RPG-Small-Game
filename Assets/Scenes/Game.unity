@@ -13984,7 +13984,7 @@ Transform:
   m_GameObject: {fileID: 429100724}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -36.040882, y: 2.5539997, z: -10}
+  m_LocalPosition: {x: -35.415974, y: 2.5539997, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14263,10 +14263,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9035027359524120891, guid: c8a2e407896b420469d4e68db0d1390f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8a2e407896b420469d4e68db0d1390f, type: 3}
 --- !u!1 &455976126
 GameObject:
@@ -17742,7 +17739,7 @@ Transform:
   m_GameObject: {fileID: 671752344}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -36.040882, y: 2.5539997, z: -10}
+  m_LocalPosition: {x: -35.415974, y: 2.5539997, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35546,9 +35543,9 @@ GameObject:
   - component: {fileID: 1376143275}
   - component: {fileID: 1376143277}
   - component: {fileID: 1376143276}
-  - component: {fileID: 1376143278}
   - component: {fileID: 1376143274}
   - component: {fileID: 1376143279}
+  - component: {fileID: 1376143282}
   - component: {fileID: 1376143280}
   - component: {fileID: 1376143281}
   m_Layer: 6
@@ -35680,42 +35677,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.13203853, y: -0.28136778}
   m_Size: {x: 1.0025138, y: 2.1118736}
   m_Direction: 0
---- !u!114 &1376143278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1376143273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e42b23c3f5d41848bc73a0dcb7e7314, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _popUpText: {fileID: 9035027359524120891, guid: c8a2e407896b420469d4e68db0d1390f, type: 3}
-  shakeMultiplier: 0.2
-  shakePower: {x: 2, y: 0, z: 0}
-  highDamageShake: {x: 1.5, y: 2, z: 0}
-  afterImagePrefab: {fileID: 1661020984844355896, guid: 372552f6e2f0d764f99b38974665e51b, type: 3}
-  colorLoseRate: 3
-  afterImageCooldown: 0.035
-  flashDuration: 0.2
-  hitMat: {fileID: 2100000, guid: 6e76868a7cfa650459f59a0e15652be5, type: 2}
-  igniteColor:
-  - {r: 0.9622642, g: 0.13163051, b: 0.13163051, a: 1}
-  - {r: 0.9622642, g: 0.48567107, b: 0.5179598, a: 1}
-  chillColor:
-  - {r: 0.38039216, g: 0.3647059, b: 1, a: 1}
-  - {r: 0.38039216, g: 0.3647059, b: 1, a: 1}
-  shockColor:
-  - {r: 0.94509804, g: 0.92156863, b: 0.3254902, a: 1}
-  - {r: 0.8901961, g: 0.8627451, b: 0.28235295, a: 1}
-  igniteFx: {fileID: 1098214754}
-  chillFx: {fileID: 356388231}
-  shockFx: {fileID: 1519542996}
-  hitFX: {fileID: 7568536884319873214, guid: b4f216482c13d6e40805692334e86a18, type: 3}
-  criticalHitFX: {fileID: 3470324897794929451, guid: 4ac97af30df71a945bde6854160c0077, type: 3}
-  dustFx: {fileID: 1244526598}
 --- !u!114 &1376143279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35846,6 +35807,42 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: 0, z: 0}
+--- !u!114 &1376143282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376143273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf0b7d94c8598734998debbf48ad557e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _popUpText: {fileID: 9035027359524120891, guid: c8a2e407896b420469d4e68db0d1390f, type: 3}
+  flashDuration: 0.2
+  hitMat: {fileID: 2100000, guid: 6e76868a7cfa650459f59a0e15652be5, type: 2}
+  igniteColor:
+  - {r: 0.9607843, g: 0.13333334, b: 0.13333334, a: 0}
+  - {r: 0.9607843, g: 0.4862745, b: 0.5176471, a: 0}
+  chillColor:
+  - {r: 0.38039216, g: 0.3647059, b: 1, a: 0}
+  - {r: 0.38039216, g: 0.3647059, b: 1, a: 0}
+  shockColor:
+  - {r: 0.94509804, g: 0.92156863, b: 0.3254902, a: 0}
+  - {r: 0.8901961, g: 0.8627451, b: 0.28235295, a: 0}
+  igniteFx: {fileID: 1098214754}
+  chillFx: {fileID: 356388231}
+  shockFx: {fileID: 1519542996}
+  hitFX: {fileID: 7568536884319873214, guid: b4f216482c13d6e40805692334e86a18, type: 3}
+  criticalHitFX: {fileID: 3470324897794929451, guid: 4ac97af30df71a945bde6854160c0077, type: 3}
+  dustFx: {fileID: 1244526598}
+  shakeMultiplier: 0.2
+  shakePower: {x: 2, y: 0, z: 0}
+  highDamageShake: {x: 1.5, y: 2, z: 0}
+  afterImagePrefab: {fileID: 1661020984844355896, guid: 372552f6e2f0d764f99b38974665e51b, type: 3}
+  colorLoseRate: 1.5
+  afterImageCooldown: 0.01
 --- !u!1001 &1390071005
 PrefabInstance:
   m_ObjectHideFlags: 0

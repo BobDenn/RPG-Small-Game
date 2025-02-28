@@ -1,4 +1,4 @@
-using Cinemachine;
+
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -6,24 +6,11 @@ using Random = UnityEngine.Random;
 
 public class EntityFX : MonoBehaviour
 {
-    private SpriteRenderer _sr;
-    private Player _player;
+    protected SpriteRenderer _sr;
+    protected Player _player;
 
     [Header("Pop Up Text")]
     [SerializeField] private GameObject _popUpText;
-    
-    [Header("Screen shake FX")] 
-    private CinemachineImpulseSource cMIS;
-    
-    [SerializeField] private float shakeMultiplier;
-    public Vector3 shakePower;
-    public Vector3 highDamageShake;
-    
-    [Header("After image fx")]
-    [SerializeField] private GameObject afterImagePrefab;
-    [SerializeField] private float colorLoseRate;
-    [SerializeField] private float afterImageCooldown;
-    private float afterImageCooldownTimer;
     
     [Header("Flash FX")] 
     [SerializeField] private float flashDuration;
@@ -46,45 +33,20 @@ public class EntityFX : MonoBehaviour
 
     [Space] [SerializeField] private ParticleSystem dustFx;
     
-    private void Start()
+    protected void Start()
     {
         _sr = GetComponentInChildren<SpriteRenderer>();
         _player = PlayerManager.instance.player;
-        cMIS = GetComponent<CinemachineImpulseSource>();
         _originalMat = _sr.material;
-        
-    }
-
-    private void Update()
-    {
-        afterImageCooldownTimer -= Time.deltaTime;
     }
 
     public void CreatePopUpText(string text)
     {
         float randomX = Random.Range(-1, 1);
         float randomY = Random.Range(1.5f, 3);
-        
         Vector3 pos = new Vector3(randomX, randomY, 0);
         GameObject newPopUpText = Instantiate(_popUpText, transform.position + pos, Quaternion.identity);
         newPopUpText.GetComponent<TextMeshPro>().text = text;
-    }
-    
-    public void ScreenShake(Vector3 swordPower)
-    {
-        cMIS.m_DefaultVelocity = new Vector3(swordPower.x * _player.facingDir, swordPower.y) * shakeMultiplier;
-        cMIS.GenerateImpulse();
-    }
-    
-
-    public void CreateAfterImage()
-    {
-        if (afterImageCooldownTimer < 0)
-        {
-            afterImageCooldownTimer = afterImageCooldown;
-            GameObject newAfterImage = Instantiate(afterImagePrefab, transform.position, transform.rotation);
-            newAfterImage.GetComponent<AfterImageFx>().SetupAfterImageFx(colorLoseRate, _sr.sprite);
-        }
     }
     
     // disappear
